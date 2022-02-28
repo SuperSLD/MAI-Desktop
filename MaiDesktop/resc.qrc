@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/resc">
+        <file>resc/icon.ico</file>
+        <file>resc/splash.svg</file>
+    </qresource>
+</RCC>
