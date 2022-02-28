@@ -18,6 +18,7 @@ SOURCES += \
     common/base/basemodel.cpp \
     common/router.cpp \
     data/appnetrepository.cpp \
+    data/models/datawrapper.cpp \
     data/models/groupmodel.cpp \
     implfragmentfactory.cpp \
     main.cpp \
@@ -39,6 +40,7 @@ HEADERS += \
     common/base/basemodel.h \
     common/router.h \
     data/appnetrepository.h \
+    data/models/datawrapper.h \
     data/models/groupmodel.h \
     implfragmentfactory.h \
     mainwindow.h \
