@@ -1,6 +1,3 @@
 #include "stylecontainer.h"
 
-StyleContainer::StyleContainer()
-{
-
-}
+StyleContainer::StyleContainer() {}

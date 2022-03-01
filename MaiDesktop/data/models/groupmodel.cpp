@@ -1,17 +1,12 @@
 #include "groupmodel.h"
+#include <QJsonArray>
 
-GroupModel::GroupModel(
-        QString id,
-        QString name,
-        QString fac,
-        QString level,
-        int course
-) {
-    this->id = id;
-    this->course = course;
-    this->fac = fac;
-    this->name = name;
-    this->level = level;
+GroupModel::GroupModel(QJsonObject obj) : BaseModel(obj) {
+    this->id = obj["id"].toString();
+    this->course = obj["course"].toInt();
+    this->fac = obj["fac"].toString();
+    this->name = obj["name"].toString();
+    this->level = obj["level"].toString();
 }
 
 QString GroupModel::getId() { return id; }

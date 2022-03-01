@@ -18,6 +18,7 @@ SOURCES += \
     common/base/basemodel.cpp \
     common/router.cpp \
     data/appnetrepository.cpp \
+    data/models/datawrapper.cpp \
     data/models/groupmodel.cpp \
     implfragmentfactory.cpp \
     main.cpp \
@@ -25,6 +26,8 @@ SOURCES += \
     stylecontainer.cpp \
     ui/searchgroupfragment.cpp \
     ui/splashfragment.cpp \
+    ui/test2fragment.cpp \
+    ui/testfragment.cpp \
     ui/widgets/codeview/codestyle.cpp \
     ui/widgets/codeview/codestyles/cppcodestyle.cpp \
     ui/widgets/codeview/codestyles/jsoncodestyle.cpp \
@@ -39,12 +42,15 @@ HEADERS += \
     common/base/basemodel.h \
     common/router.h \
     data/appnetrepository.h \
+    data/models/datawrapper.h \
     data/models/groupmodel.h \
     implfragmentfactory.h \
     mainwindow.h \
     stylecontainer.h \
     ui/searchgroupfragment.h \
     ui/splashfragment.h \
+    ui/test2fragment.h \
+    ui/testfragment.h \
     ui/widgets/codeview/codestyle.h \
     ui/widgets/codeview/codestyles/cppcodestyle.h \
     ui/widgets/codeview/codestyles/jsoncodestyle.h \
