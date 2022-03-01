@@ -29,6 +29,7 @@ public:
 
     void searchGroups(QString groupName);
 
+    void makeRequrst();
 signals:
 
     void listenGroups(QList<GroupModel> groups);

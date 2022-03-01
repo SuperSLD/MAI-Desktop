@@ -12,6 +12,7 @@ public:
     SplashFragment();
     ~SplashFragment();
 public slots:
+
     /**
      * @brief openStartScreen
      *
