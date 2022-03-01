@@ -12,8 +12,6 @@ namespace screens {
 
     static const QString SPLASH_TAG = "splash";
     static const QString SEARCH_GROUP = "search_group";
-    static const QString TEST_TAG = "test";
-    static const QString TEST_2_TAG = "test2";
 };
 
 class ImplFragmentFactory: public BaseFragmentFactory {

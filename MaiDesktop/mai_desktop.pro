@@ -26,8 +26,6 @@ SOURCES += \
     stylecontainer.cpp \
     ui/searchgroupfragment.cpp \
     ui/splashfragment.cpp \
-    ui/test2fragment.cpp \
-    ui/testfragment.cpp \
     ui/widgets/codeview/codestyle.cpp \
     ui/widgets/codeview/codestyles/cppcodestyle.cpp \
     ui/widgets/codeview/codestyles/jsoncodestyle.cpp \
@@ -49,8 +47,6 @@ HEADERS += \
     stylecontainer.h \
     ui/searchgroupfragment.h \
     ui/splashfragment.h \
-    ui/test2fragment.h \
-    ui/testfragment.h \
     ui/widgets/codeview/codestyle.h \
     ui/widgets/codeview/codestyles/cppcodestyle.h \
     ui/widgets/codeview/codestyles/jsoncodestyle.h \
