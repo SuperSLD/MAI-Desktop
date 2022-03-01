@@ -22,6 +22,7 @@ BaseFragment* ImplFragmentFactory::create(QString tag) {
     }
 }
 
+//hui
 QString ImplFragmentFactory::createStart() {
     return SPLASH_TAG;
 }
