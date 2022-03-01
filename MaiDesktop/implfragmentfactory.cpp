@@ -11,7 +11,7 @@ using namespace screens;
 ImplFragmentFactory::ImplFragmentFactory(){}
 ImplFragmentFactory::~ImplFragmentFactory(){}
 
-BaseFragment* ImplFragmentFactory::create(QString tag) {
+BaseFragment* ImplFragmentFactory::create(QString tag) {// ntgndrjnvkj
     qDebug("ScreensFactory create");
     if (tag == SPLASH_TAG) {
         return new SplashFragment;
@@ -22,7 +22,6 @@ BaseFragment* ImplFragmentFactory::create(QString tag) {
     }
 }
 
-//hui
 QString ImplFragmentFactory::createStart() {
     return SPLASH_TAG;
 }
