@@ -3,6 +3,7 @@
 
 #include <common/base/basemodel.h>
 
+#include <QJsonObject>
 #include <QString>
 
 
@@ -16,13 +17,7 @@ private:
     QString level;
     int course;
 public:
-    GroupModel(
-            QString id,
-            QString name,
-            QString fac,
-            QString level,
-            int course
-    );
+    GroupModel(QJsonObject obj);
 
     QString getId();
     QString getName();
