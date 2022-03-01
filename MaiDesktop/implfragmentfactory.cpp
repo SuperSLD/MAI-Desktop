@@ -4,8 +4,6 @@
 
 #include <ui/searchgroupfragment.h>
 #include <ui/splashfragment.h>
-#include <ui/test2fragment.h>
-#include <ui/testfragment.h>
 
 
 using namespace screens;
@@ -19,10 +17,6 @@ BaseFragment* ImplFragmentFactory::create(QString tag) {
         return new SplashFragment;
     } else if (tag == SEARCH_GROUP) {
         return new SearchGroupFragment;
-    } else if (tag == TEST_TAG) {
-        return new TestFragment;
-    } else if (tag == TEST_2_TAG) {
-        return new Test2Fragment;
     } else {
         return nullptr;
     }
