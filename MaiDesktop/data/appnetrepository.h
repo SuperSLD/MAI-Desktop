@@ -1,14 +1,17 @@
 #ifndef APPNETREPOSITORY_H
 #define APPNETREPOSITORY_H
 
+#include "apiservice.h"
+
 #include <QNetworkAccessManager>
 #include <QObject>
 #include <QString>
 #include <QList>
+#include <QNetworkReply>
+#include <QUuid>
 
 #include <data/models/groupmodel.h>
 
-class GroupModel;
 
 /**
  * @brief The AppRepository class
@@ -17,11 +20,11 @@ class GroupModel;
  * информации с сервера.
  *
  */
-class AppNetRepository: QObject {
+class AppNetRepository: public QObject {
     Q_OBJECT
 
 private:
-    QNetworkAccessManager *networkManager;
+    ApiService *service;
 
 public:
     AppNetRepository();
@@ -29,10 +32,10 @@ public:
 
     void searchGroups(QString groupName);
 
-    void makeRequrst();
 signals:
+    void listenGroups(QJsonObject response);
 
-    void listenGroups(QList<GroupModel> groups);
 };
+
 
 #endif // APPNETREPOSITORY_H

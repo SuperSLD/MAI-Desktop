@@ -1,13 +1,37 @@
 #include "appnetrepository.h"
 
-AppNetRepository::AppNetRepository() {
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
+#include <QNetworkAccessManager>
 
+#include "implfragmentfactory.h"
+using namespace screens;
+#include "apiservice.h"
+
+#include <data/models/datawrapper.h>
+using namespace service;
+
+
+AppNetRepository::AppNetRepository() {
+    service = new ApiService(this);
+
+    void (*lambda)(QJsonDocument) = [](QJsonDocument obj) {
+
+    };
 }
 
 AppNetRepository::~AppNetRepository() {
-
+    delete service;
 }
 
 void AppNetRepository::searchGroups(QString groupName) {
-    Q_UNUSED(groupName)
+    service->makeRequest(
+        GET,
+        "api/groups/search/" + groupName,
+        [](QJsonObject o, AppNetRepository *r) {
+            r->listenGroups(o);
+        }
+     );
 }
+

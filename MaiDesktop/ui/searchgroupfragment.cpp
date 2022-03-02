@@ -19,6 +19,10 @@ using namespace screens;
 using namespace styles;
 
 SearchGroupFragment::SearchGroupFragment() {
+
+    netRepository = new AppNetRepository();
+    connect(netRepository, &AppNetRepository::listenGroups, this, &SearchGroupFragment::listenGroups);
+
     // главный контейнер
     QHBoxLayout *mainHLayout = new QHBoxLayout;
     QVBoxLayout *mainVLayout = new QVBoxLayout;
@@ -58,8 +62,14 @@ SearchGroupFragment::SearchGroupFragment() {
 
     this->setLayout(mainHLayout);
     this->setObjectName("fragment");
+
+    netRepository->searchGroups("309С");
 }
 
 SearchGroupFragment::~SearchGroupFragment() {
+    delete netRepository;
+}
 
+void SearchGroupFragment::listenGroups(QJsonObject object) {
+    qDebug() << "SearchGroupFragment: listenGroups" << Qt::endl;
 }

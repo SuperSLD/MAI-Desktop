@@ -17,6 +17,7 @@ SOURCES += \
     common/base/basefragmentfactory.cpp \
     common/base/basemodel.cpp \
     common/router.cpp \
+    data/apiservice.cpp \
     data/appnetrepository.cpp \
     data/models/datawrapper.cpp \
     data/models/groupmodel.cpp \
@@ -39,6 +40,7 @@ HEADERS += \
     common/base/basefragmentfactory.h \
     common/base/basemodel.h \
     common/router.h \
+    data/apiservice.h \
     data/appnetrepository.h \
     data/models/datawrapper.h \
     data/models/groupmodel.h \
