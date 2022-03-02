@@ -26,15 +26,39 @@ private:
     QList<HandlerData> handlers;
     AppNetRepository *rep;
 
+    /**
+     * @brief createRequest
+     *
+     * Создание запроса для сервера.
+     *
+     * @param url путь
+     * @return реквест для отправки.
+     */
+    QNetworkRequest createRequest(QString url);
+
+    /**
+     * @brief createResponseHandler
+     *
+     * Создание колбэка, который
+     * будет ждать ответ сервера.
+     *
+     * @return UUID колбэка.
+     */
+    QString createResponseHandler(void (*handler)(QJsonObject, AppNetRepository*));
+
 public:
     ApiService(AppNetRepository *rep);
     ~ApiService();
 
-    void makeRequest(
-            int type,
-            QString url,
-            void (*handler)(QJsonObject, AppNetRepository*),
-            QJsonObject param = QJsonObject()
+    void get(
+        QString url,
+        void (*handler)(QJsonObject, AppNetRepository*)
+    );
+
+    void post(
+        QString url,
+        void (*handler)(QJsonObject, AppNetRepository*),
+        QJsonObject param
     );
 
 private slots:

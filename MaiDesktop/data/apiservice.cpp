@@ -13,7 +13,6 @@
 
 #include "implfragmentfactory.h"
 using namespace screens;
-using namespace service;
 
 ApiService::ApiService(AppNetRepository *rep) {
     this->rep = rep;
@@ -30,8 +29,7 @@ ApiService::~ApiService() {
     delete networkManager;
 }
 
-
-void ApiService::makeRequest(int type, QString url, void (*handler)(QJsonObject, AppNetRepository*), QJsonObject param) {
+QNetworkRequest ApiService::createRequest(QString url) {
     qDebug() << "AppNetworkService: make request" << Qt::endl;
     qDebug() << "AppNetworkService: " << url << Qt::endl;
     QNetworkRequest request(QUrl(SERVER_URL + "/" + url));
@@ -40,22 +38,36 @@ void ApiService::makeRequest(int type, QString url, void (*handler)(QJsonObject,
                 QStringLiteral("application/json;charset=utf-8")
     );
     request.setRawHeader("ApiKey", "f723a6fc-09ff-4825-ac05-c1c2f5309d1c");
+    return request;
+}
+
+QString ApiService::createResponseHandler(void (*handler)(QJsonObject, AppNetRepository*)) {
     HandlerData handlerData = HandlerData();
     handlerData.handler = handler;
     qDebug() << "AppNetworkService: handler UUID -" << handlerData.uuid << Qt::endl;
     handlers.append(handlerData);
+    return handlerData.uuid;
+}
+
+void ApiService::get(QString url, void (*handler)(QJsonObject, AppNetRepository*)) {
+    QNetworkRequest req = createRequest(url);
+    QString uuid = createResponseHandler(handler);
     QNetworkReply* reply;
-    if (type == POST) {
-        qDebug() << "AppNetworkService: POST" << Qt::endl;
-        reply = networkManager->post(
-            request,
-            QJsonDocument(param).toJson(QJsonDocument::Compact)
-        );
-    } else {
-        qDebug() << "AppNetworkService: GET" << Qt::endl;
-        reply = networkManager->get(request);
-    }
-    reply->setProperty("request_id", handlerData.uuid);
+    qDebug() << "AppNetworkService: GET" << Qt::endl;
+    reply = networkManager->get(req);
+    reply->setProperty("request_id", uuid);
+}
+
+
+void ApiService::post(QString url, void (*handler)(QJsonObject, AppNetRepository*),  QJsonObject param) {
+    QNetworkRequest req = createRequest(url);
+    QString uuid = createResponseHandler(handler);
+    QNetworkReply* reply;
+    qDebug() << "AppNetworkService: POST" << Qt::endl;
+    reply = networkManager->post(
+        req, QJsonDocument(param).toJson(QJsonDocument::Compact)
+    );
+    reply->setProperty("request_id", uuid);
 }
 
 void ApiService::onHttpResult(QNetworkReply *reply) {

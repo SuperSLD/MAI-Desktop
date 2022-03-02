@@ -13,25 +13,15 @@ using namespace screens;
 using namespace service;
 
 
-AppNetRepository::AppNetRepository() {
-    service = new ApiService(this);
+AppNetRepository::AppNetRepository() { service = new ApiService(this); }
 
-    void (*lambda)(QJsonDocument) = [](QJsonDocument obj) {
-
-    };
-}
-
-AppNetRepository::~AppNetRepository() {
-    delete service;
-}
+AppNetRepository::~AppNetRepository() { delete service; }
 
 void AppNetRepository::searchGroups(QString groupName) {
-    service->makeRequest(
-        GET,
-        "api/groups/search/" + groupName,
+    service->get( "api/groups/search/" + groupName,
         [](QJsonObject o, AppNetRepository *r) {
             r->listenGroups(o);
         }
-     );
+    );
 }
 
