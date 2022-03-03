@@ -12,6 +12,7 @@
 
 #include <data/models/datawrapper.h>
 #include <data/models/group/grouplist.h>
+#include <data/models/schedule/schedulemodel.h>
 
 
 /**
@@ -47,10 +48,20 @@ public:
      */
     void searchGroups(QString groupName);
 
+    /**
+     * @brief getSchedule
+     *
+     * Загрузка расписания по идентификатору
+     * группы. Все недели.
+     * Ответ приходит в: signal listenSchedule
+     *
+     * @param groupId
+     */
     void getSchedule(QString groupId);
 
 signals:
     void listenGroups(DataWrapper<GroupList> wrapper);
+    void listenSchedule(DataWrapper<ScheduleModel> wrapper);
 
 };
 

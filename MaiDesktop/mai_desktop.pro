@@ -22,6 +22,12 @@ SOURCES += \
     data/models/datawrapper.cpp \
     data/models/group/grouplist.cpp \
     data/models/group/groupmodel.cpp \
+    data/models/schedule/daymodel.cpp \
+    data/models/schedule/lectormodel.cpp \
+    data/models/schedule/roommodel.cpp \
+    data/models/schedule/schedulemodel.cpp \
+    data/models/schedule/subjectmodel.cpp \
+    data/models/schedule/weekmodel.cpp \
     implfragmentfactory.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -46,6 +52,12 @@ HEADERS += \
     data/models/datawrapper.h \
     data/models/group/grouplist.h \
     data/models/group/groupmodel.h \
+    data/models/schedule/daymodel.h \
+    data/models/schedule/lectormodel.h \
+    data/models/schedule/roommodel.h \
+    data/models/schedule/schedulemodel.h \
+    data/models/schedule/subjectmodel.h \
+    data/models/schedule/weekmodel.h \
     implfragmentfactory.h \
     mainwindow.h \
     stylecontainer.h \
