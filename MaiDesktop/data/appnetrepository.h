@@ -1,14 +1,18 @@
 #ifndef APPNETREPOSITORY_H
 #define APPNETREPOSITORY_H
 
+#include "apiservice.h"
+
 #include <QNetworkAccessManager>
 #include <QObject>
 #include <QString>
 #include <QList>
+#include <QNetworkReply>
+#include <QUuid>
 
-#include <data/models/groupmodel.h>
+#include <data/models/datawrapper.h>
+#include <data/models/group/grouplist.h>
 
-class GroupModel;
 
 /**
  * @brief The AppRepository class
@@ -16,12 +20,18 @@ class GroupModel;
  * Репозиторий для получения
  * информации с сервера.
  *
+ * На каждый метод сервера репозиторий
+ * имеет один метод и один сигнал.
+ * К сигналу подключаемся чтобы прослушивать
+ * данные, а метод вызываем, чтобы
+ * инициализировать отправку.
+ *
  */
-class AppNetRepository: QObject {
+class AppNetRepository: public QObject {
     Q_OBJECT
 
 private:
-    QNetworkAccessManager *networkManager;
+    ApiService *service;
 
 public:
     AppNetRepository();
@@ -29,10 +39,10 @@ public:
 
     void searchGroups(QString groupName);
 
-    void makeRequrst();
 signals:
+    void listenGroups(DataWrapper<GroupList> wrapper);
 
-    void listenGroups(QList<GroupModel> groups);
 };
+
 
 #endif // APPNETREPOSITORY_H
