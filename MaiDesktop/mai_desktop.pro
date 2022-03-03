@@ -20,7 +20,8 @@ SOURCES += \
     data/apiservice.cpp \
     data/appnetrepository.cpp \
     data/models/datawrapper.cpp \
-    data/models/groupmodel.cpp \
+    data/models/group/grouplist.cpp \
+    data/models/group/groupmodel.cpp \
     implfragmentfactory.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -43,7 +44,8 @@ HEADERS += \
     data/apiservice.h \
     data/appnetrepository.h \
     data/models/datawrapper.h \
-    data/models/groupmodel.h \
+    data/models/group/grouplist.h \
+    data/models/group/groupmodel.h \
     implfragmentfactory.h \
     mainwindow.h \
     stylecontainer.h \

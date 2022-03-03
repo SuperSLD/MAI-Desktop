@@ -92,16 +92,14 @@ void ApiService::onHttpResult(QNetworkReply *reply) {
         if(!doc.isNull()) {
             if(doc.isObject()) {
                 obj = doc.object();
+                qDebug() << "AppNetworkService: success parse -" << uuid << Qt::endl;
+                handlerData.handler(obj, rep);
             } else {
                 qDebug() << "AppNetworkService: Document is not an object" << Qt::endl;
             }
         } else {
             qDebug() << "AppNetworkService: Invalid JSON...\n" << Qt::endl;
         }
-
-        qDebug() << "AppNetworkService: success parse -" << uuid << Qt::endl;
-        handlerData.handler(obj, rep);
-
     } else {
         qDebug() << "AppNetworkService: http response error -" << uuid << Qt::endl;
     }

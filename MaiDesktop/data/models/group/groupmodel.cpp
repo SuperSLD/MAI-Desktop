@@ -1,7 +1,11 @@
 #include "groupmodel.h"
-#include <QJsonArray>
 
-GroupModel::GroupModel(QJsonObject obj) : BaseModel(obj) {
+#include <QJsonObject>
+#include <QJsonValue>
+
+
+GroupModel::GroupModel(QJsonValue val) {
+    QJsonObject obj = val.toObject();
     this->id = obj["id"].toString();
     this->course = obj["course"].toInt();
     this->fac = obj["fac"].toString();

@@ -17,7 +17,7 @@ public:
     SearchGroupFragment();
     ~SearchGroupFragment();
 public slots:
-    void listenGroups(QJsonObject object);
+    void listenGroups(DataWrapper<GroupList> wrapper);
 
 };
 

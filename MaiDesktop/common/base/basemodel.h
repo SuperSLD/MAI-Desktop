@@ -1,7 +1,7 @@
 #ifndef BASEMODEL_H
 #define BASEMODEL_H
 
-#include <QJsonObject>
+#include <QJsonValue>
 
 
 /**
@@ -16,7 +16,7 @@
 class BaseModel {
 
 public:
-    BaseModel(QJsonObject obj);
+    BaseModel();
     virtual void pol();
 };
 

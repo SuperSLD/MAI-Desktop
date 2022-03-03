@@ -10,7 +10,8 @@
 #include <QNetworkReply>
 #include <QUuid>
 
-#include <data/models/groupmodel.h>
+#include <data/models/datawrapper.h>
+#include <data/models/group/grouplist.h>
 
 
 /**
@@ -18,6 +19,12 @@
  *
  * Репозиторий для получения
  * информации с сервера.
+ *
+ * На каждый метод сервера репозиторий
+ * имеет один метод и один сигнал.
+ * К сигналу подключаемся чтобы прослушивать
+ * данные, а метод вызываем, чтобы
+ * инициализировать отправку.
  *
  */
 class AppNetRepository: public QObject {
@@ -33,7 +40,7 @@ public:
     void searchGroups(QString groupName);
 
 signals:
-    void listenGroups(QJsonObject response);
+    void listenGroups(DataWrapper<GroupList> wrapper);
 
 };
 

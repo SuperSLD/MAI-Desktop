@@ -13,6 +13,7 @@
 
 #include <ui/widgets/codeview/codestyles/cppcodestyle.h>
 #include <ui/widgets/codeview/codestyles/jsoncodestyle.h>
+#include <data/models/group/groupmodel.h>
 
 
 using namespace screens;
@@ -70,6 +71,9 @@ SearchGroupFragment::~SearchGroupFragment() {
     delete netRepository;
 }
 
-void SearchGroupFragment::listenGroups(QJsonObject object) {
+void SearchGroupFragment::listenGroups(DataWrapper<GroupList> wrapper) {
     qDebug() << "SearchGroupFragment: listenGroups" << Qt::endl;
+    foreach (GroupModel group, wrapper.getData().list) {
+        qDebug() << "SearchGroupFragment:" << group.getName() <<Qt::endl;
+    }
 }

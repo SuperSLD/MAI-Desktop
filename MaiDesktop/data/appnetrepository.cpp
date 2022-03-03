@@ -20,8 +20,7 @@ AppNetRepository::~AppNetRepository() { delete service; }
 void AppNetRepository::searchGroups(QString groupName) {
     service->get( "api/groups/search/" + groupName,
         [](QJsonObject o, AppNetRepository *r) {
-            r->listenGroups(o);
+            r->listenGroups(DataWrapper<GroupList>(o, GroupList(o["data"])));
         }
     );
 }
-
