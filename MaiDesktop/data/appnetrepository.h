@@ -41,6 +41,7 @@ public:
      * @brief searchGroups
      *
      * Поиск группы по части названия.
+     * Ответ приходит в: signal listenGroups
      *
      * @param groupName часть названия
      */
