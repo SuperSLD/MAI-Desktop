@@ -16,10 +16,10 @@ private:
 
 public:
     DataWrapper() {}
-    DataWrapper(QJsonObject obj, T data = NULL)  {
+    DataWrapper(QJsonObject obj)  {
         this->success = obj["success"].toBool();
         this->message = obj["message"].toString();
-        this->data = data;
+        this->data = T(obj["data"]);
     }
     ~DataWrapper() {}
 

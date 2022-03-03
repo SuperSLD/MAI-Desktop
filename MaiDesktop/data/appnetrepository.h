@@ -37,7 +37,16 @@ public:
     AppNetRepository();
     ~AppNetRepository();
 
+    /**
+     * @brief searchGroups
+     *
+     * Поиск группы по части названия.
+     *
+     * @param groupName часть названия
+     */
     void searchGroups(QString groupName);
+
+    void getSchedule(QString groupId);
 
 signals:
     void listenGroups(DataWrapper<GroupList> wrapper);
