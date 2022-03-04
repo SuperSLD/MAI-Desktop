@@ -16,7 +16,10 @@ private:
     QString fac;
     QString level;
     int course;
+
 public:
+    int count = 0;
+
     GroupModel(QJsonValue obj);
 
     QString getId();
@@ -24,6 +27,8 @@ public:
     QString getFaculty();
     QString getLevel();
     int getCourse();
+
+    QJsonObject toParams();
 };
 
 #endif // GROUPMODEL_H

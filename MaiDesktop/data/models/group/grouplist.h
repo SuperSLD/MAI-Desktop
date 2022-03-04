@@ -11,7 +11,8 @@ class GroupList : public BaseModel {
 public:
     QList<GroupModel> list;
 
-    GroupList(QJsonValue);
+    GroupList(QJsonValue val);
+    QJsonObject toParams(int percent);
 };
 
 #endif // GROUPLIST_H
