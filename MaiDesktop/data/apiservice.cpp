@@ -31,7 +31,7 @@ ApiService::~ApiService() {
 
 QNetworkRequest ApiService::createRequest(QString url) {
     qDebug() << "AppNetworkService: make request" << Qt::endl;
-    qDebug() << "AppNetworkService: " << url << Qt::endl;
+    qDebug() << "AppNetworkService: " << SERVER_URL + "/" + url << Qt::endl;
     QNetworkRequest request(QUrl(SERVER_URL + "/" + url));
     request.setHeader(
                 QNetworkRequest::ContentTypeHeader,
@@ -53,7 +53,7 @@ void ApiService::get(QString url, void (*handler)(QJsonObject, AppNetRepository*
     QNetworkRequest req = createRequest(url);
     QString uuid = createResponseHandler(handler);
     QNetworkReply* reply;
-    qDebug() << "AppNetworkService: GET" << Qt::endl;
+    qDebug() << "AppNetworkService: GET" << uuid << Qt::endl;
     reply = networkManager->get(req);
     reply->setProperty("request_id", uuid);
 }
@@ -63,7 +63,8 @@ void ApiService::post(QString url, void (*handler)(QJsonObject, AppNetRepository
     QNetworkRequest req = createRequest(url);
     QString uuid = createResponseHandler(handler);
     QNetworkReply* reply;
-    qDebug() << "AppNetworkService: POST" << Qt::endl;
+    qDebug() << "AppNetworkService: POST" << uuid << Qt::endl;
+    qDebug() << "AppNetworkService: BODY-" << QJsonDocument(param).toJson(QJsonDocument::Compact) << Qt::endl << "BODY uuid-" << uuid << Qt::endl;
     reply = networkManager->post(
         req, QJsonDocument(param).toJson(QJsonDocument::Compact)
     );
@@ -71,11 +72,14 @@ void ApiService::post(QString url, void (*handler)(QJsonObject, AppNetRepository
 }
 
 void ApiService::onHttpResult(QNetworkReply *reply) {
-    qDebug() << "AppNetworkService: http response" << Qt::endl;
     QString uuid = reply->property("request_id").toString();
     qDebug() << "AppNetworkService: response UUID -" << uuid << Qt::endl;
     HandlerData handlerData;
     int handlerIndex = -1;
+    QVariant statusCode = reply->attribute( QNetworkRequest::HttpStatusCodeAttribute );
+    if ( statusCode.isValid() ) {
+        qDebug() << "AppNetworkService: STATUS CODE -" << statusCode.toString() << uuid  << Qt::endl;
+    }
     for (int i = 0; i < handlers.size(); i++) {
         if (handlers[i].uuid == uuid) {
             handlerData = handlers[i];
@@ -86,7 +90,7 @@ void ApiService::onHttpResult(QNetworkReply *reply) {
 
     if(!reply->error()) {
         QByteArray resp = reply->readAll();
-        qDebug() << "AppNetworkService: " << resp << Qt::endl;
+        qDebug() << "AppNetworkService: " << resp << uuid  << Qt::endl;
         QJsonDocument doc = QJsonDocument::fromJson(resp);
         QJsonObject obj;
         if(!doc.isNull()) {
@@ -95,10 +99,10 @@ void ApiService::onHttpResult(QNetworkReply *reply) {
                 qDebug() << "AppNetworkService: success parse -" << uuid << Qt::endl;
                 handlerData.handler(obj, rep);
             } else {
-                qDebug() << "AppNetworkService: Document is not an object" << Qt::endl;
+                qDebug() << "AppNetworkService: Document is not an object" << uuid << Qt::endl;
             }
         } else {
-            qDebug() << "AppNetworkService: Invalid JSON...\n" << Qt::endl;
+            qDebug() << "AppNetworkService: Invalid JSON...\n" << uuid << Qt::endl;
         }
     } else {
         qDebug() << "AppNetworkService: http response error -" << uuid << Qt::endl;

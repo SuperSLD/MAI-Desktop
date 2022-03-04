@@ -22,6 +22,9 @@ SOURCES += \
     data/models/datawrapper.cpp \
     data/models/group/grouplist.cpp \
     data/models/group/groupmodel.cpp \
+    data/models/optimal/optimaldaymodel.cpp \
+    data/models/optimal/optimalmodel.cpp \
+    data/models/optimal/optimaltimemodel.cpp \
     data/models/schedule/daymodel.cpp \
     data/models/schedule/lectormodel.cpp \
     data/models/schedule/roommodel.cpp \
@@ -52,6 +55,9 @@ HEADERS += \
     data/models/datawrapper.h \
     data/models/group/grouplist.h \
     data/models/group/groupmodel.h \
+    data/models/optimal/optimaldaymodel.h \
+    data/models/optimal/optimalmodel.h \
+    data/models/optimal/optimaltimemodel.h \
     data/models/schedule/daymodel.h \
     data/models/schedule/lectormodel.h \
     data/models/schedule/roommodel.h \

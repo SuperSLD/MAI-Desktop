@@ -5,12 +5,7 @@
 #include <QJsonValue>
 #include <QNetworkAccessManager>
 
-#include "implfragmentfactory.h"
-using namespace screens;
 #include "apiservice.h"
-
-#include <data/models/datawrapper.h>
-using namespace service;
 
 AppNetRepository::AppNetRepository() { service = new ApiService(this); }
 
@@ -29,5 +24,14 @@ void AppNetRepository::getSchedule(QString groupId) {
          [](QJsonObject o, AppNetRepository *r) {
             r->listenSchedule(DataWrapper<ScheduleModel>(o));
          }
+    );
+}
+
+void AppNetRepository::getOptimalTime(GroupList list, int percernt) {
+    service->post("api/schedule/lastpairtime",
+          [](QJsonObject o, AppNetRepository *r) {
+             r->listenOptimalTime(DataWrapper<OptimalModel>(o));
+          },
+          list.toParams(percernt)
     );
 }

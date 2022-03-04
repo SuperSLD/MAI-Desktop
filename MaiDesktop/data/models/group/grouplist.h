@@ -12,6 +12,7 @@ public:
     QList<GroupModel> list;
 
     GroupList(QJsonValue val);
+    QJsonObject toParams(int percent);
 };
 
 #endif // GROUPLIST_H

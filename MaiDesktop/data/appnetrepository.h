@@ -12,6 +12,7 @@
 
 #include <data/models/datawrapper.h>
 #include <data/models/group/grouplist.h>
+#include <data/models/optimal/optimalmodel.h>
 #include <data/models/schedule/schedulemodel.h>
 
 
@@ -59,9 +60,23 @@ public:
      */
     void getSchedule(QString groupId);
 
+    /**
+     * @brief getOptimalTime
+     *
+     * Получение оптимального времени,
+     * в которое все перечисленные группы
+     * могут приехать на мероприятие.
+     * Ответ приходит в: signal listenOptimalTime
+     *
+     * @param list
+     */
+    void getOptimalTime(GroupList list, int percernt);
+
 signals:
     void listenGroups(DataWrapper<GroupList> wrapper);
     void listenSchedule(DataWrapper<ScheduleModel> wrapper);
+    void listenOptimalTime(DataWrapper<OptimalModel> wrapper);
+
 
 };
 

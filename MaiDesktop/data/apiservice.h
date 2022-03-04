@@ -10,12 +10,6 @@
 #include <QJsonObject>
 
 class AppNetRepository;
-
-namespace service {
-    static const int GET = 0;
-    static const int POST = 1;
-};
-
 class HandlerData;
 
 class ApiService : public QObject {
