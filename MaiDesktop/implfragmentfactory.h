@@ -7,13 +7,11 @@
 
 
 namespace screens {
-    static const QString SERVER_URL = "http://jutter.online/mytask";
+    static const QString SERVER_URL = "https://jutter.online/mai_v2";
     //static const QString SERVER_URL = "http://localhost:8080";
 
     static const QString SPLASH_TAG = "splash";
     static const QString SEARCH_GROUP = "search_group";
-    static const QString TEST_TAG = "test";
-    static const QString TEST_2_TAG = "test2";
 };
 
 class ImplFragmentFactory: public BaseFragmentFactory {

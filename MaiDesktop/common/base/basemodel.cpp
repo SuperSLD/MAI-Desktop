@@ -1,7 +1,4 @@
 #include "basemodel.h"
 
-BaseModel::BaseModel(QJsonObject obj) {
-    Q_UNUSED(obj)
-}
-
+BaseModel::BaseModel() {}
 void BaseModel::pol() {}

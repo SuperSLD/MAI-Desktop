@@ -1,6 +1,7 @@
 #ifndef DATAWRAPPER_H
 #define DATAWRAPPER_H
 
+#include <QJsonObject>
 #include <qstring.h>
 
 
@@ -9,16 +10,18 @@
  */
 template <typename T> class DataWrapper {
 private:
-    bool success;
-    QString message;
-    T data;
+    bool success = false;
+    QString message = NULL;
+    T data = T(QJsonValue());
 
 public:
-    DataWrapper(
-        bool success,
-        QString message,
-        T data
-    );
+    DataWrapper() {}
+    DataWrapper(QJsonObject obj)  {
+        this->success = obj["success"].toBool();
+        this->message = obj["message"].toString();
+        this->data = T(obj["data"]);
+    }
+    ~DataWrapper() {}
 
     /**
      * @brief isSuccess
@@ -28,7 +31,10 @@ public:
      *
      * @return true если запрос прошел без ошибок.
      */
-    bool isSuccess();
+    bool isSuccess() {
+        return success;
+    }
+
 
     /**
      * @brief getMessage
@@ -37,7 +43,10 @@ public:
      *
      * @return сообщение об ошибке.
      */
-    QString getMessage();
+    QString getMessage() {
+        return message;
+    }
+
 
     /**
      * @brief getData
@@ -47,7 +56,9 @@ public:
      *
      * @return данные указанного типа.
      */
-    T getData();
+    T getData() {
+        return data;
+    }
 };
 
 #endif // DATAWRAPPER_H

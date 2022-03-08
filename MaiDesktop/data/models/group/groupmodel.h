@@ -1,10 +1,10 @@
 #ifndef GROUPMODEL_H
 #define GROUPMODEL_H
 
-#include <common/base/basemodel.h>
+#include <qjsonvalue.h>
+#include <qstring.h>
 
-#include <QJsonObject>
-#include <QString>
+#include <common/base/basemodel.h>
 
 
 
@@ -16,14 +16,19 @@ private:
     QString fac;
     QString level;
     int course;
+
 public:
-    GroupModel(QJsonObject obj);
+    int count = 0;
+
+    GroupModel(QJsonValue obj);
 
     QString getId();
     QString getName();
     QString getFaculty();
     QString getLevel();
     int getCourse();
+
+    QJsonObject toParams();
 };
 
 #endif // GROUPMODEL_H

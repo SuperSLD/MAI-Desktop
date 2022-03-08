@@ -17,17 +17,26 @@ SOURCES += \
     common/base/basefragmentfactory.cpp \
     common/base/basemodel.cpp \
     common/router.cpp \
+    data/apiservice.cpp \
     data/appnetrepository.cpp \
     data/models/datawrapper.cpp \
-    data/models/groupmodel.cpp \
+    data/models/group/grouplist.cpp \
+    data/models/group/groupmodel.cpp \
+    data/models/optimal/optimaldaymodel.cpp \
+    data/models/optimal/optimalmodel.cpp \
+    data/models/optimal/optimaltimemodel.cpp \
+    data/models/schedule/daymodel.cpp \
+    data/models/schedule/lectormodel.cpp \
+    data/models/schedule/roommodel.cpp \
+    data/models/schedule/schedulemodel.cpp \
+    data/models/schedule/subjectmodel.cpp \
+    data/models/schedule/weekmodel.cpp \
     implfragmentfactory.cpp \
     main.cpp \
     mainwindow.cpp \
     stylecontainer.cpp \
     ui/searchgroupfragment.cpp \
     ui/splashfragment.cpp \
-    ui/test2fragment.cpp \
-    ui/testfragment.cpp \
     ui/widgets/codeview/codestyle.cpp \
     ui/widgets/codeview/codestyles/cppcodestyle.cpp \
     ui/widgets/codeview/codestyles/jsoncodestyle.cpp \
@@ -41,16 +50,25 @@ HEADERS += \
     common/base/basefragmentfactory.h \
     common/base/basemodel.h \
     common/router.h \
+    data/apiservice.h \
     data/appnetrepository.h \
     data/models/datawrapper.h \
-    data/models/groupmodel.h \
+    data/models/group/grouplist.h \
+    data/models/group/groupmodel.h \
+    data/models/optimal/optimaldaymodel.h \
+    data/models/optimal/optimalmodel.h \
+    data/models/optimal/optimaltimemodel.h \
+    data/models/schedule/daymodel.h \
+    data/models/schedule/lectormodel.h \
+    data/models/schedule/roommodel.h \
+    data/models/schedule/schedulemodel.h \
+    data/models/schedule/subjectmodel.h \
+    data/models/schedule/weekmodel.h \
     implfragmentfactory.h \
     mainwindow.h \
     stylecontainer.h \
     ui/searchgroupfragment.h \
     ui/splashfragment.h \
-    ui/test2fragment.h \
-    ui/testfragment.h \
     ui/widgets/codeview/codestyle.h \
     ui/widgets/codeview/codestyles/cppcodestyle.h \
     ui/widgets/codeview/codestyles/jsoncodestyle.h \
