@@ -35,6 +35,8 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     stylecontainer.cpp \
+    ui/schedule/items/numweekwidget.cpp \
+    ui/schedule/selectweekfragment.cpp \
     ui/searchgroupfragment.cpp \
     ui/splashfragment.cpp \
     ui/widgets/codeview/codestyle.cpp \
@@ -67,6 +69,8 @@ HEADERS += \
     implfragmentfactory.h \
     mainwindow.h \
     stylecontainer.h \
+    ui/schedule/items/numweekwidget.h \
+    ui/schedule/selectweekfragment.h \
     ui/searchgroupfragment.h \
     ui/splashfragment.h \
     ui/widgets/codeview/codestyle.h \
