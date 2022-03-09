@@ -4,6 +4,7 @@
 
 #include <ui/searchgroupfragment.h>
 #include <ui/splashfragment.h>
+#include <ui/schedule/selectweekfragment.h>
 
 
 using namespace screens;
@@ -17,6 +18,8 @@ BaseFragment* ImplFragmentFactory::create(QString tag) {
         return new SplashFragment;
     } else if (tag == SEARCH_GROUP) {
         return new SearchGroupFragment;
+    } else if (tag == SELECT_WEEK) {
+        return new SelectWeekFragment;
     } else {
         return nullptr;
     }
