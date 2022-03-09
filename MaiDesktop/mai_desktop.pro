@@ -19,6 +19,8 @@ SOURCES += \
     common/router.cpp \
     data/apiservice.cpp \
     data/appnetrepository.cpp \
+    data/models/canteens/canteenmodel.cpp \
+    data/models/canteens/canteenslist.cpp \
     data/models/datawrapper.cpp \
     data/models/group/grouplist.cpp \
     data/models/group/groupmodel.cpp \
@@ -35,6 +37,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     stylecontainer.cpp \
+    ui/information/informationfragment.cpp \
     ui/searchgroupfragment.cpp \
     ui/splashfragment.cpp \
     ui/widgets/codeview/codestyle.cpp \
@@ -52,6 +55,8 @@ HEADERS += \
     common/router.h \
     data/apiservice.h \
     data/appnetrepository.h \
+    data/models/canteens/canteenmodel.h \
+    data/models/canteens/canteenslist.h \
     data/models/datawrapper.h \
     data/models/group/grouplist.h \
     data/models/group/groupmodel.h \
@@ -67,6 +72,7 @@ HEADERS += \
     implfragmentfactory.h \
     mainwindow.h \
     stylecontainer.h \
+    ui/information/informationfragment.h \
     ui/searchgroupfragment.h \
     ui/splashfragment.h \
     ui/widgets/codeview/codestyle.h \
