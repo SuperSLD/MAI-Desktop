@@ -6,8 +6,6 @@
 
 #include <common/base/basemodel.h>
 
-
-
 class GroupModel : public BaseModel {
 
 private:

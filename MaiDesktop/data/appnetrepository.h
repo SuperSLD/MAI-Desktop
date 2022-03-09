@@ -10,6 +10,7 @@
 #include <QNetworkReply>
 #include <QUuid>
 
+#include <data/models/canteens/canteenslist.h>
 #include <data/models/datawrapper.h>
 #include <data/models/group/grouplist.h>
 #include <data/models/optimal/optimalmodel.h>
@@ -72,10 +73,21 @@ public:
      */
     void getOptimalTime(GroupList list, int percernt);
 
+    /**
+     * @brief getCanteens
+     *
+     * Получение списка столовых,
+     * расположенных на территории маи.
+     * Ответ приходит в: signal listenCanteens
+     *
+     */
+    void getCanteens();
+
 signals:
     void listenGroups(DataWrapper<GroupList> wrapper);
     void listenSchedule(DataWrapper<ScheduleModel> wrapper);
     void listenOptimalTime(DataWrapper<OptimalModel> wrapper);
+    void listenCanteens(DataWrapper<CanteensList> wrapper);
 
 
 };
