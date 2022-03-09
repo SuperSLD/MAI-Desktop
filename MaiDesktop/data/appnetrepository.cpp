@@ -7,7 +7,7 @@
 
 #include "apiservice.h"
 
-AppNetRepository::AppNetRepository() { service = new ApiService(this); }
+AppNetRepository::AppNetRepository(bool debug) { service = new ApiService(this, debug); }
 
 AppNetRepository::~AppNetRepository() { delete service; }
 

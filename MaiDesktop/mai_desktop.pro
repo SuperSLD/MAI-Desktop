@@ -37,6 +37,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     stylecontainer.cpp \
+    ui/information/canteensfragment.cpp \
     ui/information/informationfragment.cpp \
     ui/information/items/menubuttonwidget.cpp \
     ui/information/items/menuheaderwidget.cpp \
@@ -49,9 +50,11 @@ SOURCES += \
     ui/widgets/codeview/codestyles/cppcodestyle.cpp \
     ui/widgets/codeview/codestyles/jsoncodestyle.cpp \
     ui/widgets/codeview/codeviewwidget.cpp \
+    ui/widgets/loadingcontainerwidget.cpp \
     ui/widgets/slidingstackedwidget.cpp \
     ui/widgets/swgbutton.cpp \
-    ui/widgets/toolbarwidget.cpp
+    ui/widgets/toolbarwidget.cpp \
+    ui/widgets/waitingspinnerwidget.cpp
 
 HEADERS += \
     common/base/basefragment.h \
@@ -77,6 +80,7 @@ HEADERS += \
     implfragmentfactory.h \
     mainwindow.h \
     stylecontainer.h \
+    ui/information/canteensfragment.h \
     ui/information/informationfragment.h \
     ui/information/items/menubuttonwidget.h \
     ui/information/items/menuheaderwidget.h \
@@ -89,9 +93,11 @@ HEADERS += \
     ui/widgets/codeview/codestyles/cppcodestyle.h \
     ui/widgets/codeview/codestyles/jsoncodestyle.h \
     ui/widgets/codeview/codeviewwidget.h \
+    ui/widgets/loadingcontainerwidget.h \
     ui/widgets/slidingstackedwidget.h \
     ui/widgets/swgbutton.h \
-    ui/widgets/toolbarwidget.h
+    ui/widgets/toolbarwidget.h \
+    ui/widgets/waitingspinnerwidget.h
 
 RESOURCES += \
     resc.qrc \

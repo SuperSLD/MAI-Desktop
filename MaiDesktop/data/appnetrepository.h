@@ -37,7 +37,7 @@ private:
     ApiService *service;
 
 public:
-    AppNetRepository();
+    AppNetRepository(bool debug = false);
     ~AppNetRepository();
 
     /**

@@ -28,6 +28,8 @@
 #include <ui/information/items/menubuttonwidget.h>
 #include <ui/information/items/menuheaderwidget.h>
 using namespace styles;
+#include <implfragmentfactory.h>
+using namespace screens;
 
 InformationFragment::InformationFragment() {
 
@@ -160,4 +162,7 @@ void InformationFragment::onBackPressed() {
 
 void InformationFragment::onMenuButtonClick(int code) {
     qDebug() << "InformationFragment: click button-" << code << Qt::endl;
+    if (code == CANTEENS) {
+        emit navigateTo(CANTEENS_TAG);
+    }
 }

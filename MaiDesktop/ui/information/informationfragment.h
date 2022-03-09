@@ -18,7 +18,7 @@ public:
     InformationFragment();
     ~InformationFragment();
 
-slots
+private slots:
     void onBackPressed();
     void onMenuButtonClick(int code);
 };
