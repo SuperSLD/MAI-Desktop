@@ -45,6 +45,7 @@ ToolbarWidget::ToolbarWidget(QString title, bool showBack, QString icon) {
 
     this->title = title;
     this->setLayout(titleContainer);
+    this->setStyleSheet("background-color:#2C2C2C;");
 }
 
 ToolbarWidget::~ToolbarWidget() {}

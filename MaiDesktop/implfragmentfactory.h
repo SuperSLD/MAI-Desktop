@@ -12,6 +12,7 @@ namespace screens {
 
     static const QString SPLASH_TAG = "splash";
     static const QString SEARCH_GROUP = "search_group";
+    static const QString SELECT_WEEK = "select_week";
 };
 
 class ImplFragmentFactory: public BaseFragmentFactory {
