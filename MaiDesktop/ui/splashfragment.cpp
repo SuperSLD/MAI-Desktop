@@ -34,6 +34,7 @@ SplashFragment::~SplashFragment() {
 
 void SplashFragment::openStartScreen() {
     qDebug("open main menu");
+    emit navigateTo(INFORMATION_TAG);
     //emit newRootScreen(SEARCH_GROUP);
-    emit navigateTo(SELECT_WEEK);
+    //emit navigateTo(SELECT_WEEK);
 }

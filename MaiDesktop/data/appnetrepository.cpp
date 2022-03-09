@@ -35,3 +35,11 @@ void AppNetRepository::getOptimalTime(GroupList list, int percernt) {
           list.toParams(percernt)
     );
 }
+
+void AppNetRepository::getCanteens() {
+    service->get("api/canteens/all",
+         [](QJsonObject o, AppNetRepository *r) {
+            r->listenCanteens(DataWrapper<CanteensList>(o));
+         }
+    );
+}
