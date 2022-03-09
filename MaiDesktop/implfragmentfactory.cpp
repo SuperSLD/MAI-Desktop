@@ -4,6 +4,7 @@
 
 #include <ui/searchgroupfragment.h>
 #include <ui/splashfragment.h>
+#include <ui/schedule/selectweekfragment.h>
 
 #include <ui/information/informationfragment.h>
 
@@ -21,6 +22,8 @@ BaseFragment* ImplFragmentFactory::create(QString tag) {
         return new SearchGroupFragment;
     } else if (tag == INFORMATION_TAG) {
         return new InformationFragment;
+    } else if (tag == SELECT_WEEK) {
+        return new SelectWeekFragment;
     } else {
         return nullptr;
     }

@@ -38,6 +38,8 @@ SOURCES += \
     mainwindow.cpp \
     stylecontainer.cpp \
     ui/information/informationfragment.cpp \
+    ui/schedule/items/numweekwidget.cpp \
+    ui/schedule/selectweekfragment.cpp \
     ui/searchgroupfragment.cpp \
     ui/splashfragment.cpp \
     ui/widgets/codeview/codestyle.cpp \
@@ -73,6 +75,8 @@ HEADERS += \
     mainwindow.h \
     stylecontainer.h \
     ui/information/informationfragment.h \
+    ui/schedule/items/numweekwidget.h \
+    ui/schedule/selectweekfragment.h \
     ui/searchgroupfragment.h \
     ui/splashfragment.h \
     ui/widgets/codeview/codestyle.h \
