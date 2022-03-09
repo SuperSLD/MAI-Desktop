@@ -5,6 +5,8 @@
 #include <QHBoxLayout>
 #include <qlabel.h>
 
+#include <QGraphicsDropShadowEffect>
+#include <QPainter>
 #include <stylecontainer.h>
 using namespace styles;
 
@@ -18,8 +20,8 @@ ToolbarWidget::ToolbarWidget(QString title, bool showBack, QString icon) {
         titleContainer->addWidget(backButton);
     }
     titleContainer->addWidget(titleLabel);
-    titleContainer->setContentsMargins(0,24,0,16);
-    titleLabel->setContentsMargins(16,0,0,0);
+    titleContainer->setContentsMargins(16,16,16,16);
+    titleLabel->setContentsMargins(0,0,0,0);
 
     if (icon.length() > 0) {
         // кнопка справа тулбара
@@ -33,9 +35,9 @@ ToolbarWidget::ToolbarWidget(QString title, bool showBack, QString icon) {
         buttonContainer->setStyleSheet(SORT_ITEM_WIDGET);
         buttonContainer->setMaximumSize(QSize(38, 38));
         buttonContainer->setMinimumSize(QSize(38, 38));
-        buttonIcon->setContentsMargins(0,0,0,0);
+        buttonIcon->setContentsMargins(0, 0, 0, 0);
         buttonLayout->setContentsMargins(0, 0, 0, 0);
-        buttonContainer->setContentsMargins(0,0,0,0);
+        buttonContainer->setContentsMargins(0, 0, 0, 0);
         buttonLayout->setAlignment(Qt::AlignCenter);
         buttonLayout->addWidget(buttonIcon);
 
@@ -45,7 +47,15 @@ ToolbarWidget::ToolbarWidget(QString title, bool showBack, QString icon) {
 
     this->title = title;
     this->setLayout(titleContainer);
-    this->setStyleSheet("background-color:#2C2C2C;");
+    this->setStyleSheet("background-color:#343434;");
+
+    // Добавление тени
+    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
+    effect->setXOffset(4);
+    effect->setYOffset(4);
+    effect->setBlurRadius(20);
+    effect->setColor(QColor(0, 0, 0, 60));
+    this->setGraphicsEffect(effect);
 }
 
 ToolbarWidget::~ToolbarWidget() {}

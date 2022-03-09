@@ -17,7 +17,6 @@ SwgButton::SwgButton(QString path, QSize size) {
     this->setMinimumSize(size);
     this->setMaximumSize(size);
     this->setLayout(mainContainer);
-
 }
 
 SwgButton::~SwgButton() {

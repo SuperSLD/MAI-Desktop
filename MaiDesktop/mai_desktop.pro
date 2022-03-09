@@ -38,10 +38,13 @@ SOURCES += \
     mainwindow.cpp \
     stylecontainer.cpp \
     ui/information/informationfragment.cpp \
+    ui/information/items/menubuttonwidget.cpp \
+    ui/information/items/menuheaderwidget.cpp \
     ui/schedule/items/numweekwidget.cpp \
     ui/schedule/selectweekfragment.cpp \
     ui/searchgroupfragment.cpp \
     ui/splashfragment.cpp \
+    ui/widgets/cardwidget.cpp \
     ui/widgets/codeview/codestyle.cpp \
     ui/widgets/codeview/codestyles/cppcodestyle.cpp \
     ui/widgets/codeview/codestyles/jsoncodestyle.cpp \
@@ -75,10 +78,13 @@ HEADERS += \
     mainwindow.h \
     stylecontainer.h \
     ui/information/informationfragment.h \
+    ui/information/items/menubuttonwidget.h \
+    ui/information/items/menuheaderwidget.h \
     ui/schedule/items/numweekwidget.h \
     ui/schedule/selectweekfragment.h \
     ui/searchgroupfragment.h \
     ui/splashfragment.h \
+    ui/widgets/cardwidget.h \
     ui/widgets/codeview/codestyle.h \
     ui/widgets/codeview/codestyles/cppcodestyle.h \
     ui/widgets/codeview/codestyles/jsoncodestyle.h \

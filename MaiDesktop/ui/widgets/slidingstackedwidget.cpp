@@ -1,23 +1,3 @@
-/*
- *  MIT License
-    Copyright (c) 2020 Tim Schneeberger (ThePBone) <tim.schneeberger(at)outlook.de>
-    Permission is hereby granted, free of charge, to any person obtaining a copy
-    of this software and associated documentation files (the "Software"), to deal
-    in the Software without restriction, including without limitation the rights
-    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the Software is
-    furnished to do so, subject to the following conditions:
-    The above copyright notice and this permission notice shall be included in all
-    copies or substantial portions of the Software.
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-    SOFTWARE.
- *
- */
 #include "slidingstackedwidget.h"
 #include <QPropertyAnimation>
 #include <QParallelAnimationGroup>
@@ -160,6 +140,10 @@ void SlidingStackedWidget::slideInWgt(QWidget * newwidget, enum t_direction dire
        animnow_op->setDuration(m_speed/2);
        animnow_op->setStartValue(1);
        animnow_op->setEndValue(0);
+       connect(animnow_op,&QPropertyAnimation::finished,[=](){
+           if(animnow_op_eff  != nullptr)
+              animnow_op_eff->deleteLater();
+       });
 
        QGraphicsOpacityEffect *animnext_op_eff = new QGraphicsOpacityEffect();
        animnext_op_eff->setOpacity(0);
@@ -168,6 +152,10 @@ void SlidingStackedWidget::slideInWgt(QWidget * newwidget, enum t_direction dire
        animnext_op->setDuration(m_speed/2);
        animnext_op->setStartValue(0);
        animnext_op->setEndValue(1);
+       connect(animnext_op,&QPropertyAnimation::finished,[=](){
+           if(animnext_op_eff != nullptr)
+              animnext_op_eff->deleteLater();
+       });
 
        QPropertyAnimation *animnext = new QPropertyAnimation(widget(next), "pos");
        animnext->setDuration(m_speed);
@@ -185,12 +173,12 @@ void SlidingStackedWidget::slideInWgt(QWidget * newwidget, enum t_direction dire
        m_next=next;
        m_now=now;
        m_active=true;
-       animgroup->start();
+       animgroup->start(QAbstractAnimation::DeleteWhenStopped);
 }
 
 
-void SlidingStackedWidget::animationDoneSlot() {
-
+void SlidingStackedWidget::animationDoneSlot()
+{
    setCurrentIndex(m_next);
    widget(m_now)->hide();
    widget(m_now)->move(m_pnow);

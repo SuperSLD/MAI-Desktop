@@ -21,7 +21,12 @@
 #include <QSizePolicy>
 #include <implfragmentfactory.h>
 
+#include <ui/widgets/cardwidget.h>
+#include <ui/widgets/swgbutton.h>
 #include <ui/widgets/toolbarwidget.h>
+
+#include <ui/information/items/menubuttonwidget.h>
+#include <ui/information/items/menuheaderwidget.h>
 using namespace styles;
 
 InformationFragment::InformationFragment() {
@@ -50,12 +55,8 @@ InformationFragment::InformationFragment() {
     mainContainerLaout->addWidget(mainContainerFrame);
     mainContainerLaout->setContentsMargins(0, 0, 0, 0);
     mainContainerLaout->setSpacing(0);
+    mainContainerLaout->setAlignment(Qt::AlignTop);
     scrolConttent->setLayout(mainContainerLaout);
-
-    QVBoxLayout *secondContainerLaout = new QVBoxLayout;
-    QFrame *secondContainerFrame = new QFrame;
-    secondContainerLaout->addWidget(secondContainerFrame);
-    secondContainerFrame->setStyleSheet("background-color:#000000;");
 
     // фон
     QVBoxLayout *backContainerLaout = new QVBoxLayout;
@@ -73,24 +74,77 @@ InformationFragment::InformationFragment() {
     );
     backContainerLaout->addWidget(backGradient);
 
-    // меню
-    QFrame *menuContainerFrame = new QFrame;
-    QHBoxLayout *menuHContainerLaout = new QHBoxLayout();
-    menuContainerFrame->setLayout(menuHContainerLaout);
-    menuHContainerLaout->setAlignment(Qt::AlignHCenter);
-    menuHContainerLaout->setContentsMargins(0, 0 ,0, 0);
-    QVBoxLayout *menuContainerLaout = new QVBoxLayout;
-    menuHContainerLaout->addLayout(menuContainerLaout);
-    menuContainerLaout->setContentsMargins(0, 0, 0, 0);
-    menuContainerLaout->setAlignment(Qt::AlignTop);
-    QFrame *menuHeader = new QFrame;
-    menuHeader->setMinimumHeight(800);
-    menuHeader->setMaximumWidth(952);
-    menuHeader->setMinimumWidth(952);
-    menuHeader->setStyleSheet("background-color:#343434;");
-    menuContainerLaout->addWidget(menuHeader);
+    // контейнер для меню
+    QVBoxLayout *menuContainer = new QVBoxLayout;
+    menuContainer->setAlignment(Qt::AlignHCenter);
+    menuContainer->setContentsMargins(0, 16, 0, 0);
+    menuContainer->setSpacing(16);
+    mainContainerLaout->addLayout(menuContainer);
 
-    mainContainerLaout->addWidget(menuContainerFrame);
+    // карточка заголовка
+    CardWidget *menuHeaderCard = new CardWidget;
+    menuHeaderCard->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+    menuHeaderCard->setMaximumWidth(952);
+    menuHeaderCard->setMinimumWidth(952);
+    menuContainer->addWidget(menuHeaderCard);
+    QVBoxLayout *headerLayout = new QVBoxLayout;
+    headerLayout->setAlignment(Qt::AlignLeft);
+    headerLayout->setContentsMargins(20, 20, 20, 20);
+    menuHeaderCard->setLayout(headerLayout);
+    // кнопка "Назад" в заголовке
+    SwgButton *backButton = new SwgButton(":/resc/resc/arrow_back.svg", QSize(24,24));
+    headerLayout->addWidget(backButton);
+    connect(backButton, &SwgButton::clicked, this, &InformationFragment::onBackPressed);
+    // заголовок
+    QLabel *titleLabel = new QLabel("МАИ");
+    titleLabel->setStyleSheet(
+        "color:" + COLOR_TEXT_PRIMARY + ";"
+        "font-size:48px;"
+    );
+    headerLayout->addWidget(titleLabel);
+    // заголовок
+    QLabel *subtitleLable = new QLabel("Инфомрация о кампусе маи и другая информация об активности студентов.");
+    subtitleLable->setStyleSheet(
+        "color:" + COLOR_TEXT_SECONDARY + ";"
+        "font-size:18px;"
+    );
+    headerLayout->addWidget(subtitleLable);
+
+    // кампус
+    MenuHeaderWidget *cumpusHeader = new MenuHeaderWidget("Кампус");
+    menuContainer->addWidget(cumpusHeader);
+
+    // столовые
+    MenuButtonWidget *menuButton = new MenuButtonWidget("Столовые и буфеты", "canteens", CANTEENS);
+    connect(menuButton, &MenuButtonWidget::codeClicked, this, &InformationFragment::onMenuButtonClick);
+    menuContainer->addWidget(menuButton);
+
+    // библиотеки
+    MenuButtonWidget *libButton = new MenuButtonWidget("Библиотеки", "libraries", LIBRARIES);
+    connect(libButton, &MenuButtonWidget::codeClicked, this, &InformationFragment::onMenuButtonClick);
+    menuContainer->addWidget(libButton);
+
+    // жизнь
+    MenuHeaderWidget *lifeHeader = new MenuHeaderWidget("Жизнь");
+    menuContainer->addWidget(lifeHeader);
+
+    // спортивные секции
+    MenuButtonWidget *sportButton = new MenuButtonWidget("Спортивные секции", "sport", SPORT);
+    connect(sportButton, &MenuButtonWidget::codeClicked, this, &InformationFragment::onMenuButtonClick);
+    menuContainer->addWidget(sportButton);
+
+    // Студенческие объединения
+    MenuButtonWidget *studButton = new MenuButtonWidget("Студенческие объединения", "group", GROUPS);
+    connect(studButton, &MenuButtonWidget::codeClicked, this, &InformationFragment::onMenuButtonClick);
+    menuContainer->addWidget(studButton);
+
+    // Творческие коллективы
+    MenuButtonWidget *creativeButton = new MenuButtonWidget("Творческие коллективы", "creative", CREATIVE);
+    connect(creativeButton, &MenuButtonWidget::codeClicked, this, &InformationFragment::onMenuButtonClick);
+    menuContainer->addWidget(creativeButton);
+    QWidget *space = new QWidget;
+    space->setMinimumHeight(8);
+    menuContainer->addWidget(space);
 
     this->setLayout(scrollContainerLaout);
     this->setObjectName("fragment");
@@ -98,4 +152,12 @@ InformationFragment::InformationFragment() {
 
 InformationFragment::~InformationFragment() {
 
+}
+
+void InformationFragment::onBackPressed() {
+    emit back();
+}
+
+void InformationFragment::onMenuButtonClick(int code) {
+    qDebug() << "InformationFragment: click button-" << code << Qt::endl;
 }
