@@ -19,6 +19,7 @@ private:
     QNetworkAccessManager *networkManager;
     QList<HandlerData> handlers;
     AppNetRepository *rep;
+    bool debug;
 
     /**
      * @brief createRequest
@@ -41,7 +42,7 @@ private:
     QString createResponseHandler(void (*handler)(QJsonObject, AppNetRepository*));
 
 public:
-    ApiService(AppNetRepository *rep);
+    ApiService(AppNetRepository *rep, bool debug);
     ~ApiService();
 
     void get(
