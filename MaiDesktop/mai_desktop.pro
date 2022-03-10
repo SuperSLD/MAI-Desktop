@@ -39,6 +39,7 @@ SOURCES += \
     stylecontainer.cpp \
     ui/information/canteensfragment.cpp \
     ui/information/informationfragment.cpp \
+    ui/information/items/canteenitemwidget.cpp \
     ui/information/items/menubuttonwidget.cpp \
     ui/information/items/menuheaderwidget.cpp \
     ui/schedule/items/numweekwidget.cpp \
@@ -82,6 +83,7 @@ HEADERS += \
     stylecontainer.h \
     ui/information/canteensfragment.h \
     ui/information/informationfragment.h \
+    ui/information/items/canteenitemwidget.h \
     ui/information/items/menubuttonwidget.h \
     ui/information/items/menuheaderwidget.h \
     ui/schedule/items/numweekwidget.h \

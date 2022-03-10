@@ -8,5 +8,6 @@
         <file>resc/canteens.svg</file>
         <file>resc/group.svg</file>
         <file>resc/sport.svg</file>
+        <file>resc/clear.svg</file>
     </qresource>
 </RCC>
