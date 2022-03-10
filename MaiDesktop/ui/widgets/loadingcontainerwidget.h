@@ -1,4 +1,4 @@
-#ifndef LOADINGCONTAINERWIDGET_H
+﻿#ifndef LOADINGCONTAINERWIDGET_H
 #define LOADINGCONTAINERWIDGET_H
 
 #include "waitingspinnerwidget.h"
@@ -24,6 +24,7 @@ private:
     QString message;
     QStackedWidget *stack;
     QLabel *loadingLable;
+    QLabel *errorLable;
     WaitingSpinnerWidget *loader;
 
 public:
@@ -47,6 +48,15 @@ public:
      *
      */
     void stopLoading();
+
+    /**
+     * @brief error
+     *
+     * Отображение состояния ошибки.
+     *
+     * @param message текст ошибки.
+     */
+    void error(QString message = "Ошибка");
 };
 
 #endif // LOADINGCONTAINERWIDGET_H

@@ -2,6 +2,7 @@
 
 #include <qboxlayout.h>
 #include <qlabel.h>
+#include <qsvgwidget.h>
 #include <stylecontainer.h>
 using namespace styles;
 
@@ -30,9 +31,35 @@ LoadingContainerWidget::LoadingContainerWidget(QFrame *content) {
     loadingLayout->addWidget(loadingLable);
     loading->setLayout(loadingLayout);
 
+    // контейнер для кружка
+    QFrame *error = new QFrame;
+    QVBoxLayout*errorLayout = new QVBoxLayout;
+    errorLayout->setAlignment(Qt::AlignCenter);
+    errorLable = new QLabel("Загрузка");
+    errorLable->setStyleSheet(
+        "color:" + COLOR_TEXT_SECONDARY + ";"
+        "font-size:18px;"
+        //"background-color:#0000FF;"
+    );
+    QSize size(96, 96);
+    QHBoxLayout *imageContainer = new QHBoxLayout;
+    QSvgWidget *image = new QSvgWidget(":/resc/resc/clear.svg");
+    image->setMaximumSize(size);
+    image->setMinimumSize(size);
+    imageContainer->addWidget(image);
+    imageContainer->setAlignment(Qt::AlignCenter);
+    errorLable->setMinimumWidth(600);
+    errorLable->setAlignment(Qt::AlignHCenter);
+    errorLable->setMaximumWidth(600);
+    errorLayout->addLayout(imageContainer);
+    errorLayout->addWidget(errorLable);
+    error->setLayout(errorLayout);
+
+
     stack = new QStackedWidget;
     stack->addWidget(loading);
     stack->addWidget(content);
+    stack->addWidget(error);
     stack->setCurrentIndex(0);
     mainLayout->addWidget(stack);
 
@@ -54,4 +81,10 @@ void LoadingContainerWidget::startLoading(QString message) {
 void LoadingContainerWidget::stopLoading() {
     stack->setCurrentIndex(1);
     loader->stop();
+}
+
+void LoadingContainerWidget::error(QString message) {
+    stack->setCurrentIndex(2);
+    loader->stop();
+    errorLable->setText(message);
 }

@@ -13,6 +13,8 @@ private:
     LoadingContainerWidget *loadingContainer;
     AppNetRepository *netRep;
 
+    QVBoxLayout *mainContainerLaout;
+
 public:
     CanteensFragment();
     ~CanteensFragment();
