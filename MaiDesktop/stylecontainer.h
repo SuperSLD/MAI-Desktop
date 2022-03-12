@@ -18,7 +18,7 @@ namespace styles{
     static const QString COLOR_SECONDARY_HOVER= "#FF9F81";
     static const QString COLOR_SECONDARY_PRESSED= "#AE4524";
 
-    static const QColor QT_COLOR_PRIMARY = QColor(72, 129, 183);
+    static const QColor QT_COLOR_PRIMARY = QColor(5, 150, 255);
 
     /** объявления стилей */
     static const QString GLOBAL_BACK_WHITE =
@@ -64,7 +64,6 @@ namespace styles{
             "background-color:"+COLOR_PRIMARY+";"
             "border:none;"
             "padding:8px;"
-            "border-radius:8px;"
             "font-size:16px;"
             "}"
             "QPushButton:hover {"
@@ -77,7 +76,6 @@ namespace styles{
             "background-color: #00FFFFFF;"
             "border:1px solid "+COLOR_SECONDARY+";"
             "padding:8px;"
-            "border-radius:8px;"
             "font-size:16px;"
             "}"
             "QPushButton:hover {"

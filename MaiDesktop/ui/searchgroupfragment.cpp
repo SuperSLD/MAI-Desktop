@@ -13,12 +13,17 @@
 
 #include <ui/widgets/codeview/codestyles/cppcodestyle.h>
 #include <ui/widgets/codeview/codestyles/jsoncodestyle.h>
+#include <data/models/group/groupmodel.h>
 
 
 using namespace screens;
 using namespace styles;
 
 SearchGroupFragment::SearchGroupFragment() {
+
+    netRepository = new AppNetRepository();
+    connect(netRepository, &AppNetRepository::listenGroups, this, &SearchGroupFragment::listenGroups);
+
     // главный контейнер
     QHBoxLayout *mainHLayout = new QHBoxLayout;
     QVBoxLayout *mainVLayout = new QVBoxLayout;
@@ -29,37 +34,36 @@ SearchGroupFragment::SearchGroupFragment() {
     // отображение исходного кода
     mainVLayout->addWidget(new CodeViewWidget(
         "/**\n"
-        "  * Документирующий коментарий, со\n"
-        "  * своими правилами выделения слов.\n"
+        "  * Метод поиска группы по части\n"
+        "  * ее названия.\n"
         "  *\n"
-        "  * @param параметров нет\n"
-        "  * @return функция ничего не возвращает\n"
-        "  * @author Leonid Solyanoj (solyanoj.leonid@gmail.com)\n"
+        "  * @param groupName часть названия\n"
         "  */\n"
-        "@RequestMapping(\"api/hello\")\n"
-        "void Router::removeOnRoot() {\n"
-        "   // Отключаем слот от прослушивания завершения анимации \n"
-        "   disconnect(currentContainer, &SlidingStackedWidget::animationFinished, this, &Router::removeOnRoot);\n"
-        "   BaseFragment* last = stack.last();\n"
-        "   // Отчищаем список \n"
-        "   stack.clear();\n"
-        "   // Отчищаем стак виджет \n"
-        "   for(int i = 0; i <= currentContainer->count()-1; i++) {\n"
-        "       QWidget* widget = currentContainer->widget(i);\n"
-        "       currentContainer->removeWidget(widget);\n"
-        "       widget->deleteLater();\n"
-        "   }\n"
-        "   stack.append(last);\n"
-        "   // просто строка, чтоб понтануться выделением текста\n"
-        "   QString helloString = \"Hello world! !@#$%^&*(\\n\"\n"
+        "void AppNetRepository::searchGroups(QString groupName) {\n"
+        "   service->get( \"api/groups/search/\" + groupName,\n"
+        "       [](QJsonObject o, AppNetRepository *r) {\n"
+        "           r->listenGroups(DataWrapper<GroupList>(o));\n"
+        "       }\n"
+        "   );\n"
         "}",
         new CppCodeStyle()
     ));
 
     this->setLayout(mainHLayout);
     this->setObjectName("fragment");
+
+    netRepository->searchGroups("309С");
 }
 
 SearchGroupFragment::~SearchGroupFragment() {
+    delete netRepository;
+}
 
+void SearchGroupFragment::listenGroups(DataWrapper<GroupList> wrapper) {
+    qDebug() << "SearchGroupFragment: listenGroups" << Qt::endl;
+    foreach (GroupModel group, wrapper.getData().list) {
+        qDebug() << "SearchGroupFragment:" << group.getName() <<Qt::endl;
+        group.count = 3;
+    }
+    netRepository->getOptimalTime(wrapper.getData(), 80);
 }

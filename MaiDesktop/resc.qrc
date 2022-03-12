@@ -2,5 +2,12 @@
     <qresource prefix="/resc">
         <file>resc/icon.ico</file>
         <file>resc/splash.svg</file>
+        <file>resc/arrow_back.svg</file>
+        <file>resc/creative.svg</file>
+        <file>resc/libraries.svg</file>
+        <file>resc/canteens.svg</file>
+        <file>resc/group.svg</file>
+        <file>resc/sport.svg</file>
+        <file>resc/clear.svg</file>
     </qresource>
 </RCC>

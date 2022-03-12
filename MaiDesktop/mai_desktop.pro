@@ -17,41 +17,89 @@ SOURCES += \
     common/base/basefragmentfactory.cpp \
     common/base/basemodel.cpp \
     common/router.cpp \
+    data/apiservice.cpp \
     data/appnetrepository.cpp \
-    data/models/groupmodel.cpp \
+    data/models/canteens/canteenmodel.cpp \
+    data/models/canteens/canteenslist.cpp \
+    data/models/datawrapper.cpp \
+    data/models/group/grouplist.cpp \
+    data/models/group/groupmodel.cpp \
+    data/models/optimal/optimaldaymodel.cpp \
+    data/models/optimal/optimalmodel.cpp \
+    data/models/optimal/optimaltimemodel.cpp \
+    data/models/schedule/daymodel.cpp \
+    data/models/schedule/lectormodel.cpp \
+    data/models/schedule/roommodel.cpp \
+    data/models/schedule/schedulemodel.cpp \
+    data/models/schedule/subjectmodel.cpp \
+    data/models/schedule/weekmodel.cpp \
     implfragmentfactory.cpp \
     main.cpp \
     mainwindow.cpp \
     stylecontainer.cpp \
+    ui/information/canteensfragment.cpp \
+    ui/information/informationfragment.cpp \
+    ui/information/items/canteenitemwidget.cpp \
+    ui/information/items/menubuttonwidget.cpp \
+    ui/information/items/menuheaderwidget.cpp \
+    ui/schedule/items/numweekwidget.cpp \
+    ui/schedule/selectweekfragment.cpp \
     ui/searchgroupfragment.cpp \
     ui/splashfragment.cpp \
+    ui/widgets/cardwidget.cpp \
     ui/widgets/codeview/codestyle.cpp \
     ui/widgets/codeview/codestyles/cppcodestyle.cpp \
     ui/widgets/codeview/codestyles/jsoncodestyle.cpp \
     ui/widgets/codeview/codeviewwidget.cpp \
+    ui/widgets/loadingcontainerwidget.cpp \
     ui/widgets/slidingstackedwidget.cpp \
     ui/widgets/swgbutton.cpp \
-    ui/widgets/toolbarwidget.cpp
+    ui/widgets/toolbarwidget.cpp \
+    ui/widgets/waitingspinnerwidget.cpp
 
 HEADERS += \
     common/base/basefragment.h \
     common/base/basefragmentfactory.h \
     common/base/basemodel.h \
     common/router.h \
+    data/apiservice.h \
     data/appnetrepository.h \
-    data/models/groupmodel.h \
+    data/models/canteens/canteenmodel.h \
+    data/models/canteens/canteenslist.h \
+    data/models/datawrapper.h \
+    data/models/group/grouplist.h \
+    data/models/group/groupmodel.h \
+    data/models/optimal/optimaldaymodel.h \
+    data/models/optimal/optimalmodel.h \
+    data/models/optimal/optimaltimemodel.h \
+    data/models/schedule/daymodel.h \
+    data/models/schedule/lectormodel.h \
+    data/models/schedule/roommodel.h \
+    data/models/schedule/schedulemodel.h \
+    data/models/schedule/subjectmodel.h \
+    data/models/schedule/weekmodel.h \
     implfragmentfactory.h \
     mainwindow.h \
     stylecontainer.h \
+    ui/information/canteensfragment.h \
+    ui/information/informationfragment.h \
+    ui/information/items/canteenitemwidget.h \
+    ui/information/items/menubuttonwidget.h \
+    ui/information/items/menuheaderwidget.h \
+    ui/schedule/items/numweekwidget.h \
+    ui/schedule/selectweekfragment.h \
     ui/searchgroupfragment.h \
     ui/splashfragment.h \
+    ui/widgets/cardwidget.h \
     ui/widgets/codeview/codestyle.h \
     ui/widgets/codeview/codestyles/cppcodestyle.h \
     ui/widgets/codeview/codestyles/jsoncodestyle.h \
     ui/widgets/codeview/codeviewwidget.h \
+    ui/widgets/loadingcontainerwidget.h \
     ui/widgets/slidingstackedwidget.h \
     ui/widgets/swgbutton.h \
-    ui/widgets/toolbarwidget.h
+    ui/widgets/toolbarwidget.h \
+    ui/widgets/waitingspinnerwidget.h
 
 RESOURCES += \
     resc.qrc \

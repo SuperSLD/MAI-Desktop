@@ -1,8 +1,4 @@
 #include "basemodel.h"
 
-BaseModel::BaseModel()
-{
-
-}
-
+BaseModel::BaseModel() {}
 void BaseModel::pol() {}

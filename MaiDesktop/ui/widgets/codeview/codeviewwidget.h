@@ -12,6 +12,8 @@
  * Виджет для отображения кусков
  * кода на разных языках програмирования.
  * Также есть простой способ добавления своего языка.
+ *
+ * @author Leonid Solyanoy (solyanoy.leonid@gmail.com)
  */
 class CodeViewWidget : public QFrame {
     Q_OBJECT

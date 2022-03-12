@@ -4,6 +4,7 @@
 #include <implfragmentfactory.h>
 
 #include <ui/widgets/slidingstackedwidget.h>
+#include <ui/widgets/toolbarwidget.h>
 #include <stylecontainer.h>
 using namespace styles;
 
@@ -11,7 +12,9 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent) {
     try {
         qDebug("create main window");
+
         container = new SlidingStackedWidget(this);
+        container->setSpeed(500);
         container->setObjectName("ui");
 
         this->factory = new ImplFragmentFactory;
