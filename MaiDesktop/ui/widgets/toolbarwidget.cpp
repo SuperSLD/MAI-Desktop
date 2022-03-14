@@ -50,12 +50,12 @@ ToolbarWidget::ToolbarWidget(QString title, bool showBack, QString icon) {
     this->setStyleSheet("background-color:#343434;");
 
     // Добавление тени
-    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
-    effect->setXOffset(4);
-    effect->setYOffset(4);
-    effect->setBlurRadius(20);
-    effect->setColor(QColor(0, 0, 0, 60));
-    this->setGraphicsEffect(effect);
+    //QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
+    //effect->setXOffset(4);
+    //effect->setYOffset(4);
+    //effect->setBlurRadius(20);
+    //effect->setColor(QColor(0, 0, 0, 60));
+    //this->setGraphicsEffect(effect);
 }
 
 ToolbarWidget::~ToolbarWidget() {}

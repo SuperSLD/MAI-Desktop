@@ -28,6 +28,7 @@
 #include <ui/widgets/swgbutton.h>
 #include <ui/widgets/toolbarwidget.h>
 
+#include <ui/information/items/canteenitemwidget.h>
 #include <ui/information/items/menubuttonwidget.h>
 #include <ui/information/items/menuheaderwidget.h>
 using namespace styles;
@@ -53,32 +54,33 @@ CanteensFragment::CanteensFragment() {
     toolbar->setMinimumWidth(952);
     mainVLayout->addWidget(toolbar);
 
-    // список
-    QFrame *listFrame = new QFrame;
-    // прокручивающийся контеинер
-    QVBoxLayout *scrollContainerLaout = new QVBoxLayout;
-    scrollContainerLaout->setContentsMargins(0, 0, 0, 0);
-    listFrame->setLayout(scrollContainerLaout);
     // зона прокрутки
     QScrollArea *scrollArea = new QScrollArea;
-    scrollArea->setStyleSheet("background-color:#FF7777;");
+    scrollArea->setMinimumWidth(952);
+    scrollArea->setMaximumWidth(952);
     scrollArea->setFrameShape(QFrame::NoFrame);
-    scrollArea->setMinimumSize(QSize(200, 200));
-    QWidget *scrolConttent = new QWidget;
-    scrolConttent->setObjectName("container");
+    QWidget *scrolContainer = new QWidget;
+    scrolContainer->setObjectName("container");
     scrollArea->setStyleSheet(SCROL_BAR);
+    QHBoxLayout *deskContainer = new QHBoxLayout;
+    mainContainerLaout = new QVBoxLayout;
+    mainContainerLaout->setAlignment(Qt::AlignTop);
+    deskContainer->addLayout(mainContainerLaout);
+    deskContainer->setContentsMargins(0, 0, 0, 0);
+    mainContainerLaout->setContentsMargins(0,0,0,0);
+    scrolContainer->setLayout(deskContainer);
+    scrollArea->setWidget(scrolContainer);
     scrollArea->setWidgetResizable(true);
-    scrollArea->setWidget(scrolConttent);
     scrollArea->horizontalScrollBar()->setEnabled(false);
     scrollArea->verticalScrollBar()->hide();
-    scrollContainerLaout->addWidget(scrollArea);
-
-    // главный контеинер
-    mainContainerLaout = new QVBoxLayout;
-    scrollArea->setLayout(mainContainerLaout);
+    scrollArea->verticalScrollBar()->setMaximumWidth(0);
+    mainVLayout->addWidget(scrollArea);
+    mainVLayout->setAlignment(Qt::AlignTop);
+    mainHLayout->addLayout(mainVLayout);
+    mainHLayout->setAlignment(Qt::AlignHCenter);
 
     // контейнер загрузки
-    loadingContainer = new LoadingContainerWidget(listFrame);
+    loadingContainer = new LoadingContainerWidget(scrollArea);
     loadingContainer->setMaximumWidth(952);
     loadingContainer->startLoading("Поиск столовых...");
     mainVLayout->addWidget(loadingContainer);
@@ -95,7 +97,14 @@ void CanteensFragment::onBackPressed() {
 }
 
 void CanteensFragment::listenCanteens(DataWrapper<CanteensList> wrapper) {
-    //loadingContainer->stopLoading();
-    loadingContainer->error("Хи хи питса");
+    if (wrapper.isSuccess()) {
+        loadingContainer->stopLoading();
+        foreach (CanteenModel canteen , wrapper.getData().list) {
+            CanteenItemWidget *canteenWidget = new CanteenItemWidget(canteen);
+            mainContainerLaout->addWidget(canteenWidget);
+        }
+    } else {
+        loadingContainer->error(wrapper.getMessage());
+    }
 }
 
