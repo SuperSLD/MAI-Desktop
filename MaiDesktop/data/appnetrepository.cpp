@@ -43,3 +43,11 @@ void AppNetRepository::getCanteens() {
          }
     );
 }
+
+void AppNetRepository::getLibraryList() {
+    service->get("api/library/all",
+         [](QJsonObject o, AppNetRepository *r) {
+            r->listenLibraryList(DataWrapper<LibraryList>(o));
+         }
+    );
+}

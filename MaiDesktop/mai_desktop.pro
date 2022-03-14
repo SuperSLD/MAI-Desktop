@@ -24,6 +24,9 @@ SOURCES += \
     data/models/datawrapper.cpp \
     data/models/group/grouplist.cpp \
     data/models/group/groupmodel.cpp \
+    data/models/library/librarylist.cpp \
+    data/models/library/librarymodel.cpp \
+    data/models/library/librarysectionmodel.cpp \
     data/models/optimal/optimaldaymodel.cpp \
     data/models/optimal/optimalmodel.cpp \
     data/models/optimal/optimaltimemodel.cpp \
@@ -40,8 +43,10 @@ SOURCES += \
     ui/information/canteensfragment.cpp \
     ui/information/informationfragment.cpp \
     ui/information/items/canteenitemwidget.cpp \
+    ui/information/items/libraryitemwidget.cpp \
     ui/information/items/menubuttonwidget.cpp \
     ui/information/items/menuheaderwidget.cpp \
+    ui/information/libraryfragment.cpp \
     ui/schedule/items/numweekwidget.cpp \
     ui/schedule/selectweekfragment.cpp \
     ui/searchgroupfragment.cpp \
@@ -69,6 +74,9 @@ HEADERS += \
     data/models/datawrapper.h \
     data/models/group/grouplist.h \
     data/models/group/groupmodel.h \
+    data/models/library/librarylist.h \
+    data/models/library/librarymodel.h \
+    data/models/library/librarysectionmodel.h \
     data/models/optimal/optimaldaymodel.h \
     data/models/optimal/optimalmodel.h \
     data/models/optimal/optimaltimemodel.h \
@@ -84,8 +92,10 @@ HEADERS += \
     ui/information/canteensfragment.h \
     ui/information/informationfragment.h \
     ui/information/items/canteenitemwidget.h \
+    ui/information/items/libraryitemwidget.h \
     ui/information/items/menubuttonwidget.h \
     ui/information/items/menuheaderwidget.h \
+    ui/information/libraryfragment.h \
     ui/schedule/items/numweekwidget.h \
     ui/schedule/selectweekfragment.h \
     ui/searchgroupfragment.h \

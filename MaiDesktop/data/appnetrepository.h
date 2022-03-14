@@ -13,6 +13,7 @@
 #include <data/models/canteens/canteenslist.h>
 #include <data/models/datawrapper.h>
 #include <data/models/group/grouplist.h>
+#include <data/models/library/librarylist.h>
 #include <data/models/optimal/optimalmodel.h>
 #include <data/models/schedule/schedulemodel.h>
 
@@ -83,12 +84,20 @@ public:
      */
     void getCanteens();
 
+    /**
+     * @brief getLibraryList
+     *
+     * Получение списка библиотек.
+     * Ответ приходит в: signal listenLibraryList
+     */
+    void getLibraryList();
+
 signals:
     void listenGroups(DataWrapper<GroupList> wrapper);
     void listenSchedule(DataWrapper<ScheduleModel> wrapper);
     void listenOptimalTime(DataWrapper<OptimalModel> wrapper);
     void listenCanteens(DataWrapper<CanteensList> wrapper);
-
+    void listenLibraryList(DataWrapper<LibraryList> wrapper);
 
 };
 
