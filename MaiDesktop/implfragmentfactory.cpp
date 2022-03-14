@@ -8,7 +8,7 @@
 
 #include <ui/information/canteensfragment.h>
 #include <ui/information/informationfragment.h>
-
+#include <ui/information/libraryfragment.h>
 
 using namespace screens;
 
@@ -27,6 +27,8 @@ BaseFragment* ImplFragmentFactory::create(QString tag) {
         return new SelectWeekFragment;
     } else if (tag == CANTEENS_TAG) {
         return new CanteensFragment;
+    } else if (tag == LIBRARY_TAG) {
+        return new LibraryFragment;
     } else {
         return nullptr;
     }

@@ -17,6 +17,7 @@ namespace screens {
     //информация
     static const QString INFORMATION_TAG = "information";
     static const QString CANTEENS_TAG = "canteens";
+    static const QString LIBRARY_TAG = "library";
 
     //расписание
     static const QString SELECT_WEEK = "select_week";

@@ -164,5 +164,7 @@ void InformationFragment::onMenuButtonClick(int code) {
     qDebug() << "InformationFragment: click button-" << code << Qt::endl;
     if (code == CANTEENS) {
         emit navigateTo(CANTEENS_TAG);
+    } else if (code == LIBRARIES) {
+        emit navigateTo(LIBRARY_TAG);
     }
 }
