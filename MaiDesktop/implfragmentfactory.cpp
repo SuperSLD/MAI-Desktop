@@ -2,6 +2,7 @@
 
 #include <QString>
 
+#include <ui/mainfragment.h>
 #include <ui/searchgroupfragment.h>
 #include <ui/splashfragment.h>
 #include <ui/schedule/selectweekfragment.h>
@@ -29,6 +30,8 @@ BaseFragment* ImplFragmentFactory::create(QString tag) {
         return new CanteensFragment;
     } else if (tag == LIBRARY_TAG) {
         return new LibraryFragment;
+    } else if (tag == MAIN_TAG) {
+        return new MainFragment;
     } else {
         return nullptr;
     }

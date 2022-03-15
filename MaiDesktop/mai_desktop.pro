@@ -47,6 +47,8 @@ SOURCES += \
     ui/information/items/menubuttonwidget.cpp \
     ui/information/items/menuheaderwidget.cpp \
     ui/information/libraryfragment.cpp \
+    ui/items/mainmenubuttonwidget.cpp \
+    ui/mainfragment.cpp \
     ui/schedule/items/numweekwidget.cpp \
     ui/schedule/selectweekfragment.cpp \
     ui/searchgroupfragment.cpp \
@@ -96,6 +98,8 @@ HEADERS += \
     ui/information/items/menubuttonwidget.h \
     ui/information/items/menuheaderwidget.h \
     ui/information/libraryfragment.h \
+    ui/items/mainmenubuttonwidget.h \
+    ui/mainfragment.h \
     ui/schedule/items/numweekwidget.h \
     ui/schedule/selectweekfragment.h \
     ui/searchgroupfragment.h \
