@@ -38,7 +38,7 @@ using namespace screens;
 
 LibraryFragment::LibraryFragment() {
 
-    netRep = new AppNetRepository(true);
+    netRep = new AppNetRepository();
     connect(netRep, &AppNetRepository::listenLibraryList, this, &LibraryFragment::listenLibraryList);
 
     // Основное расположение элементов в окне
