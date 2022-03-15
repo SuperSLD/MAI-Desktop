@@ -9,6 +9,7 @@
 #include <ui/information/canteensfragment.h>
 #include <ui/information/informationfragment.h>
 #include <ui/information/libraryfragment.h>
+#include <ui/information/sportfragment.h>
 
 using namespace screens;
 
@@ -29,6 +30,8 @@ BaseFragment* ImplFragmentFactory::create(QString tag) {
         return new CanteensFragment;
     } else if (tag == LIBRARY_TAG) {
         return new LibraryFragment;
+    } else if (tag == SPORT_TAG) {
+        return new SportFragment;
     } else {
         return nullptr;
     }

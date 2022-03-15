@@ -166,5 +166,7 @@ void InformationFragment::onMenuButtonClick(int code) {
         emit navigateTo(CANTEENS_TAG);
     } else if (code == LIBRARIES) {
         emit navigateTo(LIBRARY_TAG);
+    } else if (code == SPORT) {
+        emit navigateTo(SPORT_TAG);
     }
 }

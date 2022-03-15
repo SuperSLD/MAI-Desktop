@@ -16,6 +16,7 @@
 #include <data/models/library/librarylist.h>
 #include <data/models/optimal/optimalmodel.h>
 #include <data/models/schedule/schedulemodel.h>
+#include <data/models/sport/sportlist.h>
 
 
 /**
@@ -92,13 +93,21 @@ public:
      */
     void getLibraryList();
 
+    /**
+     * @brief getSportSections
+     *
+     * Получение списка спортивных секций.
+     * Ответ приходит в: signal listenSportSections
+     */
+    void getSportSections();
+
 signals:
     void listenGroups(DataWrapper<GroupList> wrapper);
     void listenSchedule(DataWrapper<ScheduleModel> wrapper);
     void listenOptimalTime(DataWrapper<OptimalModel> wrapper);
     void listenCanteens(DataWrapper<CanteensList> wrapper);
     void listenLibraryList(DataWrapper<LibraryList> wrapper);
-
+    void listenSportSections(DataWrapper<SportList> wrapper);
 };
 
 

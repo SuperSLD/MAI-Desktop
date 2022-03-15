@@ -51,3 +51,11 @@ void AppNetRepository::getLibraryList() {
          }
     );
 }
+
+void AppNetRepository::getSportSections() {
+    service->get("api/sport/all",
+         [](QJsonObject o, AppNetRepository *r) {
+            r->listenSportSections(DataWrapper<SportList>(o));
+         }
+    );
+}

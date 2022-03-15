@@ -36,6 +36,9 @@ SOURCES += \
     data/models/schedule/schedulemodel.cpp \
     data/models/schedule/subjectmodel.cpp \
     data/models/schedule/weekmodel.cpp \
+    data/models/sport/sportlist.cpp \
+    data/models/sport/sportmodel.cpp \
+    data/models/sport/sportsectionmodel.cpp \
     implfragmentfactory.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -46,7 +49,9 @@ SOURCES += \
     ui/information/items/libraryitemwidget.cpp \
     ui/information/items/menubuttonwidget.cpp \
     ui/information/items/menuheaderwidget.cpp \
+    ui/information/items/sportitemwidget.cpp \
     ui/information/libraryfragment.cpp \
+    ui/information/sportfragment.cpp \
     ui/schedule/items/numweekwidget.cpp \
     ui/schedule/selectweekfragment.cpp \
     ui/searchgroupfragment.cpp \
@@ -86,6 +91,9 @@ HEADERS += \
     data/models/schedule/schedulemodel.h \
     data/models/schedule/subjectmodel.h \
     data/models/schedule/weekmodel.h \
+    data/models/sport/sportlist.h \
+    data/models/sport/sportmodel.h \
+    data/models/sport/sportsectionmodel.h \
     implfragmentfactory.h \
     mainwindow.h \
     stylecontainer.h \
@@ -95,7 +103,9 @@ HEADERS += \
     ui/information/items/libraryitemwidget.h \
     ui/information/items/menubuttonwidget.h \
     ui/information/items/menuheaderwidget.h \
+    ui/information/items/sportitemwidget.h \
     ui/information/libraryfragment.h \
+    ui/information/sportfragment.h \
     ui/schedule/items/numweekwidget.h \
     ui/schedule/selectweekfragment.h \
     ui/searchgroupfragment.h \
