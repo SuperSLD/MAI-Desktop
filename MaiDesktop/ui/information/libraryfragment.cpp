@@ -1,4 +1,4 @@
-#include "canteensfragment.h"
+#include "libraryfragment.h"
 
 #include <ui/widgets/loadingcontainerwidget.h>
 #include <ui/widgets/toolbarwidget.h>
@@ -29,17 +29,17 @@
 #include <ui/widgets/toolbarwidget.h>
 
 #include <ui/information/items/canteenitemwidget.h>
+#include <ui/information/items/libraryitemwidget.h>
 #include <ui/information/items/menubuttonwidget.h>
 #include <ui/information/items/menuheaderwidget.h>
 using namespace styles;
 #include <implfragmentfactory.h>
 using namespace screens;
 
+LibraryFragment::LibraryFragment() {
 
-CanteensFragment::CanteensFragment() {
-
-    netRep = new AppNetRepository();
-    connect(netRep, &AppNetRepository::listenCanteens, this, &CanteensFragment::listenCanteens);
+    netRep = new AppNetRepository(true);
+    connect(netRep, &AppNetRepository::listenLibraryList, this, &LibraryFragment::listenLibraryList);
 
     // Основное расположение элементов в окне
     QVBoxLayout *mainVLayout = new QVBoxLayout;
@@ -49,8 +49,8 @@ CanteensFragment::CanteensFragment() {
     this->setLayout(mainHLayout);
 
     // тулбар
-    ToolbarWidget *toolbar = new ToolbarWidget("Столовые и буфеты", true);
-    connect(toolbar, &ToolbarWidget::onBackPressed, this, &CanteensFragment::onBackPressed);
+    ToolbarWidget *toolbar = new ToolbarWidget("Библиотеки", true);
+    connect(toolbar, &ToolbarWidget::onBackPressed, this, &LibraryFragment::onBackPressed);
     toolbar->setMinimumWidth(952);
     mainVLayout->addWidget(toolbar);
 
@@ -82,29 +82,28 @@ CanteensFragment::CanteensFragment() {
     // контейнер загрузки
     loadingContainer = new LoadingContainerWidget(scrollArea);
     loadingContainer->setMaximumWidth(952);
-    loadingContainer->startLoading("Поиск столовых...");
+    loadingContainer->startLoading("Загрузка библиотек...");
     mainVLayout->addWidget(loadingContainer);
-    netRep->getCanteens();
+    netRep->getLibraryList();
 }
 
-CanteensFragment::~CanteensFragment() {
+LibraryFragment::~LibraryFragment() {
     delete netRep;
     delete loadingContainer;
 }
 
-void CanteensFragment::onBackPressed() {
+void LibraryFragment::onBackPressed() {
     emit back();
 }
 
-void CanteensFragment::listenCanteens(DataWrapper<CanteensList> wrapper) {
+void LibraryFragment::listenLibraryList(DataWrapper<LibraryList> wrapper) {
     if (wrapper.isSuccess()) {
         loadingContainer->stopLoading();
-        foreach (CanteenModel canteen , wrapper.getData().list) {
-            CanteenItemWidget *canteenWidget = new CanteenItemWidget(canteen);
+        foreach (LibraryModel model , wrapper.getData().list) {
+            LibraryItemWidget *canteenWidget = new LibraryItemWidget(model);
             mainContainerLaout->addWidget(canteenWidget);
         }
     } else {
         loadingContainer->error(wrapper.getMessage());
     }
 }
-

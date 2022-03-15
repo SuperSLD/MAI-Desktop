@@ -9,6 +9,7 @@ using namespace styles;
 CanteenItemWidget::CanteenItemWidget(CanteenModel model) {
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->setContentsMargins(20, 20, 20, 20);
+    mainLayout->setAlignment(Qt::AlignTop);
 
     QLabel *titleLabel = new QLabel(model.getName());
     titleLabel->setStyleSheet(
@@ -25,9 +26,11 @@ CanteenItemWidget::CanteenItemWidget(CanteenModel model) {
         "color:" + COLOR_TEXT_SECONDARY + ";"
         "font-size:14px;"
     );
-
-    mainLayout->addWidget(timeLable);
-    mainLayout->addWidget(addressLabel);
     mainLayout->addWidget(titleLabel);
+    mainLayout->addWidget(addressLabel);
+    mainLayout->addWidget(timeLable);
+
     this->setLayout(mainLayout);
+    this->setMinimumHeight(mainLayout->geometry().height());
+    this->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
 }
