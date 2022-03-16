@@ -59,3 +59,19 @@ void AppNetRepository::getSportSections() {
          }
     );
 }
+
+void AppNetRepository::getStudentOrganisations() {
+    service->get("api/studorg/all",
+         [](QJsonObject o, AppNetRepository *r) {
+            r->listenStudOrg(DataWrapper<StudOrgList>(o));
+         }
+    );
+}
+
+void AppNetRepository::getCreativeGroups() {
+    service->get("api/creative/all",
+         [](QJsonObject o, AppNetRepository *r) {
+            r->listenCreative(DataWrapper<CreativeList>(o));
+         }
+    );
+}

@@ -168,5 +168,9 @@ void InformationFragment::onMenuButtonClick(int code) {
         emit navigateTo(LIBRARY_TAG);
     } else if (code == SPORT) {
         emit navigateTo(SPORT_TAG);
+    } else if (code == GROUPS) {
+        emit navigateTo(STUD_ORG_TAG);
+    } else if (code == CREATIVE) {
+        emit navigateTo(CREATIVE_TAG);
     }
 }
