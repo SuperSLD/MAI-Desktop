@@ -1,6 +1,8 @@
 #ifndef TOOLBARWIDGET_H
 #define TOOLBARWIDGET_H
 
+#include "cardwidget.h"
+
 #include <QFrame>
 
 
@@ -10,7 +12,7 @@
  * Тулбар. Верхний элемент экрана
  * с заголовком и парой кнопок.
  */
-class ToolbarWidget: public QFrame {
+class ToolbarWidget: public CardWidget {
     Q_OBJECT
 private:
     QString title;
