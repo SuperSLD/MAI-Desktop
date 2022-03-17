@@ -14,11 +14,23 @@
 using namespace screens;
 using namespace styles;
 
-SelectWeekFragment::SelectWeekFragment()
-{
+SelectWeekFragment::SelectWeekFragment() {
     // Прокручивающийся контейнер
-    QVBoxLayout *scrollContainerLaout = new QVBoxLayout;
-    scrollContainerLaout->setContentsMargins(0, 0, 0, 0);
+    QVBoxLayout *scrollContainerLayout = new QVBoxLayout;
+    scrollContainerLayout->setContentsMargins(25, 25, 25, 35);
+
+    QHBoxLayout *ContainerHLayout = new QHBoxLayout; // выравнивание по горизонтали
+
+    // Работаем с тулбаром
+    ToolbarWidget *toolbar = new ToolbarWidget("Выбор недели", true);
+    toolbar->setFixedHeight(71);
+    toolbar->setFixedWidth(952);
+    // При нажатии на стрелочку переходим к предыдущему экрану
+    connect(toolbar, &ToolbarWidget::onBackPressed, this, &SelectWeekFragment::onBackPressed);  // слот-сигнал
+    ContainerHLayout->addWidget(toolbar);
+
+    scrollContainerLayout->addLayout(ContainerHLayout);
+
     // Зона прокрутки
     QScrollArea *scrollArea = new QScrollArea;
     scrollArea->setStyleSheet("background-color:#FF7777;");
@@ -31,7 +43,7 @@ SelectWeekFragment::SelectWeekFragment()
     scrollArea->setWidget(scrolConttent);
     scrollArea->horizontalScrollBar()->setEnabled(false);
     scrollArea->verticalScrollBar()->hide();
-    scrollContainerLaout->addWidget(scrollArea);
+    scrollContainerLayout->addWidget(scrollArea);
 
     // Основное расположение элементов в окне
     QVBoxLayout *mainVLayout = new QVBoxLayout;
@@ -41,13 +53,7 @@ SelectWeekFragment::SelectWeekFragment()
     mainHLayout->addLayout(mainVLayout);
     scrolConttent->setLayout(mainHLayout);
 
-    this->setLayout(scrollContainerLaout);  // назначение главного лейута
-
-    // работаем с туллбаром
-    ToolbarWidget *toolbar = new ToolbarWidget("Выбор недели", true);
-    toolbar->setFixedHeight(71);
-    toolbar->setFixedWidth(952);
-    mainVLayout->addWidget(toolbar);
+    this->setLayout(scrollContainerLayout);  // назначение главного лейута
 
     QGridLayout *gridLayout = new QGridLayout;  // сетка
 
@@ -59,7 +65,9 @@ SelectWeekFragment::SelectWeekFragment()
     };
     gridLayout->setHorizontalSpacing(23);   // расстояние между столбцами
     gridLayout->setVerticalSpacing(23);   // расстояние между строками
-    gridLayout->setContentsMargins(0,20,0,20);
     mainVLayout->addLayout(gridLayout);
-    mainVLayout->setContentsMargins(29,29,29,29);
+}
+
+void SelectWeekFragment::onBackPressed() {
+    emit back();
 }

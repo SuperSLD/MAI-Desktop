@@ -1,9 +1,9 @@
 #ifndef NUMWEEKWIDGET_H
 #define NUMWEEKWIDGET_H
 
-#include <QFrame>
+#include <ui/widgets/cardwidget.h>
 
-class NumWeekWidget : public QFrame {
+class NumWeekWidget : public CardWidget {
     Q_OBJECT
 public:
     NumWeekWidget(QString numWeek);

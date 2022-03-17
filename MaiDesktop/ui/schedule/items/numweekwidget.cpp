@@ -8,8 +8,7 @@
 #include <stylecontainer.h>
 using namespace styles;
 
-NumWeekWidget::NumWeekWidget (QString numWeek)
-{
+NumWeekWidget::NumWeekWidget (QString numWeek) {
     // Основное расположение элементов в окне
     QVBoxLayout *mainVLayout = new QVBoxLayout;
     QHBoxLayout *mainHLayout = new QHBoxLayout;
@@ -37,15 +36,4 @@ NumWeekWidget::NumWeekWidget (QString numWeek)
 
     this->setFixedHeight(164);
     this->setFixedWidth(221);
-    this->setStyleSheet(
-        "background-color:#343434;"
-    );
-
-    // Добавление тени
-    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
-    effect->setXOffset(4);
-    effect->setYOffset(4);
-    effect->setBlurRadius(20);
-    effect->setColor(QColor(0, 0, 0, 60));
-    this->setGraphicsEffect(effect);
 }
