@@ -19,6 +19,7 @@ namespace screens {
 
     //расписание
     static const QString SELECT_WEEK = "select_week";
+    static const QString EXAM_SCHEDULE = "exam_schedule";
 };
 
 class ImplFragmentFactory: public BaseFragmentFactory {

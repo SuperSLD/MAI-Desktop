@@ -40,6 +40,8 @@ SOURCES += \
     ui/information/informationfragment.cpp \
     ui/information/items/menubuttonwidget.cpp \
     ui/information/items/menuheaderwidget.cpp \
+    ui/schedule/examschedulefragment.cpp \
+    ui/schedule/items/dayschedulewidget.cpp \
     ui/schedule/items/numweekwidget.cpp \
     ui/schedule/selectweekfragment.cpp \
     ui/searchgroupfragment.cpp \
@@ -80,6 +82,8 @@ HEADERS += \
     ui/information/informationfragment.h \
     ui/information/items/menubuttonwidget.h \
     ui/information/items/menuheaderwidget.h \
+    ui/schedule/examschedulefragment.h \
+    ui/schedule/items/dayschedulewidget.h \
     ui/schedule/items/numweekwidget.h \
     ui/schedule/selectweekfragment.h \
     ui/searchgroupfragment.h \
