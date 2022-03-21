@@ -48,6 +48,7 @@ InformationFragment::InformationFragment() {
     scrollArea->setWidget(scrolConttent);
     scrollArea->horizontalScrollBar()->setEnabled(false);
     scrollArea->verticalScrollBar()->hide();
+    scrollArea->verticalScrollBar()->setMaximumWidth(0);
     scrollContainerLaout->addWidget(scrollArea);
 
     // главный контеинер
