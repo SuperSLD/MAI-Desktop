@@ -21,6 +21,8 @@ SOURCES += \
     data/appnetrepository.cpp \
     data/models/canteens/canteenmodel.cpp \
     data/models/canteens/canteenslist.cpp \
+    data/models/creative/creativelist.cpp \
+    data/models/creative/creativemodel.cpp \
     data/models/datawrapper.cpp \
     data/models/group/grouplist.cpp \
     data/models/group/groupmodel.cpp \
@@ -36,19 +38,30 @@ SOURCES += \
     data/models/schedule/schedulemodel.cpp \
     data/models/schedule/subjectmodel.cpp \
     data/models/schedule/weekmodel.cpp \
+    data/models/sport/sportlist.cpp \
+    data/models/sport/sportmodel.cpp \
+    data/models/sport/sportsectionmodel.cpp \
+    data/models/studorg/studorglist.cpp \
+    data/models/studorg/studorgmodel.cpp \
     implfragmentfactory.cpp \
     main.cpp \
     mainwindow.cpp \
     stylecontainer.cpp \
     ui/information/canteensfragment.cpp \
+    ui/information/creativefragment.cpp \
     ui/information/informationfragment.cpp \
     ui/information/items/canteenitemwidget.cpp \
+    ui/information/items/creativeitemwidget.cpp \
     ui/information/items/libraryitemwidget.cpp \
     ui/information/items/menubuttonwidget.cpp \
     ui/information/items/menuheaderwidget.cpp \
+    ui/information/items/sportitemwidget.cpp \
+    ui/information/items/studorgitemwidget.cpp \
     ui/information/libraryfragment.cpp \
     ui/items/mainmenubuttonwidget.cpp \
     ui/mainfragment.cpp \
+    ui/information/sportfragment.cpp \
+    ui/information/studorgfragment.cpp \
     ui/schedule/items/numweekwidget.cpp \
     ui/schedule/selectweekfragment.cpp \
     ui/searchgroupfragment.cpp \
@@ -73,6 +86,8 @@ HEADERS += \
     data/appnetrepository.h \
     data/models/canteens/canteenmodel.h \
     data/models/canteens/canteenslist.h \
+    data/models/creative/creativelist.h \
+    data/models/creative/creativemodel.h \
     data/models/datawrapper.h \
     data/models/group/grouplist.h \
     data/models/group/groupmodel.h \
@@ -88,18 +103,29 @@ HEADERS += \
     data/models/schedule/schedulemodel.h \
     data/models/schedule/subjectmodel.h \
     data/models/schedule/weekmodel.h \
+    data/models/sport/sportlist.h \
+    data/models/sport/sportmodel.h \
+    data/models/sport/sportsectionmodel.h \
+    data/models/studorg/studorglist.h \
+    data/models/studorg/studorgmodel.h \
     implfragmentfactory.h \
     mainwindow.h \
     stylecontainer.h \
     ui/information/canteensfragment.h \
+    ui/information/creativefragment.h \
     ui/information/informationfragment.h \
     ui/information/items/canteenitemwidget.h \
+    ui/information/items/creativeitemwidget.h \
     ui/information/items/libraryitemwidget.h \
     ui/information/items/menubuttonwidget.h \
     ui/information/items/menuheaderwidget.h \
+    ui/information/items/sportitemwidget.h \
+    ui/information/items/studorgitemwidget.h \
     ui/information/libraryfragment.h \
     ui/items/mainmenubuttonwidget.h \
     ui/mainfragment.h \
+    ui/information/sportfragment.h \
+    ui/information/studorgfragment.h \
     ui/schedule/items/numweekwidget.h \
     ui/schedule/selectweekfragment.h \
     ui/searchgroupfragment.h \

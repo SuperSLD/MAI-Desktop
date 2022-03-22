@@ -4,8 +4,12 @@
 #include <common/base/basefragment.h>
 
 class SelectWeekFragment : public BaseFragment {
+
 public:
     SelectWeekFragment();
+
+private slots:
+    void onBackPressed();
 };
 
 #endif // SELECTWEEKFRAGMENT_H

@@ -48,6 +48,7 @@ InformationFragment::InformationFragment() {
     scrollArea->setWidget(scrolConttent);
     scrollArea->horizontalScrollBar()->setEnabled(false);
     scrollArea->verticalScrollBar()->hide();
+    scrollArea->verticalScrollBar()->setMaximumWidth(0);
     scrollContainerLaout->addWidget(scrollArea);
 
     // главный контеинер
@@ -166,5 +167,11 @@ void InformationFragment::onMenuButtonClick(int code) {
         emit navigateTo(CANTEENS_TAG);
     } else if (code == LIBRARIES) {
         emit navigateTo(LIBRARY_TAG);
+    } else if (code == SPORT) {
+        emit navigateTo(SPORT_TAG);
+    } else if (code == GROUPS) {
+        emit navigateTo(STUD_ORG_TAG);
+    } else if (code == CREATIVE) {
+        emit navigateTo(CREATIVE_TAG);
     }
 }

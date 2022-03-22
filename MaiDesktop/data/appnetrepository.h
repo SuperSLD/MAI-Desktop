@@ -11,11 +11,14 @@
 #include <QUuid>
 
 #include <data/models/canteens/canteenslist.h>
+#include <data/models/creative/creativelist.h>
 #include <data/models/datawrapper.h>
 #include <data/models/group/grouplist.h>
 #include <data/models/library/librarylist.h>
 #include <data/models/optimal/optimalmodel.h>
 #include <data/models/schedule/schedulemodel.h>
+#include <data/models/sport/sportlist.h>
+#include <data/models/studorg/studorglist.h>
 
 
 /**
@@ -92,13 +95,39 @@ public:
      */
     void getLibraryList();
 
+    /**
+     * @brief getSportSections
+     *
+     * Получение списка спортивных секций.
+     * Ответ приходит в: signal listenSportSections
+     */
+    void getSportSections();
+
+    /**
+     * @brief getStudentOrganisations
+     *
+     * Получение студенческих организаций.
+     * Ответ приходит в: signal listenStudOrg
+     */
+    void getStudentOrganisations();
+
+    /**
+     * @brief getCreativeGroups
+     *
+     * Получение творческих коллективов.
+     * Ответ приходит в: signal listenCreative
+     */
+    void getCreativeGroups();
+
 signals:
     void listenGroups(DataWrapper<GroupList> wrapper);
     void listenSchedule(DataWrapper<ScheduleModel> wrapper);
     void listenOptimalTime(DataWrapper<OptimalModel> wrapper);
     void listenCanteens(DataWrapper<CanteensList> wrapper);
     void listenLibraryList(DataWrapper<LibraryList> wrapper);
-
+    void listenSportSections(DataWrapper<SportList> wrapper);
+    void listenStudOrg(DataWrapper<StudOrgList> wrapper);
+    void listenCreative(DataWrapper<CreativeList> wrapper);
 };
 
 

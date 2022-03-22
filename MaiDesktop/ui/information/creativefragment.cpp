@@ -1,4 +1,4 @@
-#include "libraryfragment.h"
+#include "creativefragment.h"
 
 #include <ui/widgets/loadingcontainerwidget.h>
 #include <ui/widgets/toolbarwidget.h>
@@ -29,17 +29,18 @@
 #include <ui/widgets/toolbarwidget.h>
 
 #include <ui/information/items/canteenitemwidget.h>
-#include <ui/information/items/libraryitemwidget.h>
+#include <ui/information/items/creativeitemwidget.h>
 #include <ui/information/items/menubuttonwidget.h>
 #include <ui/information/items/menuheaderwidget.h>
+#include <ui/information/items/studorgitemwidget.h>
 using namespace styles;
 #include <implfragmentfactory.h>
 using namespace screens;
 
-LibraryFragment::LibraryFragment() {
+CreativeFragment::CreativeFragment() {
 
     netRep = new AppNetRepository();
-    connect(netRep, &AppNetRepository::listenLibraryList, this, &LibraryFragment::listenLibraryList);
+    connect(netRep, &AppNetRepository::listenCreative, this, &CreativeFragment::listenCreative);
 
     // Основное расположение элементов в окне
     QVBoxLayout *mainVLayout = new QVBoxLayout;
@@ -49,8 +50,8 @@ LibraryFragment::LibraryFragment() {
     this->setLayout(mainHLayout);
 
     // тулбар
-    ToolbarWidget *toolbar = new ToolbarWidget("Библиотеки", true);
-    connect(toolbar, &ToolbarWidget::onBackPressed, this, &LibraryFragment::onBackPressed);
+    ToolbarWidget *toolbar = new ToolbarWidget("Творческие коллективы", true);
+    connect(toolbar, &ToolbarWidget::onBackPressed, this, &CreativeFragment::onBackPressed);
     toolbar->setMinimumWidth(952);
     mainVLayout->addWidget(toolbar);
 
@@ -82,26 +83,26 @@ LibraryFragment::LibraryFragment() {
     // контейнер загрузки
     loadingContainer = new LoadingContainerWidget(scrollArea);
     loadingContainer->setMaximumWidth(952);
-    loadingContainer->startLoading("Загрузка библиотек...");
+    loadingContainer->startLoading("Поиск кого-то творческого...");
     mainVLayout->addWidget(loadingContainer);
-    netRep->getLibraryList();
+    netRep->getCreativeGroups();
 }
 
-LibraryFragment::~LibraryFragment() {
+CreativeFragment::~CreativeFragment() {
     delete netRep;
     delete loadingContainer;
 }
 
-void LibraryFragment::onBackPressed() {
+void CreativeFragment::onBackPressed() {
     emit back();
 }
 
-void LibraryFragment::listenLibraryList(DataWrapper<LibraryList> wrapper) {
+void CreativeFragment::listenCreative(DataWrapper<CreativeList> wrapper) {
     if (wrapper.isSuccess()) {
         loadingContainer->stopLoading();
-        foreach (LibraryModel model , wrapper.getData().list) {
-            LibraryItemWidget *canteenWidget = new LibraryItemWidget(model);
-            mainContainerLaout->addWidget(canteenWidget);
+        foreach (CreativeModel model , wrapper.getData().list) {
+            CreativeItemWidget *modelWidget = new CreativeItemWidget(model);
+            mainContainerLaout->addWidget(modelWidget);
         }
     } else {
         loadingContainer->error(wrapper.getMessage());
