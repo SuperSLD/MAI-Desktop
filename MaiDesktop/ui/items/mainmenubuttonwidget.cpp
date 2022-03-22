@@ -1,5 +1,6 @@
 #include "mainmenubuttonwidget.h"
 
+#include <QSvgWidget>
 #include <qboxlayout.h>
 #include <qlabel.h>
 
@@ -10,6 +11,10 @@ MainMenuButtonWidget::MainMenuButtonWidget(QString icon, QString title, QString 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->setContentsMargins(20, 20, 20, 20);
     mainLayout->setAlignment(Qt::AlignTop);
+    QSvgWidget *iconButton = new QSvgWidget(":/resc/resc/"+icon+".svg");
+    mainLayout->addWidget(iconButton);
+    iconButton->setMaximumSize(QSize(88,88));
+    iconButton->setMinimumSize(QSize(88,88));
 
     QLabel *titleLabel = new QLabel(title);
     titleLabel->setStyleSheet(
@@ -27,4 +32,5 @@ MainMenuButtonWidget::MainMenuButtonWidget(QString icon, QString title, QString 
     this->setLayout(mainLayout);
     this->setMinimumHeight(mainLayout->geometry().height());
     this->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+    this->setMinimumWidth(306);
 }
