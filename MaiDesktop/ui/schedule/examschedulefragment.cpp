@@ -17,7 +17,7 @@ using namespace styles;
 ExamScheduleFragment::ExamScheduleFragment() {
     // Прокручивающийся контейнер
     QVBoxLayout *scrollContainerLayout = new QVBoxLayout;
-    scrollContainerLayout->setContentsMargins(25, 25, 25, 35);
+    scrollContainerLayout->setContentsMargins(25, 25, 25, 25);
 
     QHBoxLayout *ContainerHLayout = new QHBoxLayout; // выравнивание по горизонтали
 
@@ -55,9 +55,30 @@ ExamScheduleFragment::ExamScheduleFragment() {
 
     this->setLayout(scrollContainerLayout);  // назначение главного лейута
 
+    QGridLayout *gridLayout = new QGridLayout;
     // работаем с днями
     DayScheduleWidget *day_1 = new DayScheduleWidget(3);
-    mainVLayout->addWidget(day_1);
+    day_1->setFixedWidth(296);
+    gridLayout->addWidget(day_1, 0, 0, 1, 1);
+    DayScheduleWidget *day_2 = new DayScheduleWidget(2);
+    day_2->setFixedWidth(296);
+    gridLayout->addWidget(day_2, 0, 1, 1, 1);
+    DayScheduleWidget *day_3 = new DayScheduleWidget(1);
+    day_3->setFixedWidth(296);
+    gridLayout->addWidget(day_3, 0, 2, 1, 1);
+    DayScheduleWidget *day_4 = new DayScheduleWidget(3);
+    day_4->setFixedWidth(296);
+    gridLayout->addWidget(day_4, 1, 0, 1, 1);
+    DayScheduleWidget *day_5 = new DayScheduleWidget(2);
+    day_5->setFixedWidth(296);
+    gridLayout->addWidget(day_5, 1, 1, 1, 1);
+    DayScheduleWidget *day_6 = new DayScheduleWidget(1);
+    day_6->setFixedWidth(296);
+    gridLayout->addWidget(day_6, 1, 2, 1, 1);
+
+    gridLayout->setHorizontalSpacing(32);   // расстояние между столбцами
+    gridLayout->setVerticalSpacing(32);   // расстояние между строками
+    mainVLayout->addLayout(gridLayout);
 }
 
 void ExamScheduleFragment::onBackPressed() {
