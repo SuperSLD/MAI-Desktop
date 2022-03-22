@@ -91,7 +91,6 @@ MainFragment::MainFragment() {
     mainVLayout->addLayout(gridLayout);
     this->setLayout(mainHLayout);
 }
-MainFragment::~MainFragment()
-{
+MainFragment::~MainFragment() {
 
 }
