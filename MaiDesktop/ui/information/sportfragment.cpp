@@ -1,4 +1,4 @@
-#include "libraryfragment.h"
+#include "sportfragment.h"
 
 #include <ui/widgets/loadingcontainerwidget.h>
 #include <ui/widgets/toolbarwidget.h>
@@ -29,17 +29,17 @@
 #include <ui/widgets/toolbarwidget.h>
 
 #include <ui/information/items/canteenitemwidget.h>
-#include <ui/information/items/libraryitemwidget.h>
 #include <ui/information/items/menubuttonwidget.h>
 #include <ui/information/items/menuheaderwidget.h>
+#include <ui/information/items/sportitemwidget.h>
 using namespace styles;
 #include <implfragmentfactory.h>
 using namespace screens;
 
-LibraryFragment::LibraryFragment() {
+SportFragment::SportFragment() {
 
     netRep = new AppNetRepository();
-    connect(netRep, &AppNetRepository::listenLibraryList, this, &LibraryFragment::listenLibraryList);
+    connect(netRep, &AppNetRepository::listenSportSections, this, &SportFragment::listenSportSections);
 
     // Основное расположение элементов в окне
     QVBoxLayout *mainVLayout = new QVBoxLayout;
@@ -49,8 +49,8 @@ LibraryFragment::LibraryFragment() {
     this->setLayout(mainHLayout);
 
     // тулбар
-    ToolbarWidget *toolbar = new ToolbarWidget("Библиотеки", true);
-    connect(toolbar, &ToolbarWidget::onBackPressed, this, &LibraryFragment::onBackPressed);
+    ToolbarWidget *toolbar = new ToolbarWidget("Спортивные секции", true);
+    connect(toolbar, &ToolbarWidget::onBackPressed, this, &SportFragment::onBackPressed);
     toolbar->setMinimumWidth(952);
     mainVLayout->addWidget(toolbar);
 
@@ -82,28 +82,29 @@ LibraryFragment::LibraryFragment() {
     // контейнер загрузки
     loadingContainer = new LoadingContainerWidget(scrollArea);
     loadingContainer->setMaximumWidth(952);
-    loadingContainer->startLoading("Загрузка библиотек...");
+    loadingContainer->startLoading("Загружаем спортивные секции...");
     mainVLayout->addWidget(loadingContainer);
-    netRep->getLibraryList();
+    netRep->getSportSections();
 }
 
-LibraryFragment::~LibraryFragment() {
+SportFragment::~SportFragment() {
     delete netRep;
     delete loadingContainer;
 }
 
-void LibraryFragment::onBackPressed() {
+void SportFragment::onBackPressed() {
     emit back();
 }
 
-void LibraryFragment::listenLibraryList(DataWrapper<LibraryList> wrapper) {
+void SportFragment::listenSportSections(DataWrapper<SportList> wrapper) {
     if (wrapper.isSuccess()) {
         loadingContainer->stopLoading();
-        foreach (LibraryModel model , wrapper.getData().list) {
-            LibraryItemWidget *canteenWidget = new LibraryItemWidget(model);
-            mainContainerLaout->addWidget(canteenWidget);
+        foreach (SportModel section , wrapper.getData().list) {
+            SportItemWidget *itemWidget = new SportItemWidget(section);
+            mainContainerLaout->addWidget(itemWidget);
         }
     } else {
         loadingContainer->error(wrapper.getMessage());
     }
 }
+
