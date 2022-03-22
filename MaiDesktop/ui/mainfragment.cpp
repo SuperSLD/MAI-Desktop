@@ -11,8 +11,7 @@
 using namespace styles;
 
 
-MainFragment::MainFragment()
-{
+MainFragment::MainFragment() {
     // главный контейнер
     QHBoxLayout *mainHLayout = new QHBoxLayout;
     QVBoxLayout *mainVLayout = new QVBoxLayout;
