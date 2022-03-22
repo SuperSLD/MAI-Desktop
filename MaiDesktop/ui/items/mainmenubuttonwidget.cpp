@@ -7,12 +7,44 @@
 #include <stylecontainer.h>
 using namespace styles;
 
-MainMenuButtonWidget::MainMenuButtonWidget(QString icon, QString title, QString description){
-    QVBoxLayout *mainLayout = new QVBoxLayout;
-    mainLayout->setContentsMargins(20, 20, 20, 20);
-    mainLayout->setAlignment(Qt::AlignTop);
+MainMenuButtonWidget::MainMenuButtonWidget(
+        QString icon,
+        QString title,
+        QString description,
+        int code
+) {
+    this->code = code;
+    this->setStyleSheet(
+            "QFrame#menuButton {"
+            "   background-color:#343434;"
+            "}"
+            "QFrame#menuButton:hover {"
+            "   background-color:#3D3D3D;"
+            "}"
+    );
+    this->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+    this->setObjectName("menuButton");
+
+    // кнопка
+    QVBoxLayout *mainContainer = new QVBoxLayout;
+    mainContainer->setContentsMargins(0, 0, 0, 0);
+    QPushButton *button = new QPushButton(this);
+    button->setStyleSheet("border:none; padding:0px; background-color:#00FFFFFF;");
+    connect(button, &QPushButton::clicked, this, &MainMenuButtonWidget::selfClick);
+    mainContainer->addWidget(button);
+    this->setLayout(mainContainer);
+
+    // контейнер кнопки
+    QVBoxLayout *buttonContainer = new QVBoxLayout;
+    buttonContainer->setContentsMargins(20, 20, 20, 20);
+    button->setLayout(buttonContainer);
+    buttonContainer->setContentsMargins(20, 20, 20, 20);
+    buttonContainer->setAlignment(Qt::AlignTop);
+    button->setMinimumHeight(180);
+    //bi->setLayout(buttonContainer);
+
     QSvgWidget *iconButton = new QSvgWidget(":/resc/resc/"+icon+".svg");
-    mainLayout->addWidget(iconButton);
+    buttonContainer->addWidget(iconButton);
     iconButton->setMaximumSize(QSize(88,88));
     iconButton->setMinimumSize(QSize(88,88));
 
@@ -21,16 +53,28 @@ MainMenuButtonWidget::MainMenuButtonWidget(QString icon, QString title, QString 
         "color:" + COLOR_TEXT_PRIMARY + ";"
         "font-size:14px;"
     );
-    QLabel *descriptionLable = new QLabel(description);
+    descriptionLable = new QLabel(description);
     descriptionLable->setStyleSheet(
         "color:" + COLOR_TEXT_SECONDARY + ";"
         "font-size:14px;"
     );
-    mainLayout->addWidget(titleLabel);
-    mainLayout->addWidget(descriptionLable);
+    buttonContainer->addWidget(titleLabel);
+    buttonContainer->addWidget(descriptionLable);
 
-    this->setLayout(mainLayout);
-    this->setMinimumHeight(mainLayout->geometry().height());
+    this->setLayout(mainContainer);
+    this->setMinimumHeight(mainContainer->geometry().height());
     this->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
     this->setMinimumWidth(306);
+}
+
+MainMenuButtonWidget::~MainMenuButtonWidget() {
+    delete descriptionLable;
+}
+
+void MainMenuButtonWidget::selfClick() {
+    emit codeClicked(this->code);
+}
+
+void MainMenuButtonWidget::setSubtitle(QString subtitle) {
+    descriptionLable->setText(subtitle);
 }
