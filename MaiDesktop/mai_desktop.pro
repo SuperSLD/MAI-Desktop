@@ -58,6 +58,8 @@ SOURCES += \
     ui/information/items/sportitemwidget.cpp \
     ui/information/items/studorgitemwidget.cpp \
     ui/information/libraryfragment.cpp \
+    ui/items/mainmenubuttonwidget.cpp \
+    ui/mainfragment.cpp \
     ui/information/sportfragment.cpp \
     ui/information/studorgfragment.cpp \
     ui/schedule/items/numweekwidget.cpp \
@@ -120,6 +122,8 @@ HEADERS += \
     ui/information/items/sportitemwidget.h \
     ui/information/items/studorgitemwidget.h \
     ui/information/libraryfragment.h \
+    ui/items/mainmenubuttonwidget.h \
+    ui/mainfragment.h \
     ui/information/sportfragment.h \
     ui/information/studorgfragment.h \
     ui/schedule/items/numweekwidget.h \

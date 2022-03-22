@@ -24,6 +24,7 @@ namespace screens {
 
     //расписание
     static const QString SELECT_WEEK = "select_week";
+    static const QString MAIN_TAG = "main_tag";
 };
 
 class ImplFragmentFactory: public BaseFragmentFactory {
