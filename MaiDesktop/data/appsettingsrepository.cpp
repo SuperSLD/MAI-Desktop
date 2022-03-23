@@ -24,6 +24,19 @@ GroupModel AppSettingsRepository::getGroup() {
         settings->value("group_name", "").toString(),
         settings->value("group_fac", "").toString(),
         settings->value("group_level", "").toString(),
-        settings->value("group_course", "0").toInt()
+        settings->value("group_course", 0).toInt()
     );
+}
+
+void AppSettingsRepository::deleteGroup() {
+    settings->setValue("group_id", "");
+    settings->setValue("group_course", 0);
+    settings->setValue("group_fac", "");
+    settings->setValue("group_name", "");
+    settings->setValue("group_level", "");
+    settings->sync();
+}
+
+bool AppSettingsRepository::containsGroup() {
+    return settings->value("group_id", "") != "";
 }
