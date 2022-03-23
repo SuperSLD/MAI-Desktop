@@ -119,10 +119,9 @@ MainFragment::~MainFragment() {
 void MainFragment::listenSchedule(DataWrapper<ScheduleModel> wrapper) {
     if (wrapper.isSuccess()) {
         loadingContainer->stopLoading();
-        ScheduleModel sch = wrapper.getData();
-        this->schedule = &sch;
-        b1->setSubtitle("Найдено " + QString::number(schedule->getWeeks().size()) + " учебных недель");
-        b2->setSubtitle("Найдено " + QString::number(schedule->examsCount()) + " экзаменов");
+        this->schedule = wrapper.getData();
+        b1->setSubtitle("Найдено " + QString::number(schedule.getWeeks().size()) + " учебных недель");
+        b2->setSubtitle("Найдено " + QString::number(schedule.examsCount()) + " экзаменов");
     } else {
         loadingContainer->error(wrapper.getMessage());
     }
@@ -134,7 +133,8 @@ void MainFragment::onMenuButtonClick(int code) {
         // тут прям пишешь emit navigateTo(название, schedule)
         // Второй параметр это модель расписания (класс с расписанием)
     } else if (code == EXAMS) {
-        emit navigateWhithData(EXAM_SCHEDULE, schedule);
+        ScheduleModel *sch = &schedule;
+        emit navigateWhithData(EXAM_SCHEDULE, sch);
     } else if (code == PLANING) {
         //
     } else if (code == INFORmAtION) {

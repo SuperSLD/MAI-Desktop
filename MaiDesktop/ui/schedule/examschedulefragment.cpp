@@ -87,11 +87,9 @@ void ExamScheduleFragment::onBackPressed() {
 }
 
 void ExamScheduleFragment::bindData(BaseModel* model) {
-    // ScheduleModel *sch = dynamic_cast<ScheduleModel*>(model);
-//    for (int i=0; i<sch->getWeeks().size(); i++) {
-//        if (sch->getWeeks()[i].getDays()[0].getSubjects()[0].getType() == "Экзамен") {
-//            qDebug() << sch->getWeeks()[i].getDays()[0].getDate();
-//        }
-//    }
+    ScheduleModel *sch = dynamic_cast<ScheduleModel*>(model);
+    for (int i=0; i<sch->getWeeks().size(); i++) {
+        qDebug() << sch->getWeeks()[i].getDate();
+    }
 }
 
