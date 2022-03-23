@@ -3,8 +3,6 @@
 #include <QHBoxLayout>
 #include <qlabel.h>
 
-#include <QGraphicsDropShadowEffect>
-
 #include <stylecontainer.h>
 using namespace styles;
 
