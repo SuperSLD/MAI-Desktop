@@ -90,6 +90,11 @@ void ExamScheduleFragment::bindData(BaseModel* model) {
     ScheduleModel *sch = dynamic_cast<ScheduleModel*>(model);
     for (int i=0; i<sch->getWeeks().size(); i++) {
         qDebug() << sch->getWeeks()[i].getDate();
+        qDebug() << sch->getWeeks()[i].getDays().size();
+        WeekModel week = sch->getWeeks()[i];
+        for (int j=0; j < week.getDays().size(); j++) {
+            qDebug() << week.getDays()[j].getName();
+        }
     }
 }
 
