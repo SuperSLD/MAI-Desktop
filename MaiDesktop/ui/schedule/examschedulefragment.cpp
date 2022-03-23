@@ -17,6 +17,14 @@ using namespace screens;
 using namespace styles;
 
 ExamScheduleFragment::ExamScheduleFragment() {
+
+}
+
+void ExamScheduleFragment::onBackPressed() {
+    emit back();
+}
+
+void ExamScheduleFragment::bindData(BaseModel* model) {
     // Прокручивающийся контейнер
     QVBoxLayout *scrollContainerLayout = new QVBoxLayout;
     scrollContainerLayout->setContentsMargins(25, 25, 25, 25);
@@ -57,49 +65,25 @@ ExamScheduleFragment::ExamScheduleFragment() {
 
     this->setLayout(scrollContainerLayout);  // назначение главного лейута
 
+    ScheduleModel *sch = dynamic_cast<ScheduleModel*>(model);
     QGridLayout *gridLayout = new QGridLayout;
     // работаем с днями
-    DayScheduleWidget *day_1 = new DayScheduleWidget(3);
-    day_1->setFixedWidth(296);
-    gridLayout->addWidget(day_1, 0, 0, 1, 1);
-    DayScheduleWidget *day_2 = new DayScheduleWidget(2);
-    day_2->setFixedWidth(296);
-    gridLayout->addWidget(day_2, 0, 1, 1, 1);
-    DayScheduleWidget *day_3 = new DayScheduleWidget(1);
-    day_3->setFixedWidth(296);
-    gridLayout->addWidget(day_3, 0, 2, 1, 1);
-    DayScheduleWidget *day_4 = new DayScheduleWidget(3);
-    day_4->setFixedWidth(296);
-    gridLayout->addWidget(day_4, 1, 0, 1, 1);
-    DayScheduleWidget *day_5 = new DayScheduleWidget(2);
-    day_5->setFixedWidth(296);
-    gridLayout->addWidget(day_5, 1, 1, 1, 1);
-    DayScheduleWidget *day_6 = new DayScheduleWidget(1);
-    day_6->setFixedWidth(296);
-    gridLayout->addWidget(day_6, 1, 2, 1, 1);
-
+    QList <QString> dates;
+    for (int i=0; i<sch->getWeeks().size(); i++) {
+        for (int j=0; j<(sch->getWeeks()[i]).getDays().size(); j++) {
+            for (int k=0; k<sch->getWeeks()[i].getDays()[j].getSubjects().size(); k++) {
+                if (dates.indexOf(sch->getWeeks()[i].getDays()[j].getDate()) == -1 && sch->getWeeks()[i].getDays()[j].getSubjects()[k].getType() == "Экзамен") {
+                    DayScheduleWidget *day = new DayScheduleWidget(sch->getWeeks()[i].getDays()[j]);
+                    day->setFixedWidth(296);
+                    day->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+                    gridLayout->addWidget(day, dates.size()/3, dates.size()%3, 1, 1);
+                    dates.append(sch->getWeeks()[i].getDays()[j].getDate());
+                };
+            };
+        };
+    };
     gridLayout->setHorizontalSpacing(32);   // расстояние между столбцами
     gridLayout->setVerticalSpacing(32);   // расстояние между строками
     mainVLayout->addLayout(gridLayout);
-}
-
-void ExamScheduleFragment::onBackPressed() {
-    emit back();
-}
-
-void ExamScheduleFragment::bindData(BaseModel* model) {
-    ScheduleModel *sch = dynamic_cast<ScheduleModel*>(model);
-    for (int i=0; i<sch->getWeeks().size(); i++) {
-        for (int j=0; j<(sch->getWeeks()[i]).getDays().size(); j++) {
-            qDebug() << 1;
-            //qDebug() << sch->getWeeks()[i].getDays()[j].getId();
-//            for (int k=0; k<sch->getWeeks()[i].getDays()[j].getSubjects().size(); k++) {
-//                qDebug() << sch->getWeeks()[i].getDays()[j].getSubjects()[k].getId();
-////                if (sch->getWeeks()[i].getDays()[j].getSubjects()[k].getType() == QString("ПЗ")) {
-////                    qDebug() << sch->getWeeks()[i].getDays()[j].getSubjects()[k].getType() << " " << sch->getWeeks()[i].getDays()[j].getSubjects()[k].getName();
-////                };
-//            };
-        }
-    }
 }
 
