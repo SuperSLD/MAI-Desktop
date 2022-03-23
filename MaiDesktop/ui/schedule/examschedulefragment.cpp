@@ -2,6 +2,7 @@
 
 #include <QDebug>
 #include <QGridLayout>
+#include <QList>
 #include <QScrollArea>
 #include <QScrollBar>
 
@@ -89,7 +90,16 @@ void ExamScheduleFragment::onBackPressed() {
 void ExamScheduleFragment::bindData(BaseModel* model) {
     ScheduleModel *sch = dynamic_cast<ScheduleModel*>(model);
     for (int i=0; i<sch->getWeeks().size(); i++) {
-        qDebug() << sch->getWeeks()[i].getDate();
+        for (int j=0; j<(sch->getWeeks()[i]).getDays().size(); j++) {
+            qDebug() << 1;
+            //qDebug() << sch->getWeeks()[i].getDays()[j].getId();
+//            for (int k=0; k<sch->getWeeks()[i].getDays()[j].getSubjects().size(); k++) {
+//                qDebug() << sch->getWeeks()[i].getDays()[j].getSubjects()[k].getId();
+////                if (sch->getWeeks()[i].getDays()[j].getSubjects()[k].getType() == QString("ПЗ")) {
+////                    qDebug() << sch->getWeeks()[i].getDays()[j].getSubjects()[k].getType() << " " << sch->getWeeks()[i].getDays()[j].getSubjects()[k].getName();
+////                };
+//            };
+        }
     }
 }
 
