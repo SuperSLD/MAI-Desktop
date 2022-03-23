@@ -22,7 +22,7 @@ private:
     MainMenuButtonWidget *b1;
     MainMenuButtonWidget *b2;
 
-    ScheduleModel schedule;
+    ScheduleModel *schedule;
 
 public:
     MainFragment();

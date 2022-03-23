@@ -8,6 +8,7 @@ class ExamScheduleFragment : public BaseFragment {
 public:
     ExamScheduleFragment();
 
+    void bindData(BaseModel* model) override;
 private slots:
     void onBackPressed();
 };

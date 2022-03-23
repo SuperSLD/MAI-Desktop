@@ -10,6 +10,7 @@
 
 #include <ui/widgets/toolbarwidget.h>
 #include <ui/schedule/items/dayschedulewidget.h>
+#include <data/models/schedule/schedulemodel.h>
 
 using namespace screens;
 using namespace styles;
@@ -83,5 +84,14 @@ ExamScheduleFragment::ExamScheduleFragment() {
 
 void ExamScheduleFragment::onBackPressed() {
     emit back();
+}
+
+void ExamScheduleFragment::bindData(BaseModel* model) {
+    // ScheduleModel *sch = dynamic_cast<ScheduleModel*>(model);
+//    for (int i=0; i<sch->getWeeks().size(); i++) {
+//        if (sch->getWeeks()[i].getDays()[0].getSubjects()[0].getType() == "Экзамен") {
+//            qDebug() << sch->getWeeks()[i].getDays()[0].getDate();
+//        }
+//    }
 }
 
