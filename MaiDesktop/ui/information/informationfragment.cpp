@@ -28,6 +28,8 @@
 #include <ui/information/items/menubuttonwidget.h>
 #include <ui/information/items/menuheaderwidget.h>
 using namespace styles;
+#include <implfragmentfactory.h>
+using namespace screens;
 
 InformationFragment::InformationFragment() {
 
@@ -46,6 +48,7 @@ InformationFragment::InformationFragment() {
     scrollArea->setWidget(scrolConttent);
     scrollArea->horizontalScrollBar()->setEnabled(false);
     scrollArea->verticalScrollBar()->hide();
+    scrollArea->verticalScrollBar()->setMaximumWidth(0);
     scrollContainerLaout->addWidget(scrollArea);
 
     // главный контеинер
@@ -160,4 +163,15 @@ void InformationFragment::onBackPressed() {
 
 void InformationFragment::onMenuButtonClick(int code) {
     qDebug() << "InformationFragment: click button-" << code << Qt::endl;
+    if (code == CANTEENS) {
+        emit navigateTo(CANTEENS_TAG);
+    } else if (code == LIBRARIES) {
+        emit navigateTo(LIBRARY_TAG);
+    } else if (code == SPORT) {
+        emit navigateTo(SPORT_TAG);
+    } else if (code == GROUPS) {
+        emit navigateTo(STUD_ORG_TAG);
+    } else if (code == CREATIVE) {
+        emit navigateTo(CREATIVE_TAG);
+    }
 }

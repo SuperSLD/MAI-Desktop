@@ -7,7 +7,7 @@
 
 #include "apiservice.h"
 
-AppNetRepository::AppNetRepository() { service = new ApiService(this); }
+AppNetRepository::AppNetRepository(bool debug) { service = new ApiService(this, debug); }
 
 AppNetRepository::~AppNetRepository() { delete service; }
 
@@ -40,6 +40,38 @@ void AppNetRepository::getCanteens() {
     service->get("api/canteens/all",
          [](QJsonObject o, AppNetRepository *r) {
             r->listenCanteens(DataWrapper<CanteensList>(o));
+         }
+    );
+}
+
+void AppNetRepository::getLibraryList() {
+    service->get("api/library/all",
+         [](QJsonObject o, AppNetRepository *r) {
+            r->listenLibraryList(DataWrapper<LibraryList>(o));
+         }
+    );
+}
+
+void AppNetRepository::getSportSections() {
+    service->get("api/sport/all",
+         [](QJsonObject o, AppNetRepository *r) {
+            r->listenSportSections(DataWrapper<SportList>(o));
+         }
+    );
+}
+
+void AppNetRepository::getStudentOrganisations() {
+    service->get("api/studorg/all",
+         [](QJsonObject o, AppNetRepository *r) {
+            r->listenStudOrg(DataWrapper<StudOrgList>(o));
+         }
+    );
+}
+
+void AppNetRepository::getCreativeGroups() {
+    service->get("api/creative/all",
+         [](QJsonObject o, AppNetRepository *r) {
+            r->listenCreative(DataWrapper<CreativeList>(o));
          }
     );
 }

@@ -18,7 +18,7 @@ namespace styles{
     static const QString COLOR_SECONDARY_HOVER= "#FF9F81";
     static const QString COLOR_SECONDARY_PRESSED= "#AE4524";
 
-    static const QColor QT_COLOR_PRIMARY = QColor(72, 129, 183);
+    static const QColor QT_COLOR_PRIMARY = QColor(5, 150, 255);
 
     /** объявления стилей */
     static const QString GLOBAL_BACK_WHITE =

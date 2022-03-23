@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
         qDebug("create main window");
 
         container = new SlidingStackedWidget(this);
+        container->setSpeed(500);
         container->setObjectName("ui");
 
         this->factory = new ImplFragmentFactory;

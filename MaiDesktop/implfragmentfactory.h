@@ -16,10 +16,16 @@ namespace screens {
 
     //информация
     static const QString INFORMATION_TAG = "information";
+    static const QString CANTEENS_TAG = "canteens";
+    static const QString LIBRARY_TAG = "library";
+    static const QString SPORT_TAG = "sport";
+    static const QString STUD_ORG_TAG = "stud_org";
+    static const QString CREATIVE_TAG = "creative";
 
     //расписание
     static const QString SELECT_WEEK = "select_week";
     static const QString EXAM_SCHEDULE = "exam_schedule";
+    static const QString MAIN_TAG = "main_tag";
 };
 
 class ImplFragmentFactory: public BaseFragmentFactory {
