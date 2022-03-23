@@ -19,6 +19,8 @@ public:
     ScheduleModel(QJsonValue val);
 
     QList<WeekModel> getWeeks();
+
+    int examsCount();
 };
 
 #endif // SCHEDULEMODEL_H

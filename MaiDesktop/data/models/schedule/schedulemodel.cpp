@@ -11,3 +11,8 @@ ScheduleModel::ScheduleModel(QJsonValue val) {
 }
 
 QList<WeekModel> ScheduleModel::getWeeks() {return weeks;}
+
+int ScheduleModel::examsCount() {
+    // потом дописать
+    return 5;
+}

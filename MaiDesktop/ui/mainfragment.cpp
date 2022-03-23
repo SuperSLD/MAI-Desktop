@@ -9,15 +9,26 @@
 #include <stylecontainer.h>
 
 using namespace styles;
-
+#include <implfragmentfactory.h>
+using namespace screens;
 
 MainFragment::MainFragment() {
+
+    // подключение репозитория
+    netRep = new AppNetRepository();
+    connect(netRep, &AppNetRepository::listenSchedule, this, &MainFragment::listenSchedule);
+
     // главный контейнер
+    QHBoxLayout *mainLayout = new QHBoxLayout;
+    this->setLayout(mainLayout);
+
+    QFrame *mainMenuFarame = new QFrame;
     QHBoxLayout *mainHLayout = new QHBoxLayout;
     QVBoxLayout *mainVLayout = new QVBoxLayout;
     mainVLayout->setAlignment(Qt::AlignCenter);
     mainHLayout->addLayout(mainVLayout);
     mainHLayout->setAlignment(Qt::AlignHCenter);
+    mainMenuFarame->setLayout(mainHLayout);
 
     QGridLayout *gridLayout = new QGridLayout;
     QFrame *informationCardFrame = new QFrame;
@@ -74,10 +85,14 @@ MainFragment::MainFragment() {
 
 
 
-    MainMenuButtonWidget *b1 = new MainMenuButtonWidget("today_calendar", "Расписание занятий", "Найдено 35 учебных недель");
-    MainMenuButtonWidget *b2 = new MainMenuButtonWidget("whatshot", "Расписание экзаменов", "Найдено 3 экзамена");
-    MainMenuButtonWidget *b3 = new MainMenuButtonWidget("watch_later", "Помощь с планированием", "Поиск удобного времени");
-    MainMenuButtonWidget *b4 = new MainMenuButtonWidget("info", "Информация", "Информация о кампусе");
+    b1 = new MainMenuButtonWidget("today_calendar", "Расписание занятий", "x", SCHEDULE);
+    connect(b1, &MainMenuButtonWidget::codeClicked, this, &MainFragment::onMenuButtonClick);
+    b2 = new MainMenuButtonWidget("whatshot", "Расписание экзаменов", "x", EXAMS);
+    connect(b2, &MainMenuButtonWidget::codeClicked, this, &MainFragment::onMenuButtonClick);
+    MainMenuButtonWidget *b3 = new MainMenuButtonWidget("watch_later", "Помощь с планированием", "Поиск удобного времени", PLANING);
+    connect(b3, &MainMenuButtonWidget::codeClicked, this, &MainFragment::onMenuButtonClick);
+    MainMenuButtonWidget *b4 = new MainMenuButtonWidget("info", "Информация", "Информация о кампусе", INFORmAtION);
+    connect(b4, &MainMenuButtonWidget::codeClicked, this, &MainFragment::onMenuButtonClick);
 
     gridLayout->addWidget(informationCardFrame, 0, 0, 1, 2);
     gridLayout->addWidget(b1, 1, 0, 1, 1);
@@ -87,10 +102,41 @@ MainFragment::MainFragment() {
 
     gridLayout->setHorizontalSpacing(23); // расстояние между столбцами
     gridLayout->setVerticalSpacing(23); // расстояние между строками
-
     mainVLayout->addLayout(gridLayout);
-    this->setLayout(mainHLayout);
+
+    // контейнер загрузки
+    loadingContainer = new LoadingContainerWidget(mainMenuFarame);
+    loadingContainer->setMaximumWidth(952);
+    loadingContainer->startLoading("Загружаем расписание...");
+    mainLayout->addWidget(loadingContainer);
+    netRep->getSchedule("d1497292f31d8755ce4530f7022b519c");
 }
 MainFragment::~MainFragment() {
+    delete netRep;
+    delete loadingContainer;
+}
 
+void MainFragment::listenSchedule(DataWrapper<ScheduleModel> wrapper) {
+    if (wrapper.isSuccess()) {
+        loadingContainer->stopLoading();
+        this->schedule = wrapper.getData();
+        b1->setSubtitle("Найдено " + QString::number(schedule.getWeeks().size()) + " учебных недель");
+        b2->setSubtitle("Найдено " + QString::number(schedule.examsCount()) + " экзаменов");
+    } else {
+        loadingContainer->error(wrapper.getMessage());
+    }
+}
+
+void MainFragment::onMenuButtonClick(int code) {
+    qDebug() << "InformationFragment: click button-" << code << Qt::endl;
+    if (code == SCHEDULE) {
+        // тут прям пишешь emit navigateTo(название, schedule)
+        // Второй параметр это модель расписания (класс с расписанием)
+    } else if (code == EXAMS) {
+        //
+    } else if (code == PLANING) {
+        //
+    } else if (code == INFORmAtION) {
+        navigateTo(INFORMATION_TAG);
+    }
 }
