@@ -19,6 +19,13 @@ public:
     int count = 0;
 
     GroupModel(QJsonValue obj);
+    GroupModel(
+            QString id,
+            QString name,
+            QString fac,
+            QString level,
+            int course
+    );
 
     QString getId();
     QString getName();

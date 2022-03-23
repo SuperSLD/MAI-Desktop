@@ -19,6 +19,7 @@ SOURCES += \
     common/router.cpp \
     data/apiservice.cpp \
     data/appnetrepository.cpp \
+    data/appsettingsrepository.cpp \
     data/models/canteens/canteenmodel.cpp \
     data/models/canteens/canteenslist.cpp \
     data/models/creative/creativelist.cpp \
@@ -84,6 +85,7 @@ HEADERS += \
     common/router.h \
     data/apiservice.h \
     data/appnetrepository.h \
+    data/appsettingsrepository.h \
     data/models/canteens/canteenmodel.h \
     data/models/canteens/canteenslist.h \
     data/models/creative/creativelist.h \
