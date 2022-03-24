@@ -16,9 +16,8 @@ LoadingContainerWidget::LoadingContainerWidget(QFrame *content) {
     loadingLable = new QLabel("Загрузка");
     loadingLable->setStyleSheet(
         "color:" + COLOR_TEXT_SECONDARY + ";"
-        "font-size:18px;"
-        //"background-color:#0000FF;"
     );
+    loadingLable->setFont(QFont("Roboto", 18, QFont::Normal));
     QWidget *loaderBox = new QWidget;
     loaderBox->setMinimumSize(QSize(600, 80));
     loaderBox->setMaximumSize(QSize(600, 80));
@@ -38,9 +37,9 @@ LoadingContainerWidget::LoadingContainerWidget(QFrame *content) {
     errorLable = new QLabel("Загрузка");
     errorLable->setStyleSheet(
         "color:" + COLOR_TEXT_SECONDARY + ";"
-        "font-size:18px;"
         //"background-color:#0000FF;"
     );
+    errorLable->setFont(QFont("Roboto", 18, QFont::Normal));
     QSize size(96, 96);
     QHBoxLayout *imageContainer = new QHBoxLayout;
     QSvgWidget *image = new QSvgWidget(":/resc/resc/clear.svg");

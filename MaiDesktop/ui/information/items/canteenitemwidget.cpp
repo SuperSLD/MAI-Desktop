@@ -14,18 +14,19 @@ CanteenItemWidget::CanteenItemWidget(CanteenModel model) {
     QLabel *titleLabel = new QLabel(model.getName());
     titleLabel->setStyleSheet(
         "color:" + COLOR_PRIMARY + ";"
-        "font-size:18px;"
     );
+    titleLabel->setFont(QFont("Roboto", 18, QFont::Normal));
     QLabel *addressLabel = new QLabel(model.getAddress());
     addressLabel->setStyleSheet(
         "color:" + COLOR_TEXT_PRIMARY + ";"
-        "font-size:14px;"
     );
+    addressLabel->setFont(QFont("Roboto", 14, QFont::Normal));
     QLabel *timeLable = new QLabel(model.getWorkTime());
     timeLable->setStyleSheet(
         "color:" + COLOR_TEXT_SECONDARY + ";"
         "font-size:14px;"
     );
+    timeLable->setFont(QFont("Roboto", 14, QFont::Normal));
     mainLayout->addWidget(titleLabel);
     mainLayout->addWidget(addressLabel);
     mainLayout->addWidget(timeLable);

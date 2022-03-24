@@ -13,6 +13,7 @@ MenuHeaderWidget::MenuHeaderWidget(QString title) {
         "color:" + COLOR_TEXT_SECONDARY + ";"
         "font-size:18px;"
     );
+    titleLabel->setFont(QFont("Roboto", 18, QFont::Normal));
     mainLayout->addWidget(titleLabel);
     this->setLayout(mainLayout);
 }

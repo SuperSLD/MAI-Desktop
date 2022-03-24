@@ -46,8 +46,8 @@ MainFragment::MainFragment() {
     QLabel *titleLabel = new QLabel("М1О-309С-19");
     titleLabel->setStyleSheet(
         "color:" + COLOR_TEXT_PRIMARY + ";"
-        "font-size:36px;"
     );
+    titleLabel->setFont(QFont("Roboto", 36, QFont::Normal));
     secondaryLayout->addWidget(titleLabel);
     SwgButton *backButton = new SwgButton(":/resc/resc/Vector.svg", QSize(20,18));
     secondaryLayout->addWidget(backButton);
@@ -57,20 +57,21 @@ MainFragment::MainFragment() {
         "color:" + COLOR_TEXT_PRIMARY + ";"
         "font-size:14px;"
     );
+    titleInstituteLabel->setFont(QFont("Roboto", 14, QFont::Normal));
     headerLayout->addWidget(titleInstituteLabel);
-
     QLabel *titleTypeLabel = new QLabel("Бакалавриат или специалитет");
     titleTypeLabel->setStyleSheet(
         "color:" + COLOR_TEXT_PRIMARY + ";"
         "font-size:14px;"
     );
+    titleTypeLabel->setFont(QFont("Roboto", 14, QFont::Normal));
     headerLayout->addWidget(titleTypeLabel);
-
     QLabel *titleCourseLabel = new QLabel("Курс");
     titleCourseLabel->setStyleSheet(
         "color:" + COLOR_TEXT_PRIMARY + ";"
         "font-size:14px;"
     );
+    titleCourseLabel->setFont(QFont("Roboto", 14, QFont::Normal));
     headerLayout->addWidget(titleCourseLabel);
     headerLayout->setContentsMargins(24,24,24,24);
 
@@ -79,6 +80,7 @@ MainFragment::MainFragment() {
         "color:" + COLOR_TEXT_PRIMARY + ";"
         "font-size:14px;"
     );
+    titleChosenGroup->setFont(QFont("Roboto", 14, QFont::Normal));
     headerLayout->addWidget(titleChosenGroup);
     titleChosenGroup->setAlignment(Qt::AlignRight);
     headerLayout->setContentsMargins(24,24,24,24);
