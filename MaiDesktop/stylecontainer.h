@@ -43,8 +43,7 @@ namespace styles{
             "   width:210px;";
 
     static const QString TITLE_LABLE =
-            "color:" + COLOR_TEXT_PRIMARY + ";"
-            "font-size:24px;";
+            "color:" + COLOR_TEXT_PRIMARY + ";";
     static const QString BIG_TITLE_LABLE =
             "color:" + COLOR_TEXT_PRIMARY + ";"
             "font-size:36px;";

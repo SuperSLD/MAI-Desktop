@@ -14,6 +14,7 @@ ToolbarWidget::ToolbarWidget(QString title, bool showBack, QString icon) {
     QHBoxLayout *titleContainer = new QHBoxLayout;
     SwgButton *backButton = new SwgButton(":/resc/resc/arrow_back.svg", QSize(24,24));
     QLabel *titleLabel = new QLabel(title);
+    titleLabel->setFont(QFont("Roboto", 24, QFont::Bold));
     titleLabel->setStyleSheet(TITLE_LABLE);
     connect(backButton, &SwgButton::clicked, this, &ToolbarWidget::onBackPressed);
     if (showBack) {

@@ -1,12 +1,19 @@
 #include "dayschedulewidget.h"
 
+#include <QFont>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QTime>
 
 #include <stylecontainer.h>
+#include <ui/widgets/swgbutton.h>
+
 using namespace styles;
 
-DayScheduleWidget::DayScheduleWidget(int countItems) {
+DayScheduleWidget::DayScheduleWidget(DayModel dayInfo) {
+
+    this->date = dayInfo.getDate();
+    this->name = dayInfo.getName();
 
     // Основное расположение элементов в окне
     QVBoxLayout *mainVLayout = new QVBoxLayout;
@@ -18,29 +25,27 @@ DayScheduleWidget::DayScheduleWidget(int countItems) {
 
     this->setLayout(mainHLayout);  // назначение главного лейута
 
-    QLabel *dayWeeekLabel = new QLabel("Пн");
+    QLabel *dayWeeekLabel = new QLabel(this->name);
+    dayWeeekLabel->setFont(QFont("Roboto", 24, QFont::Bold));
     QHBoxLayout *dateHLayout = new QHBoxLayout;
     dateHLayout->setAlignment(Qt::AlignLeft);
     dateHLayout->setContentsMargins(0, 0, 0, 10);
     dateHLayout->setSpacing(10);
     dayWeeekLabel->setStyleSheet(
         "color: white;"
-        "font-size: 24px;"
-        "font-weight: bold;"
     );
     dayWeeekLabel->setAlignment(Qt::AlignBottom);
     dateHLayout->addWidget(dayWeeekLabel);
-    QLabel *dateLabel = new QLabel("24.05");
+    QLabel *dateLabel = new QLabel(this->date.remove(5, 11));
+    dateLabel->setFont(QFont("Roboto", 14, QFont::Bold));
     dateLabel->setStyleSheet(
         "color:" + COLOR_TEXT_SECONDARY + ";"
-        "font-size: 14px;"
-        "font-weight: bold;"
     );
     dateLabel->setAlignment(Qt::AlignBottom);
     dateHLayout->addWidget(dateLabel);
     mainVLayout->addLayout(dateHLayout);
 
-    for (int i=0; i<countItems; i++) {
+    for (int i=0; i<dayInfo.getSubjects().size(); i++) {
         QHBoxLayout *itemHLayout = new QHBoxLayout;
         itemHLayout->setSpacing(13);    // расстояние между правой и левой областями
 
@@ -49,17 +54,10 @@ DayScheduleWidget::DayScheduleWidget(int countItems) {
         leftAreaVLayout->setMargin(0);
         leftAreaVLayout->setSpacing(0);
         leftArea->setFixedWidth(24);
-        //leftArea->setStyleSheet("background-color: black;");
-        QLabel *countLabel = new QLabel(QString::number(i+1));
+        QLabel *countLabel = new QLabel(dayInfo.getSubjects()[i].getNumber());
+        countLabel->setFont(QFont("Roboto", 18, QFont::Bold));
         countLabel->setFixedWidth(24);
         countLabel->setFixedHeight(24);
-        countLabel->setStyleSheet(
-            "color: white;"
-            "font-size: 18px;"
-            "font-weight: bold;"
-            "border-radius: 12px;"
-            "background-color:"+COLOR_PRIMARY+";"
-        );
         countLabel->setAlignment(Qt::AlignHCenter);
         leftAreaVLayout->addWidget(countLabel);
         QFrame *line = new QFrame;
@@ -67,9 +65,7 @@ DayScheduleWidget::DayScheduleWidget(int countItems) {
         lineHLayout->setAlignment(Qt::AlignHCenter);
         lineHLayout->addWidget(line);
         line->setFixedWidth(4);
-        line->setStyleSheet(
-            "background-color:"+COLOR_PRIMARY+";"
-        );
+
         leftAreaVLayout->addLayout(lineHLayout);
 
         leftArea->setLayout(leftAreaVLayout);
@@ -83,52 +79,52 @@ DayScheduleWidget::DayScheduleWidget(int countItems) {
         QGridLayout *gridLayout = new QGridLayout;
         gridLayout->setMargin(0);
         gridLayout->setVerticalSpacing(4);
-        QLabel *l1 = new QLabel("Технология системного моделирования");
-        QHBoxLayout *l1HLayout = new QHBoxLayout;
-        l1HLayout->setContentsMargins(0, 0, 0, 8);
-        l1->setStyleSheet(
+        QLabel *nameLabel = new QLabel(dayInfo.getSubjects()[i].getName());
+        nameLabel->setFont(QFont("Roboto", 18));
+        QHBoxLayout *nameLabelHLayout = new QHBoxLayout;
+        nameLabelHLayout->setContentsMargins(0, 0, 0, 8);
+        nameLabel->setStyleSheet(
             "color: white;"
-            "font-size:18px;"
         );
-        l1->setAlignment(Qt::AlignLeft);
-        l1->setWordWrap(true);
-        l1HLayout->addWidget(l1);
-        gridLayout->addLayout(l1HLayout, 0, 0, 1, 2);
-        QLabel *l2 = new QLabel("Топорова Мария Илларионова");
-        l2->setStyleSheet(
+        nameLabel->setAlignment(Qt::AlignLeft);
+        nameLabel->setWordWrap(true);
+        nameLabelHLayout->addWidget(nameLabel);
+        gridLayout->addLayout(nameLabelHLayout, 0, 0, 1, 2);
+        QLabel *lectorLabel = new QLabel(dayInfo.getSubjects()[i].getLector().getName());
+        lectorLabel->setFont(QFont("Roboto", 14));
+        lectorLabel->setStyleSheet(
             "color:" + COLOR_PRIMARY + ";"
-            "font-size:14px;"
         );
-        l2->setAlignment(Qt::AlignLeft);
-        l2->setWordWrap(true);
-        gridLayout->addWidget(l2, 1, 0, 1, 2);
-        QLabel *l3 = new QLabel("09:00 - 10:30");
-        QHBoxLayout *l3HLayout = new QHBoxLayout;
-        l3HLayout->setContentsMargins(0, 0, 0, 8);
-        l3->setStyleSheet(
+        lectorLabel->setAlignment(Qt::AlignLeft);
+        lectorLabel->setWordWrap(true);
+        gridLayout->addWidget(lectorLabel, 1, 0, 1, 2);
+        QLabel *timeLabel = new QLabel(dayInfo.getSubjects()[i].getTimeStart() + " - " + dayInfo.getSubjects()[i].getTimeEnd());
+        timeLabel->setFont(QFont("Roboto", 14));
+        QHBoxLayout *timeLabelHLayout = new QHBoxLayout;
+        timeLabelHLayout->setContentsMargins(0, 0, 0, 8);
+        timeLabel->setStyleSheet(
             "color:" + COLOR_TEXT_SECONDARY + ";"
-            "font-size:14px;"
         );
-        l3->setAlignment(Qt::AlignLeft);
-        l3HLayout->addWidget(l3);
-        gridLayout->addLayout(l3HLayout, 2, 0, 1, 2);
-        QLabel *l4 = new QLabel("--каф");
-        l4->setStyleSheet(
+        timeLabel->setAlignment(Qt::AlignLeft);
+        timeLabelHLayout->addWidget(timeLabel);
+        gridLayout->addLayout(timeLabelHLayout, 2, 0, 1, 2);
+        QLabel *roomLabel = new QLabel(dayInfo.getSubjects()[i].getRoom().getName());
+        roomLabel->setFont(QFont("Roboto", 14));
+        roomLabel->setStyleSheet(
             "color:" + COLOR_TEXT_SECONDARY + ";"
-            "font-size:14px;"
         );
-        l4->setAlignment(Qt::AlignLeft);
-        gridLayout->addWidget(l4, 3, 0, 1, 1);
-        QLabel *l5 = new QLabel("ЛК");
-        l5->setStyleSheet(
+        roomLabel->setAlignment(Qt::AlignLeft);
+        gridLayout->addWidget(roomLabel, 3, 0, 1, 1);
+        QLabel *subjectLabel = new QLabel(dayInfo.getSubjects()[i].getType());
+        subjectLabel->setFont(QFont("Roboto", 14));
+        subjectLabel->setStyleSheet(
             "color:" + COLOR_TEXT_SECONDARY + ";"
-            "font-size:14px;"
         );
-        l5->setAlignment(Qt::AlignRight);
-        gridLayout->addWidget(l5, 3, 1, 1, 1);
+        subjectLabel->setAlignment(Qt::AlignRight);
+        gridLayout->addWidget(subjectLabel, 3, 1, 1, 1);
         QLabel *breakLine = new QLabel();
         QHBoxLayout *breakLineHLayout = new QHBoxLayout;
-        breakLineHLayout->setContentsMargins(0, 10, 0, 0);
+        breakLineHLayout->setContentsMargins(0, 14, 0, 0);
         breakLine->setFixedHeight(1);
         breakLine->setStyleSheet(
             "background-color:" + COLOR_BORDER + ";"
@@ -136,7 +132,54 @@ DayScheduleWidget::DayScheduleWidget(int countItems) {
         breakLine->setAlignment(Qt::AlignHCenter);
         breakLineHLayout->addWidget(breakLine);
         gridLayout->addLayout(breakLineHLayout, 4, 0, 1, 2);
+
+        if (dayInfo.getSubjects()[i].getTimeEnd() == "12:15") {
+            QHBoxLayout *dinnerContainer = new QHBoxLayout;
+            SwgButton *dinnerButton = new SwgButton(":/resc/resc/dinner.svg", QSize(24,24));
+            QLabel *dinnerLabel = new QLabel("Обеденный перерыв");
+            dinnerLabel->setFont(QFont("Roboto", 14));
+            dinnerLabel->setStyleSheet(
+                "color:" + COLOR_TEXT_SECONDARY + ";"
+            );
+            dinnerContainer->addWidget(dinnerButton);
+            dinnerContainer->addWidget(dinnerLabel);
+            dinnerContainer->setContentsMargins(0,14,0,0);
+            //dinnerLabel->setContentsMargins(0,0,0,0);
+            gridLayout->addLayout(dinnerContainer, 5, 0, 1, 2);
+
+            QLabel *breakLineDinner = new QLabel();
+            QHBoxLayout *breakLineDinnerHLayout = new QHBoxLayout;
+            breakLineDinnerHLayout->setContentsMargins(0, 14, 0, 0);
+            breakLineDinner->setFixedHeight(1);
+            breakLineDinner->setStyleSheet(
+                "background-color:" + COLOR_BORDER + ";"
+            );
+            breakLineDinner->setAlignment(Qt::AlignHCenter);
+            breakLineDinnerHLayout->addWidget(breakLineDinner);
+            gridLayout->addLayout(breakLineDinnerHLayout, 6, 0, 1, 2);
+        }
+
         rightArea->setLayout(gridLayout);
+
+        if (QDateTime::currentDateTime().toString("dd.MM.yyyy") == this->date && (QTime::currentTime().toString("HHmm").toInt()+1000 > dayInfo.getSubjects()[i].getTimeStart().replace(":", "") && QTime::currentTime().toString("HHmm").toInt()+1000 < dayInfo.getSubjects()[i].getTimeEnd().replace(":", ""))) {
+            line->setStyleSheet(
+                "background-color:"+COLOR_PRIMARY+";"
+            );
+            countLabel->setStyleSheet(
+                "color: white;"
+                "border-radius: 12px;"
+                "background-color:"+COLOR_PRIMARY+";"
+            );
+        } else {
+            line->setStyleSheet(
+                "background-color:"+COLOR_BORDER+";"
+            );
+            countLabel->setStyleSheet(
+                "color: white;"
+                "border-radius: 12px;"
+                "background-color:"+COLOR_BORDER+";"
+            );
+        };
 
         itemHLayout->addWidget(rightArea);
 
