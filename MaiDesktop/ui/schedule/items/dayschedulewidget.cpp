@@ -6,6 +6,7 @@
 #include <QTime>
 
 #include <stylecontainer.h>
+#include <ui/widgets/swgbutton.h>
 
 using namespace styles;
 
@@ -78,52 +79,52 @@ DayScheduleWidget::DayScheduleWidget(DayModel dayInfo) {
         QGridLayout *gridLayout = new QGridLayout;
         gridLayout->setMargin(0);
         gridLayout->setVerticalSpacing(4);
-        QLabel *l1 = new QLabel(dayInfo.getSubjects()[i].getName());
-        l1->setFont(QFont("Roboto", 18));
-        QHBoxLayout *l1HLayout = new QHBoxLayout;
-        l1HLayout->setContentsMargins(0, 0, 0, 8);
-        l1->setStyleSheet(
+        QLabel *nameLabel = new QLabel(dayInfo.getSubjects()[i].getName());
+        nameLabel->setFont(QFont("Roboto", 18));
+        QHBoxLayout *nameLabelHLayout = new QHBoxLayout;
+        nameLabelHLayout->setContentsMargins(0, 0, 0, 8);
+        nameLabel->setStyleSheet(
             "color: white;"
         );
-        l1->setAlignment(Qt::AlignLeft);
-        l1->setWordWrap(true);
-        l1HLayout->addWidget(l1);
-        gridLayout->addLayout(l1HLayout, 0, 0, 1, 2);
-        QLabel *l2 = new QLabel(dayInfo.getSubjects()[i].getLector().getName());
-        l2->setFont(QFont("Roboto", 14));
-        l2->setStyleSheet(
+        nameLabel->setAlignment(Qt::AlignLeft);
+        nameLabel->setWordWrap(true);
+        nameLabelHLayout->addWidget(nameLabel);
+        gridLayout->addLayout(nameLabelHLayout, 0, 0, 1, 2);
+        QLabel *lectorLabel = new QLabel(dayInfo.getSubjects()[i].getLector().getName());
+        lectorLabel->setFont(QFont("Roboto", 14));
+        lectorLabel->setStyleSheet(
             "color:" + COLOR_PRIMARY + ";"
         );
-        l2->setAlignment(Qt::AlignLeft);
-        l2->setWordWrap(true);
-        gridLayout->addWidget(l2, 1, 0, 1, 2);
-        QLabel *l3 = new QLabel(dayInfo.getSubjects()[i].getTimeStart() + " - " + dayInfo.getSubjects()[i].getTimeEnd());
-        l3->setFont(QFont("Roboto", 14));
-        QHBoxLayout *l3HLayout = new QHBoxLayout;
-        l3HLayout->setContentsMargins(0, 0, 0, 8);
-        l3->setStyleSheet(
+        lectorLabel->setAlignment(Qt::AlignLeft);
+        lectorLabel->setWordWrap(true);
+        gridLayout->addWidget(lectorLabel, 1, 0, 1, 2);
+        QLabel *timeLabel = new QLabel(dayInfo.getSubjects()[i].getTimeStart() + " - " + dayInfo.getSubjects()[i].getTimeEnd());
+        timeLabel->setFont(QFont("Roboto", 14));
+        QHBoxLayout *timeLabelHLayout = new QHBoxLayout;
+        timeLabelHLayout->setContentsMargins(0, 0, 0, 8);
+        timeLabel->setStyleSheet(
             "color:" + COLOR_TEXT_SECONDARY + ";"
         );
-        l3->setAlignment(Qt::AlignLeft);
-        l3HLayout->addWidget(l3);
-        gridLayout->addLayout(l3HLayout, 2, 0, 1, 2);
-        QLabel *l4 = new QLabel(dayInfo.getSubjects()[i].getRoom().getName());
-        l4->setFont(QFont("Roboto", 14));
-        l4->setStyleSheet(
+        timeLabel->setAlignment(Qt::AlignLeft);
+        timeLabelHLayout->addWidget(timeLabel);
+        gridLayout->addLayout(timeLabelHLayout, 2, 0, 1, 2);
+        QLabel *roomLabel = new QLabel(dayInfo.getSubjects()[i].getRoom().getName());
+        roomLabel->setFont(QFont("Roboto", 14));
+        roomLabel->setStyleSheet(
             "color:" + COLOR_TEXT_SECONDARY + ";"
         );
-        l4->setAlignment(Qt::AlignLeft);
-        gridLayout->addWidget(l4, 3, 0, 1, 1);
-        QLabel *l5 = new QLabel(dayInfo.getSubjects()[i].getType());
-        l5->setFont(QFont("Roboto", 14));
-        l5->setStyleSheet(
+        roomLabel->setAlignment(Qt::AlignLeft);
+        gridLayout->addWidget(roomLabel, 3, 0, 1, 1);
+        QLabel *subjectLabel = new QLabel(dayInfo.getSubjects()[i].getType());
+        subjectLabel->setFont(QFont("Roboto", 14));
+        subjectLabel->setStyleSheet(
             "color:" + COLOR_TEXT_SECONDARY + ";"
         );
-        l5->setAlignment(Qt::AlignRight);
-        gridLayout->addWidget(l5, 3, 1, 1, 1);
+        subjectLabel->setAlignment(Qt::AlignRight);
+        gridLayout->addWidget(subjectLabel, 3, 1, 1, 1);
         QLabel *breakLine = new QLabel();
         QHBoxLayout *breakLineHLayout = new QHBoxLayout;
-        breakLineHLayout->setContentsMargins(0, 10, 0, 0);
+        breakLineHLayout->setContentsMargins(0, 14, 0, 0);
         breakLine->setFixedHeight(1);
         breakLine->setStyleSheet(
             "background-color:" + COLOR_BORDER + ";"
@@ -131,6 +132,33 @@ DayScheduleWidget::DayScheduleWidget(DayModel dayInfo) {
         breakLine->setAlignment(Qt::AlignHCenter);
         breakLineHLayout->addWidget(breakLine);
         gridLayout->addLayout(breakLineHLayout, 4, 0, 1, 2);
+
+        if (dayInfo.getSubjects()[i].getTimeEnd() == "12:15") {
+            QHBoxLayout *dinnerContainer = new QHBoxLayout;
+            SwgButton *dinnerButton = new SwgButton(":/resc/resc/dinner.svg", QSize(24,24));
+            QLabel *dinnerLabel = new QLabel("Обеденный перерыв");
+            dinnerLabel->setFont(QFont("Roboto", 14));
+            dinnerLabel->setStyleSheet(
+                "color:" + COLOR_TEXT_SECONDARY + ";"
+            );
+            dinnerContainer->addWidget(dinnerButton);
+            dinnerContainer->addWidget(dinnerLabel);
+            dinnerContainer->setContentsMargins(0,14,0,0);
+            //dinnerLabel->setContentsMargins(0,0,0,0);
+            gridLayout->addLayout(dinnerContainer, 5, 0, 1, 2);
+
+            QLabel *breakLineDinner = new QLabel();
+            QHBoxLayout *breakLineDinnerHLayout = new QHBoxLayout;
+            breakLineDinnerHLayout->setContentsMargins(0, 14, 0, 0);
+            breakLineDinner->setFixedHeight(1);
+            breakLineDinner->setStyleSheet(
+                "background-color:" + COLOR_BORDER + ";"
+            );
+            breakLineDinner->setAlignment(Qt::AlignHCenter);
+            breakLineDinnerHLayout->addWidget(breakLineDinner);
+            gridLayout->addLayout(breakLineDinnerHLayout, 6, 0, 1, 2);
+        }
+
         rightArea->setLayout(gridLayout);
 
         if (QDateTime::currentDateTime().toString("dd.MM.yyyy") == this->date && (QTime::currentTime().toString("HHmm").toInt()+1000 > dayInfo.getSubjects()[i].getTimeStart().replace(":", "") && QTime::currentTime().toString("HHmm").toInt()+1000 < dayInfo.getSubjects()[i].getTimeEnd().replace(":", ""))) {
