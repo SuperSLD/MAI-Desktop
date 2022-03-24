@@ -51,13 +51,13 @@ MainMenuButtonWidget::MainMenuButtonWidget(
     QLabel *titleLabel = new QLabel(title);
     titleLabel->setStyleSheet(
         "color:" + COLOR_TEXT_PRIMARY + ";"
-        "font-size:14px;"
     );
+    titleLabel->setFont(QFont("Roboto", 18, QFont::Normal));
     descriptionLable = new QLabel(description);
     descriptionLable->setStyleSheet(
         "color:" + COLOR_TEXT_SECONDARY + ";"
-        "font-size:14px;"
     );
+    descriptionLable->setFont(QFont("Roboto", 14, QFont::Normal));
     buttonContainer->addWidget(titleLabel);
     buttonContainer->addWidget(descriptionLable);
 
