@@ -16,6 +16,7 @@ StudOrgItemWidget::StudOrgItemWidget(StudOrgModel model) {
         "color:" + COLOR_PRIMARY + ";"
         "font-size:18px;"
     );
+    titleLabel->setFont(QFont("Roboto", 18, QFont::Normal));
     QLabel *phoneLabel = new QLabel(model.getContact());
     phoneLabel->setStyleSheet(
                 "QLabel {"
@@ -26,17 +27,20 @@ StudOrgItemWidget::StudOrgItemWidget(StudOrgModel model) {
                 "   color:"+COLOR_TEXT_PRIMARY+";"
                 "}"
     );
+    phoneLabel->setFont(QFont("Roboto", 16, QFont::Normal));
     phoneLabel->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
     QLabel *addressTitleLabel = new QLabel("Адрес:");
     addressTitleLabel->setStyleSheet(
         "color:" + COLOR_TEXT_SECONDARY + ";"
         "font-size:14px;"
     );
+    addressTitleLabel->setFont(QFont("Roboto", 14, QFont::Normal));
     QLabel *addressLabel = new QLabel(model.getAddress());
     addressLabel->setStyleSheet(
         "color:" + COLOR_TEXT_PRIMARY + ";"
         "font-size:14px;"
     );
+    addressLabel->setFont(QFont("Roboto", 14, QFont::Normal));
     mainLayout->addWidget(titleLabel);
     mainLayout->addWidget(phoneLabel);
     mainLayout->addWidget(addressTitleLabel);

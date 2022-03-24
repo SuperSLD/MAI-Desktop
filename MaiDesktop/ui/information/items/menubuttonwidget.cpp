@@ -50,7 +50,9 @@ MenuButtonWidget::MenuButtonWidget(QString title, QString icon, int code) {
         "color:" + COLOR_TEXT_PRIMARY + ";"
         "font-size:18px;"
     );
+    titleLabel->setFont(QFont("Roboto", 18, QFont::Normal));
     titleLabel->setContentsMargins(16, 0, 0, 0);
+    titleLabel->setFont(QFont("Roboto", 18, QFont::Normal));
     buttonContainer->addWidget(titleLabel);
 
 }

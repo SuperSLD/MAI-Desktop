@@ -102,8 +102,8 @@ InformationFragment::InformationFragment() {
     QLabel *titleLabel = new QLabel("МАИ");
     titleLabel->setStyleSheet(
         "color:" + COLOR_TEXT_PRIMARY + ";"
-        "font-size:48px;"
     );
+    titleLabel->setFont(QFont("Roboto", 48, QFont::Bold));
     headerLayout->addWidget(titleLabel);
     // заголовок
     QLabel *subtitleLable = new QLabel("Инфомрация о кампусе маи и другая информация об активности студентов.");
@@ -111,6 +111,7 @@ InformationFragment::InformationFragment() {
         "color:" + COLOR_TEXT_SECONDARY + ";"
         "font-size:18px;"
     );
+    subtitleLable->setFont(QFont("Roboto", 18, QFont::Normal));
     headerLayout->addWidget(subtitleLable);
 
     // кампус

@@ -16,7 +16,7 @@ LibraryItemWidget::LibraryItemWidget(LibraryModel model) {
         "color:" + COLOR_PRIMARY + ";"
         "font-size:18px;"
     );
-
+    titleLabel->setFont(QFont("Roboto", 18, QFont::Normal));
     mainLayout->addWidget(titleLabel);
 
     foreach(LibrarySectionModel section, model.getSections()) {
@@ -26,11 +26,13 @@ LibraryItemWidget::LibraryItemWidget(LibraryModel model) {
             "color:" + COLOR_TEXT_PRIMARY + ";"
             "font-size:14px;"
         );
+        nameLabel->setFont(QFont("Roboto", 14, QFont::Normal));
         QLabel *roomLable = new QLabel(section.getLocation());
         roomLable->setStyleSheet(
             "color:" + COLOR_TEXT_SECONDARY + ";"
             "font-size:14px;"
         );
+        roomLable->setFont(QFont("Roboto", 14, QFont::Normal));
         roomLable->setAlignment(Qt::AlignRight);
         sectionContainer->addWidget(nameLabel);
         sectionContainer->addWidget(roomLable);
