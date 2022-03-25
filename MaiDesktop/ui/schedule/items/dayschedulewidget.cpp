@@ -80,6 +80,7 @@ DayScheduleWidget::DayScheduleWidget(DayModel dayInfo) {
         gridLayout->setMargin(0);
         gridLayout->setVerticalSpacing(4);
         QLabel *nameLabel = new QLabel(dayInfo.getSubjects()[i].getName());
+        nameLabel->setFixedHeight(fontMetrics().boundingRect(dayInfo.getSubjects()[i].getName()).width()/4.7);  // высота nameLabel задаётся по содержимому тексту
         nameLabel->setFont(QFont("Roboto", 18));
         QHBoxLayout *nameLabelHLayout = new QHBoxLayout;
         nameLabelHLayout->setContentsMargins(0, 0, 0, 8);
