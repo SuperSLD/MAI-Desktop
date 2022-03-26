@@ -76,7 +76,7 @@ void ExamScheduleFragment::bindData(BaseModel* model) {
                     DayScheduleWidget *day = new DayScheduleWidget(sch->getWeeks()[i].getDays()[j]);
                     day->setFixedWidth(296);
                     day->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
-                    gridLayout->addWidget(day, dates.size()/3, dates.size()%3, 1, 1);
+                    gridLayout->addWidget(day, dates.size()/3, dates.size()%3, 1, 1, Qt::AlignTop);
                     dates.append(sch->getWeeks()[i].getDays()[j].getDate());
                 };
             };
