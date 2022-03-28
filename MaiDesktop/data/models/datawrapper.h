@@ -19,7 +19,9 @@ public:
     DataWrapper(QJsonObject obj)  {
         this->success = obj["success"].toBool();
         this->message = obj["message"].toString();
-        this->data = T(obj["data"]);
+        if (obj.contains("data")) {
+            this->data = T(obj["data"]);
+        }
     }
     ~DataWrapper() {}
 
