@@ -20,7 +20,7 @@ ImplFragmentFactory::ImplFragmentFactory(){}
 ImplFragmentFactory::~ImplFragmentFactory(){}
 
 BaseFragment* ImplFragmentFactory::create(QString tag) {
-    qDebug("ScreensFactory create");
+    qDebug() << "FragmentFactory: create - {" << tag << "}";
     if (tag == SPLASH_TAG) {
         return new SplashFragment;
     } else if (tag == SEARCH_GROUP) {

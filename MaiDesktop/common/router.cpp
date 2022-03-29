@@ -6,15 +6,14 @@ Router::Router(
         SlidingStackedWidget *container,
         BaseFragmentFactory *screensFactory
 ) {
-    qDebug("create navigator");
+    qDebug() << "Router: create navigator";
     this->screensFactory = screensFactory;
     this->currentContainer = container;
-    qDebug("create start fragment");
+    qDebug() << "Router: create start fragment";
     BaseFragment* startFragment = getStartScreen();
-    qDebug("append start fragment");
+    qDebug() << "Router: append start fragment";
     this->stack.append(startFragment);
-
-    qDebug("add widget");
+    qDebug() << "Router: add widget";
     currentContainer->addWidget(stack.last());
     currentContainer->setCurrentIndex(0);
 }
@@ -23,7 +22,7 @@ Router::~Router() {
 }
 
 void Router::navigateTo(QString tag) {
-    qDebug("Navigator navigateTo");
+    qDebug() << "Router: navigateTo - {" << tag << "}";
     BaseFragment *newFragment = this->screensFactory->create(tag);
     stack.last()->onPause();
     disconnectFragment(stack.last());
@@ -34,7 +33,7 @@ void Router::navigateTo(QString tag) {
 }
 
 void Router::back() {
-    qDebug("Navigator back");
+    qDebug() << "Router: back";
     currentContainer->slideInIdx(stack.size()-2);
     connect(currentContainer, &SlidingStackedWidget::animationFinished, this, &Router::removeOnFinishLast);
 }
@@ -49,7 +48,7 @@ void Router::removeOnFinishLast() {
 }
 
 void Router::replace(QString tag) {
-    qDebug("Navigator replace");
+    qDebug() << "Router: replace - {" << tag << "}";
     BaseFragment *newFragment = this->screensFactory->create(tag);
     connect(currentContainer, &SlidingStackedWidget::animationFinished, this, &Router::removeOnReplace);
     disconnectFragment(stack.last());
@@ -69,7 +68,7 @@ void Router::removeOnReplace() {
 }
 
 void Router::newRootScreen(QString tag) {
-    qDebug("Navigator newRootScreen");
+    qDebug() << "Router: newRootScreen - {" << tag << "}";
     BaseFragment *newFragment = this->screensFactory->create(tag);
     connect(currentContainer, &SlidingStackedWidget::animationFinished, this, &Router::removeOnRoot);
     disconnectFragment(stack.last());
@@ -93,17 +92,20 @@ void Router::removeOnRoot() {
 }
 
 void Router::backWhithData(BaseModel* model) {
+    qDebug() << "Router: backWhithData";
     stack[stack.size()-2]->bindData(model);
     back();
 }
 
 void Router::navigateWhithData(QString tag, BaseModel* model) {
+    qDebug() << "Router: navigateWhithData - {" << tag << "}";
     navigateTo(tag);
     stack.last()->bindData(model);
 }
 
 
 void Router::replaceWhithData(QString tag, BaseModel* model) {
+    qDebug() << "Router: replaceWhithData - {" << tag << "}";
     replace(tag);
     stack.last()->bindData(model);
 }
@@ -113,7 +115,7 @@ BaseFragment* Router::getStartScreen() {
 }
 
 void Router::connectFragment(BaseFragment *fragment) {
-    qDebug("Navigator connect slots");
+    qDebug() << "Router: connect slots";
     connect(fragment, &BaseFragment::back, this, &Router::back);
     connect(fragment, &BaseFragment::replace, this, &Router::replace);
     connect(fragment, &BaseFragment::navigateTo, this, &Router::navigateTo);
@@ -124,7 +126,7 @@ void Router::connectFragment(BaseFragment *fragment) {
 }
 
 void Router::disconnectFragment(BaseFragment *fragment) {
-    qDebug("Navigator disconnect slots");
+    qDebug() << "Router: disconnect slots";
     disconnect(fragment, &BaseFragment::back, this, &Router::back);
     disconnect(fragment, &BaseFragment::replace, this, &Router::replace);
     disconnect(fragment, &BaseFragment::navigateTo, this, &Router::navigateTo);
@@ -136,7 +138,7 @@ void Router::disconnectFragment(BaseFragment *fragment) {
 
 BaseFragment* Router::createAndConnect(QString tag) {
     BaseFragment *fragment = this->screensFactory->create(tag);
-    qDebug("Navigator create screen");
+    qDebug() << "Router: create screen - {" << tag << "}";
     connectFragment(fragment);
     return fragment;
 }

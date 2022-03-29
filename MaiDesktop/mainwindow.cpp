@@ -11,7 +11,7 @@ using namespace styles;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent) {
     try {
-        qDebug("create main window");
+        qDebug() << "App: create main window";
 
         container = new SlidingStackedWidget(this);
         container->setSpeed(500);
