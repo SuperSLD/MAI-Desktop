@@ -122,6 +122,6 @@ void ApiService::onHttpResult(QNetworkReply *reply) {
     // удаляем хэндлер запроса если он найден
     if (handlerIndex >= 0) {
         handlers.removeAt(handlerIndex);
-        if (debug) qDebug() << "AppNetworkService: handler remove -" << handlers.size();
+        qDebug() << "AppNetworkService: handler remove -" << handlers.size();
     }
 }

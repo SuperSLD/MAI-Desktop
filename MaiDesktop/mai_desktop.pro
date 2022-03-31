@@ -56,6 +56,7 @@ SOURCES += \
     ui/information/items/libraryitemwidget.cpp \
     ui/information/items/menubuttonwidget.cpp \
     ui/information/items/menuheaderwidget.cpp \
+    ui/optimal/optimalgroupsfragment.cpp \
     ui/schedule/examschedulefragment.cpp \
     ui/schedule/items/dayschedulewidget.cpp \
     ui/information/items/sportitemwidget.cpp \
@@ -123,6 +124,7 @@ HEADERS += \
     ui/information/items/libraryitemwidget.h \
     ui/information/items/menubuttonwidget.h \
     ui/information/items/menuheaderwidget.h \
+    ui/optimal/optimalgroupsfragment.h \
     ui/schedule/examschedulefragment.h \
     ui/schedule/items/dayschedulewidget.h \
     ui/information/items/sportitemwidget.h \
