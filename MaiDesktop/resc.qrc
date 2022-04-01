@@ -15,5 +15,6 @@
         <file>resc/whatshot.svg</file>
         <file>resc/Vector.svg</file>
         <file>resc/dinner.svg</file>
+        <file>resc/selectweek.svg</file>
     </qresource>
 </RCC>

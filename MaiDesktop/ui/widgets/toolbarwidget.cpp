@@ -28,7 +28,7 @@ ToolbarWidget::ToolbarWidget(QString title, bool showBack, QString icon) {
         // кнопка справа тулбара
         QFrame *buttonContainer = new QFrame;
         QVBoxLayout *buttonLayout = new QVBoxLayout;
-        SwgButton *buttonIcon = new SwgButton(":/resc/resc/"+icon+".svg", QSize(32,32));
+        SwgButton *buttonIcon = new SwgButton(":/resc/resc/"+icon+".svg", QSize(38,38));
 
         buttonContainer->setLayout(buttonLayout);
         buttonContainer->setObjectName("sort_item");

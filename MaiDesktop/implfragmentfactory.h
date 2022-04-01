@@ -23,6 +23,7 @@ namespace screens {
     static const QString CREATIVE_TAG = "creative";
 
     //расписание
+    static const QString WEEK_SCHEDULE = "week_schedule";
     static const QString SELECT_WEEK = "select_week";
     static const QString EXAM_SCHEDULE = "exam_schedule";
     static const QString MAIN_TAG = "main_tag";

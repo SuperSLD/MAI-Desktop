@@ -36,7 +36,7 @@ DayScheduleWidget::DayScheduleWidget(DayModel dayInfo) {
     );
     dayWeeekLabel->setAlignment(Qt::AlignBottom);
     dateHLayout->addWidget(dayWeeekLabel);
-    QLabel *dateLabel = new QLabel(this->date.remove(5, 11));
+    QLabel *dateLabel = new QLabel(dayInfo.getDate().remove(5, 11));
     dateLabel->setFont(QFont("Roboto", 14, QFont::Bold));
     dateLabel->setStyleSheet(
         "color:" + COLOR_TEXT_SECONDARY + ";"
@@ -80,7 +80,7 @@ DayScheduleWidget::DayScheduleWidget(DayModel dayInfo) {
         gridLayout->setMargin(0);
         gridLayout->setVerticalSpacing(4);
         QLabel *nameLabel = new QLabel(dayInfo.getSubjects()[i].getName());
-        nameLabel->setFixedHeight(fontMetrics().boundingRect(dayInfo.getSubjects()[i].getName()).width()/4.7);  // высота nameLabel задаётся по содержимому тексту
+        nameLabel->setFixedHeight(25*((fontMetrics().boundingRect(dayInfo.getSubjects()[i].getName()).width()/138)+1));  // высота nameLabel задаётся по содержимому тексту
         nameLabel->setFont(QFont("Roboto", 18));
         QHBoxLayout *nameLabelHLayout = new QHBoxLayout;
         nameLabelHLayout->setContentsMargins(0, 0, 0, 8);
@@ -158,11 +158,11 @@ DayScheduleWidget::DayScheduleWidget(DayModel dayInfo) {
             breakLineDinner->setAlignment(Qt::AlignHCenter);
             breakLineDinnerHLayout->addWidget(breakLineDinner);
             gridLayout->addLayout(breakLineDinnerHLayout, 6, 0, 1, 2);
-        }
+        };
 
         rightArea->setLayout(gridLayout);
 
-        if (QDateTime::currentDateTime().toString("dd.MM.yyyy") == this->date && (QTime::currentTime().toString("HHmm").toInt()+1000 > dayInfo.getSubjects()[i].getTimeStart().replace(":", "") && QTime::currentTime().toString("HHmm").toInt()+1000 < dayInfo.getSubjects()[i].getTimeEnd().replace(":", ""))) {
+        if (QDate::currentDate().toString("dd.MM.yyyy") == this->date && QTime::currentTime() >= QTime::fromString(dayInfo.getSubjects()[i].getTimeStart(), "HH:mm") && QTime::currentTime() <= QTime::fromString(dayInfo.getSubjects()[i].getTimeEnd(), "HH:mm")) {
             line->setStyleSheet(
                 "background-color:"+COLOR_PRIMARY+";"
             );
