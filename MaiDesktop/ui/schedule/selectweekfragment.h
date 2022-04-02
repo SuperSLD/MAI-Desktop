@@ -11,7 +11,6 @@ public:
     SelectWeekFragment();
     void bindData(BaseModel* model) override;
 private:
-    BaseModel* mainModel;
     ScheduleModel *sch;
 private slots:
     void onBackPressed();

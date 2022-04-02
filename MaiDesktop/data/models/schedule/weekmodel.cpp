@@ -19,3 +19,6 @@ int WeekModel::getNumber() {return number;}
 QString WeekModel::getDate() {return date;}
 bool WeekModel::getCurrent() {return current;}
 QList<DayModel> WeekModel::getDays() {return days;}
+void WeekModel::setIsCurrent(bool isCurrent) {
+    this->current = isCurrent;
+}

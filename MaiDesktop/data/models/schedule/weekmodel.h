@@ -24,6 +24,7 @@ public:
     int getNumber();
     QString getDate();
     bool getCurrent();
+    void setIsCurrent(bool isCurrent);
     QList<DayModel> getDays();
 };
 

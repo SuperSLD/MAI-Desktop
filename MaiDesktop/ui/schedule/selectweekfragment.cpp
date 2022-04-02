@@ -22,10 +22,9 @@ void SelectWeekFragment::onBackPressed() {
 
 
 void SelectWeekFragment::onWeekPressed() {
-    qDebug() << this->mainModel;
     //this->sch->getWeeks()[(((QPushButton*)sender())->objectName()).toInt()].getCurrent() = true;
     qDebug() << ((QPushButton*)sender())->objectName(); // отправляем номер недели
-    //emit replaceWhithData(WEEK_SCHEDULE, this->mainModel);
+    emit replaceWhithData(WEEK_SCHEDULE, this->sch);
 }
 
 
@@ -33,7 +32,6 @@ SelectWeekFragment::SelectWeekFragment() {
 }
 
 void SelectWeekFragment::bindData(BaseModel* model) {
-    this->mainModel = model;
     this->sch = dynamic_cast<ScheduleModel*>(model);
 
     // Прокручивающийся контейнер
