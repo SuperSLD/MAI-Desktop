@@ -67,6 +67,7 @@ SOURCES += \
     ui/information/studorgfragment.cpp \
     ui/schedule/items/numweekwidget.cpp \
     ui/schedule/selectweekfragment.cpp \
+    ui/schedule/weekschedulefragment.cpp \
     ui/searchgroupfragment.cpp \
     ui/splashfragment.cpp \
     ui/widgets/cardwidget.cpp \
@@ -134,6 +135,7 @@ HEADERS += \
     ui/information/studorgfragment.h \
     ui/schedule/items/numweekwidget.h \
     ui/schedule/selectweekfragment.h \
+    ui/schedule/weekschedulefragment.h \
     ui/searchgroupfragment.h \
     ui/splashfragment.h \
     ui/widgets/cardwidget.h \

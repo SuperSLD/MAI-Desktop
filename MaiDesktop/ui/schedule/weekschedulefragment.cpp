@@ -1,4 +1,4 @@
-#include "examschedulefragment.h"
+#include "weekschedulefragment.h"
 
 #include <QDebug>
 #include <QGridLayout>
@@ -9,6 +9,7 @@
 #include <implfragmentfactory.h>
 #include <stylecontainer.h>
 
+#include <ui/widgets/swgbutton.h>
 #include <ui/widgets/toolbarwidget.h>
 #include <ui/schedule/items/dayschedulewidget.h>
 #include <data/models/schedule/schedulemodel.h>
@@ -16,27 +17,44 @@
 using namespace screens;
 using namespace styles;
 
-ExamScheduleFragment::ExamScheduleFragment() {
+WeekScheduleFragment::WeekScheduleFragment() {
 
-}
+};
 
-void ExamScheduleFragment::onBackPressed() {
+void WeekScheduleFragment::onBackPressed() {
     emit back();
-}
+};
 
-void ExamScheduleFragment::bindData(BaseModel* model) {
+void WeekScheduleFragment::onButtinPressed() {
+    emit replaceWhithData(SELECT_WEEK, this->mainModel);    // ??????
+};
+
+void WeekScheduleFragment::bindData(BaseModel* model) {
+    this->mainModel = model;    // ???????
+    ScheduleModel *sch = dynamic_cast<ScheduleModel*>(model);
+
     // Прокручивающийся контейнер
     QVBoxLayout *scrollContainerLayout = new QVBoxLayout;
     scrollContainerLayout->setContentsMargins(25, 25, 25, 25);
 
     QHBoxLayout *ContainerHLayout = new QHBoxLayout; // выравнивание по горизонтали
 
+    // Находим и сохраняем в переменную currentWeekNumber номер текущей недели
+    for (int i=0; i<sch->getWeeks().size(); i++) {
+        if (QDate::currentDate() >= QDate::fromString(sch->getWeeks()[i].getDate().mid(0, 10), Qt::LocaleDate) && QDate::currentDate() <= QDate::fromString(sch->getWeeks()[i].getDate().mid(13, 10), Qt::LocaleDate)) {
+            this->currentWeekNumber = sch->getWeeks()[i].getNumber();
+            break;
+        };
+    };
+
     // Работаем с тулбаром
-    ToolbarWidget *toolbar = new ToolbarWidget("Расписание экзаменов", true);
+    ToolbarWidget *toolbar = new ToolbarWidget("Неделя "+QString::number(this->currentWeekNumber) + " (Текущая)", true, "selectweek");
     toolbar->setFixedHeight(71);
     toolbar->setFixedWidth(952);
+    // При нажатии на кнопку "Выбор недели" переходим к одноимённому экрану
+    connect(toolbar, &ToolbarWidget::onButtinPressed, this, &WeekScheduleFragment::onButtinPressed);    // слот-сигнал
     // При нажатии на стрелочку переходим к предыдущему экрану
-    connect(toolbar, &ToolbarWidget::onBackPressed, this, &ExamScheduleFragment::onBackPressed);  // слот-сигнал
+    connect(toolbar, &ToolbarWidget::onBackPressed, this, &WeekScheduleFragment::onBackPressed);    // слот-сигнал
     ContainerHLayout->addWidget(toolbar);
 
     scrollContainerLayout->addLayout(ContainerHLayout);
@@ -65,22 +83,13 @@ void ExamScheduleFragment::bindData(BaseModel* model) {
 
     this->setLayout(scrollContainerLayout);  // назначение главного лейута
 
-    ScheduleModel *sch = dynamic_cast<ScheduleModel*>(model);
     QGridLayout *gridLayout = new QGridLayout;
     // работаем с днями
-    QList <QString> dates;
-    for (int i=0; i<sch->getWeeks().size(); i++) {
-        for (int j=0; j<(sch->getWeeks()[i]).getDays().size(); j++) {
-            for (int k=0; k<sch->getWeeks()[i].getDays()[j].getSubjects().size(); k++) {
-                if (dates.indexOf(sch->getWeeks()[i].getDays()[j].getDate()) == -1 && sch->getWeeks()[i].getDays()[j].getSubjects()[k].getType() == "Экзамен") {
-                    DayScheduleWidget *day = new DayScheduleWidget(sch->getWeeks()[i].getDays()[j]);
-                    day->setFixedWidth(296);
-                    day->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
-                    gridLayout->addWidget(day, dates.size()/3, dates.size()%3, 1, 1, Qt::AlignTop);
-                    dates.append(sch->getWeeks()[i].getDays()[j].getDate());
-                };
-            };
-        };
+    for (int i=0; i<sch->getWeeks()[this->currentWeekNumber-1].getDays().size(); i++) {
+        DayScheduleWidget *day = new DayScheduleWidget(sch->getWeeks()[this->currentWeekNumber-1].getDays()[i]);
+        day->setFixedWidth(296);
+        day->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+        gridLayout->addWidget(day, i/3, i%3, 1, 1, Qt::AlignTop);
     };
     gridLayout->setHorizontalSpacing(32);   // расстояние между столбцами
     gridLayout->setVerticalSpacing(32);   // расстояние между строками

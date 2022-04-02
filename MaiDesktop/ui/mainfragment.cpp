@@ -132,8 +132,8 @@ void MainFragment::listenSchedule(DataWrapper<ScheduleModel> wrapper) {
 void MainFragment::onMenuButtonClick(int code) {
     qDebug() << "InformationFragment: click button-" << code << Qt::endl;
     if (code == SCHEDULE) {
-        // тут прям пишешь emit navigateTo(название, schedule)
-        // Второй параметр это модель расписания (класс с расписанием)
+        ScheduleModel *sch = &schedule;
+        emit navigateWhithData(WEEK_SCHEDULE, sch);
     } else if (code == EXAMS) {
         ScheduleModel *sch = &schedule;
         emit navigateWhithData(EXAM_SCHEDULE, sch);
