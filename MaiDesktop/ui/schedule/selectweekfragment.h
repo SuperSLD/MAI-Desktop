@@ -7,9 +7,12 @@ class SelectWeekFragment : public BaseFragment {
 
 public:
     SelectWeekFragment();
-
+    void bindData(BaseModel* model) override;
+private:
+    BaseModel* mainModel;
 private slots:
     void onBackPressed();
+    void onWeekPressed();
 };
 
 #endif // SELECTWEEKFRAGMENT_H

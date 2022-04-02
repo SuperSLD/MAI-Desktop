@@ -26,11 +26,11 @@ void WeekScheduleFragment::onBackPressed() {
 };
 
 void WeekScheduleFragment::onButtinPressed() {
-    emit replaceWhithData(SELECT_WEEK, this->mainModel);    // ??????
+    emit replaceWhithData(SELECT_WEEK, this->mainModel);
 };
 
 void WeekScheduleFragment::bindData(BaseModel* model) {
-    this->mainModel = model;    // ???????
+    this->mainModel = model;
     ScheduleModel *sch = dynamic_cast<ScheduleModel*>(model);
 
     // Прокручивающийся контейнер

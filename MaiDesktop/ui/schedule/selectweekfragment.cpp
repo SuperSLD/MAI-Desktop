@@ -1,6 +1,7 @@
 #include "selectweekfragment.h"
 
 #include <QDebug>
+#include <QFrame>
 #include <QGridLayout>
 #include <QScrollArea>
 #include <QScrollBar>
@@ -10,11 +11,30 @@
 
 #include <ui/widgets/toolbarwidget.h>
 #include <ui/schedule/items/numweekwidget.h>
+#include <data/models/schedule/schedulemodel.h>
 
 using namespace screens;
 using namespace styles;
 
+
+void SelectWeekFragment::onBackPressed() {
+    emit back();
+}
+
+
+void SelectWeekFragment::onWeekPressed() {
+    qDebug() << ((QPushButton*)sender())->objectName(); // отправляем номер недели
+    emit replaceWhithData(WEEK_SCHEDULE, this->mainModel);
+}
+
+
 SelectWeekFragment::SelectWeekFragment() {
+}
+
+void SelectWeekFragment::bindData(BaseModel* model) {
+    this->mainModel = model;
+    ScheduleModel *sch = dynamic_cast<ScheduleModel*>(model);
+
     // Прокручивающийся контейнер
     QVBoxLayout *scrollContainerLayout = new QVBoxLayout;
     scrollContainerLayout->setContentsMargins(25, 25, 25, 35);
@@ -58,16 +78,14 @@ SelectWeekFragment::SelectWeekFragment() {
     QGridLayout *gridLayout = new QGridLayout;  // сетка
 
     // работаем с отдельными неделями
-    int countWeeks = 20;   // предполагаемое кол-во недель
+    int countWeeks = sch->getWeeks().size();
     for (int i=0; i<countWeeks; i++) {
         NumWeekWidget *blockWeek = new NumWeekWidget(QString::number(i+1));
+        blockWeek->setObjectName(QString::number(i+1));
+        connect(blockWeek, &NumWeekWidget::clicked, this, &SelectWeekFragment::onWeekPressed);  // слот-сигнал
         gridLayout->addWidget(blockWeek,i/4,i%4,1,1);
     };
     gridLayout->setHorizontalSpacing(23);   // расстояние между столбцами
     gridLayout->setVerticalSpacing(23);   // расстояние между строками
     mainVLayout->addLayout(gridLayout);
-}
-
-void SelectWeekFragment::onBackPressed() {
-    emit back();
-}
+};
