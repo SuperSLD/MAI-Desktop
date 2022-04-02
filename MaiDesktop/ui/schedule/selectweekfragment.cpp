@@ -11,7 +11,6 @@
 
 #include <ui/widgets/toolbarwidget.h>
 #include <ui/schedule/items/numweekwidget.h>
-#include <data/models/schedule/schedulemodel.h>
 
 using namespace screens;
 using namespace styles;
@@ -23,8 +22,10 @@ void SelectWeekFragment::onBackPressed() {
 
 
 void SelectWeekFragment::onWeekPressed() {
+    qDebug() << this->mainModel;
+    //this->sch->getWeeks()[(((QPushButton*)sender())->objectName()).toInt()].getCurrent() = true;
     qDebug() << ((QPushButton*)sender())->objectName(); // отправляем номер недели
-    emit replaceWhithData(WEEK_SCHEDULE, this->mainModel);
+    //emit replaceWhithData(WEEK_SCHEDULE, this->mainModel);
 }
 
 
@@ -33,7 +34,7 @@ SelectWeekFragment::SelectWeekFragment() {
 
 void SelectWeekFragment::bindData(BaseModel* model) {
     this->mainModel = model;
-    ScheduleModel *sch = dynamic_cast<ScheduleModel*>(model);
+    this->sch = dynamic_cast<ScheduleModel*>(model);
 
     // Прокручивающийся контейнер
     QVBoxLayout *scrollContainerLayout = new QVBoxLayout;
@@ -78,7 +79,7 @@ void SelectWeekFragment::bindData(BaseModel* model) {
     QGridLayout *gridLayout = new QGridLayout;  // сетка
 
     // работаем с отдельными неделями
-    int countWeeks = sch->getWeeks().size();
+    int countWeeks = this->sch->getWeeks().size();
     for (int i=0; i<countWeeks; i++) {
         NumWeekWidget *blockWeek = new NumWeekWidget(QString::number(i+1));
         blockWeek->setObjectName(QString::number(i+1));

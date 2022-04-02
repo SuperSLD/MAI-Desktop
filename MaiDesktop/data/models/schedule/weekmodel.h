@@ -15,6 +15,7 @@ class WeekModel: public BaseModel {
 private:
     int number;
     QString date;
+    bool current = false;
     QList<DayModel> days;
 public:
     WeekModel() {}
@@ -22,6 +23,7 @@ public:
 
     int getNumber();
     QString getDate();
+    bool getCurrent();
     QList<DayModel> getDays();
 };
 

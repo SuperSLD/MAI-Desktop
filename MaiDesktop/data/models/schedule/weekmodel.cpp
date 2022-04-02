@@ -7,6 +7,7 @@ WeekModel::WeekModel(QJsonValue val) {
     QJsonObject obj = val.toObject();
     this->number = obj["number"].toInt();
     this->date = obj["date"].toString();
+    this->current = obj["current"].toBool();
 
     QJsonArray items = obj["days"].toArray();
     foreach(QJsonValue item, items) {
@@ -16,4 +17,5 @@ WeekModel::WeekModel(QJsonValue val) {
 
 int WeekModel::getNumber() {return number;}
 QString WeekModel::getDate() {return date;}
+bool WeekModel::getCurrent() {return current;}
 QList<DayModel> WeekModel::getDays() {return days;}

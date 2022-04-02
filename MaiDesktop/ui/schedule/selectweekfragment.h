@@ -3,6 +3,8 @@
 
 #include <common/base/basefragment.h>
 
+#include <data/models/schedule/schedulemodel.h>
+
 class SelectWeekFragment : public BaseFragment {
 
 public:
@@ -10,6 +12,7 @@ public:
     void bindData(BaseModel* model) override;
 private:
     BaseModel* mainModel;
+    ScheduleModel *sch;
 private slots:
     void onBackPressed();
     void onWeekPressed();
