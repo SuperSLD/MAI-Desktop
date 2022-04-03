@@ -10,7 +10,6 @@
 #include <stylecontainer.h>
 
 #include <ui/widgets/toolbarwidget.h>
-#include <ui/schedule/items/numweekwidget.h>
 
 using namespace screens;
 using namespace styles;
@@ -22,8 +21,8 @@ void SelectWeekFragment::onBackPressed() {
 
 
 void SelectWeekFragment::onWeekPressed() {
-    //this->sch->getWeeks()[(((QPushButton*)sender())->objectName()).toInt()].getCurrent() = true;
-    qDebug() << ((QPushButton*)sender())->objectName(); // отправляем номер недели
+    int currentNum = (((QPushButton*)sender())->objectName()).toInt();
+    this->sch->setCurrentWeekNumber(currentNum);   // назначаем выбранную неделю
     emit replaceWhithData(WEEK_SCHEDULE, this->sch);
 }
 
@@ -79,7 +78,11 @@ void SelectWeekFragment::bindData(BaseModel* model) {
     // работаем с отдельными неделями
     int countWeeks = this->sch->getWeeks().size();
     for (int i=0; i<countWeeks; i++) {
-        NumWeekWidget *blockWeek = new NumWeekWidget(QString::number(i+1));
+        if (i+1 == this->sch->getCurrentWeekNumber()) {
+            blockWeek = new NumWeekWidget(QString::number(i+1), true);
+        } else {
+            blockWeek = new NumWeekWidget(QString::number(i+1), false);
+        };
         blockWeek->setObjectName(QString::number(i+1));
         connect(blockWeek, &NumWeekWidget::clicked, this, &SelectWeekFragment::onWeekPressed);  // слот-сигнал
         gridLayout->addWidget(blockWeek,i/4,i%4,1,1);

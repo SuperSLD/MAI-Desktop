@@ -6,7 +6,7 @@
 class NumWeekWidget : public QPushButton {
     Q_OBJECT
 public:
-    NumWeekWidget(QString numWeek);
+    NumWeekWidget(QString numWeek, bool current);
 };
 
 #endif // NUMWEEKWIDGET_H
