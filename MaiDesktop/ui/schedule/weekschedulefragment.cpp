@@ -10,9 +10,8 @@
 #include <stylecontainer.h>
 
 #include <ui/widgets/swgbutton.h>
-#include <ui/widgets/toolbarwidget.h>
 #include <ui/schedule/items/dayschedulewidget.h>
-#include <data/models/schedule/schedulemodel.h>
+
 
 using namespace screens;
 using namespace styles;
@@ -22,16 +21,22 @@ WeekScheduleFragment::WeekScheduleFragment() {
 };
 
 void WeekScheduleFragment::onBackPressed() {
+    this->sch->setCurrentWeekNumber(-1);
     emit back();
 };
 
 void WeekScheduleFragment::onButtinPressed() {
-    emit replaceWhithData(SELECT_WEEK, this->mainModel);    // ??????
+    if (this->currentWeekNumber == 0) {
+        this->sch->setCurrentWeekNumber(this->nowWeekNumber);
+        emit replaceWhithData(SELECT_WEEK, this->sch);
+    } else {
+        this->sch->setCurrentWeekNumber(this->currentWeekNumber);
+        emit replaceWhithData(SELECT_WEEK, this->sch);
+    };
 };
 
 void WeekScheduleFragment::bindData(BaseModel* model) {
-    this->mainModel = model;    // ???????
-    ScheduleModel *sch = dynamic_cast<ScheduleModel*>(model);
+    this->sch = dynamic_cast<ScheduleModel*>(model);
 
     // Прокручивающийся контейнер
     QVBoxLayout *scrollContainerLayout = new QVBoxLayout;
@@ -39,16 +44,22 @@ void WeekScheduleFragment::bindData(BaseModel* model) {
 
     QHBoxLayout *ContainerHLayout = new QHBoxLayout; // выравнивание по горизонтали
 
-    // Находим и сохраняем в переменную currentWeekNumber номер текущей недели
-    for (int i=0; i<sch->getWeeks().size(); i++) {
-        if (QDate::currentDate() >= QDate::fromString(sch->getWeeks()[i].getDate().mid(0, 10), Qt::LocaleDate) && QDate::currentDate() <= QDate::fromString(sch->getWeeks()[i].getDate().mid(13, 10), Qt::LocaleDate)) {
-            this->currentWeekNumber = sch->getWeeks()[i].getNumber();
-            break;
+    // Находим и сохраняем в переменную nowWeekNumber номер текущей недели и в переменную currentWeekNumber номер выбранной недели
+    for (int i=0; i<this->sch->getWeeks().size(); i++) {
+        if (QDate::currentDate() >= QDate::fromString(this->sch->getWeeks()[i].getDate().mid(0, 10), Qt::LocaleDate) && QDate::currentDate() <= QDate::fromString(this->sch->getWeeks()[i].getDate().mid(13, 10), Qt::LocaleDate)) {
+            this->nowWeekNumber = this->sch->getWeeks()[i].getNumber();
+        };
+        if (this->sch->getCurrentWeekNumber() != -1) {
+            this->currentWeekNumber = this->sch->getCurrentWeekNumber();
         };
     };
 
     // Работаем с тулбаром
-    ToolbarWidget *toolbar = new ToolbarWidget("Неделя "+QString::number(this->currentWeekNumber) + " (Текущая)", true, "selectweek");
+    if (this->currentWeekNumber == 0) {
+        toolbar = new ToolbarWidget("Неделя "+QString::number(this->nowWeekNumber) + " (Текущая)", true, "selectweek");
+    } else {
+        toolbar = new ToolbarWidget("Неделя "+QString::number(this->currentWeekNumber), true, "selectweek");
+    };
     toolbar->setFixedHeight(71);
     toolbar->setFixedWidth(952);
     // При нажатии на кнопку "Выбор недели" переходим к одноимённому экрану
@@ -85,12 +96,22 @@ void WeekScheduleFragment::bindData(BaseModel* model) {
 
     QGridLayout *gridLayout = new QGridLayout;
     // работаем с днями
-    for (int i=0; i<sch->getWeeks()[this->currentWeekNumber-1].getDays().size(); i++) {
-        DayScheduleWidget *day = new DayScheduleWidget(sch->getWeeks()[this->currentWeekNumber-1].getDays()[i]);
-        day->setFixedWidth(296);
-        day->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
-        gridLayout->addWidget(day, i/3, i%3, 1, 1, Qt::AlignTop);
+    if (this->currentWeekNumber == 0) {
+        for (int i=0; i<this->sch->getWeeks()[this->nowWeekNumber-1].getDays().size(); i++) {
+            DayScheduleWidget *day = new DayScheduleWidget(this->sch->getWeeks()[this->nowWeekNumber-1].getDays()[i]);
+            day->setFixedWidth(296);
+            day->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+            gridLayout->addWidget(day, i/3, i%3, 1, 1, Qt::AlignTop);
+        };
+    } else {
+        for (int i=0; i<this->sch->getWeeks()[this->currentWeekNumber-1].getDays().size(); i++) {
+            DayScheduleWidget *day = new DayScheduleWidget(this->sch->getWeeks()[this->currentWeekNumber-1].getDays()[i]);
+            day->setFixedWidth(296);
+            day->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+            gridLayout->addWidget(day, i/3, i%3, 1, 1, Qt::AlignTop);
+        };
     };
+
     gridLayout->setHorizontalSpacing(32);   // расстояние между столбцами
     gridLayout->setVerticalSpacing(32);   // расстояние между строками
     mainVLayout->addLayout(gridLayout);

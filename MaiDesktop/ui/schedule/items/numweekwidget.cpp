@@ -6,7 +6,7 @@
 #include <stylecontainer.h>
 using namespace styles;
 
-NumWeekWidget::NumWeekWidget (QString numWeek) {
+NumWeekWidget::NumWeekWidget (QString numWeek, bool current) {
     // Основное расположение элементов в окне
     QVBoxLayout *mainVLayout = new QVBoxLayout;
     QHBoxLayout *mainHLayout = new QHBoxLayout;
@@ -25,13 +25,31 @@ NumWeekWidget::NumWeekWidget (QString numWeek) {
     mainVLayout->addWidget(mainLabel);
 
     QLabel *weekLabel = new QLabel("Неделя №"+ numWeek);
-    weekLabel->setStyleSheet(
-        "color:" + COLOR_TEXT_SECONDARY + ";"
-        "font-size:18px;"
-    );
     weekLabel->setAlignment(Qt::AlignHCenter);
     mainVLayout->addWidget(weekLabel);
 
     this->setFixedHeight(164);
     this->setFixedWidth(221);
+
+    if (current) {
+        this->setStyleSheet(
+            "background-color:" + COLOR_PRIMARY + ";"
+            "border:none;"
+            "padding:0px;"
+        );
+        weekLabel->setStyleSheet(
+            "color:white;"
+            "font-size:18px;"
+        );
+    } else {
+        this->setStyleSheet(
+            "background-color:#343434;"
+            "border:none;"
+            "padding:0px;"
+        );
+        weekLabel->setStyleSheet(
+            "color:" + COLOR_TEXT_SECONDARY + ";"
+            "font-size:18px;"
+        );
+    };
 }
