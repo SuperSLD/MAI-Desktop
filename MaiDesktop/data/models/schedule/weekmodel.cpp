@@ -8,7 +8,7 @@ WeekModel::WeekModel(QJsonValue val) {
     this->number = obj["number"].toInt();
     this->date = obj["date"].toString();
 
-    QJsonArray items = obj["subjects"].toArray();
+    QJsonArray items = obj["days"].toArray();
     foreach(QJsonValue item, items) {
         days.append(DayModel(item));
     }

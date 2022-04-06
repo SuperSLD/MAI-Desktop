@@ -27,12 +27,12 @@ void AppNetRepository::getSchedule(QString groupId) {
     );
 }
 
-void AppNetRepository::getOptimalTime(GroupList list, int percernt) {
+void AppNetRepository::getOptimalTime(GroupList list) {
     service->post("api/schedule/lastpairtime",
           [](QJsonObject o, AppNetRepository *r) {
              r->listenOptimalTime(DataWrapper<OptimalModel>(o));
           },
-          list.toParams(percernt)
+          list.toParams()
     );
 }
 

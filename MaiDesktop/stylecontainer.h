@@ -43,8 +43,7 @@ namespace styles{
             "   width:210px;";
 
     static const QString TITLE_LABLE =
-            "color:" + COLOR_TEXT_PRIMARY + ";"
-            "font-size:24px;";
+            "color:" + COLOR_TEXT_PRIMARY + ";";
     static const QString BIG_TITLE_LABLE =
             "color:" + COLOR_TEXT_PRIMARY + ";"
             "font-size:36px;";
@@ -160,6 +159,14 @@ namespace styles{
             "   padding: 8px;"
             "   border-radius:8px;"
             "}";
+
+    static const QString EDIT_TEXT =
+            "border: 1px solid "+COLOR_BORDER+";"
+            "color: "+COLOR_TEXT_PRIMARY+";"
+            "background-color:"+COLOR_BACKGROUND+";"
+            "font-size:16px;"
+            "border-radius: 0px;"
+            "padding:8px;";
 };
 
 class StyleContainer

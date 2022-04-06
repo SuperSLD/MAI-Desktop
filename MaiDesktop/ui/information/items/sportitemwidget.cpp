@@ -16,11 +16,14 @@ SportItemWidget::SportItemWidget(SportModel model) {
         "color:" + COLOR_PRIMARY + ";"
         "font-size:18px;"
     );
+    titleLabel->setFont(QFont("Roboto", 18, QFont::Normal));
+
     QLabel *addressLabel = new QLabel(model.getAddress());
     addressLabel->setStyleSheet(
         "color:" + COLOR_TEXT_SECONDARY + ";"
         "font-size:14px;"
     );
+    addressLabel->setFont(QFont("Roboto", 14, QFont::Normal));
 
     mainLayout->addWidget(titleLabel);
     mainLayout->addWidget(addressLabel);
@@ -45,11 +48,14 @@ SportItemWidget::SportItemWidget(SportModel model) {
                     "color:" + COLOR_TEXT_PRIMARY + ";"
                     "font-size:14px;"
                 );
+                nameLabel->setFont(QFont("Roboto", 14, QFont::Normal));
                 QLabel *contactNameLabel = new QLabel(section.getContactName());
                 contactNameLabel->setStyleSheet(
                     "color:" + COLOR_PRIMARY + ";"
                     "font-size:14px;"
                 );
+                contactNameLabel->setFont(QFont("Roboto", 14, QFont::Normal));
+
                 QLabel *phoneLabel = new QLabel(section.getContact());
                 phoneLabel->setStyleSheet(
                             "QLabel {"
@@ -60,6 +66,7 @@ SportItemWidget::SportItemWidget(SportModel model) {
                             "   color:"+COLOR_TEXT_PRIMARY+";"
                             "}"
                 );
+                phoneLabel->setFont(QFont("Roboto", 14, QFont::Normal));
                 phoneLabel->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
                 sectionLayout->addWidget(nameLabel);
                 sectionLayout->addWidget(contactNameLabel);

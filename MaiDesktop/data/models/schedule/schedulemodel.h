@@ -13,12 +13,17 @@ class ScheduleModel: public BaseModel {
 
 private:
     QList<WeekModel> weeks;
+    int currentWeekNumber = -1;
 
 public:
     ScheduleModel() {}
     ScheduleModel(QJsonValue val);
 
     QList<WeekModel> getWeeks();
+    int getCurrentWeekNumber();
+    void setCurrentWeekNumber(int isCurrentWeekNumber);
+
+    int examsCount();
 };
 
 #endif // SCHEDULEMODEL_H

@@ -1,8 +1,8 @@
-#include "selectweekfragment.h"
+#include "examschedulefragment.h"
 
 #include <QDebug>
-#include <QFrame>
 #include <QGridLayout>
+#include <QList>
 #include <QScrollArea>
 #include <QScrollBar>
 
@@ -10,41 +10,33 @@
 #include <stylecontainer.h>
 
 #include <ui/widgets/toolbarwidget.h>
+#include <ui/schedule/items/dayschedulewidget.h>
+#include <data/models/schedule/schedulemodel.h>
 
 using namespace screens;
 using namespace styles;
 
+ExamScheduleFragment::ExamScheduleFragment() {
 
-void SelectWeekFragment::onBackPressed() {
+}
+
+void ExamScheduleFragment::onBackPressed() {
     emit back();
 }
 
-
-void SelectWeekFragment::onWeekPressed() {
-    int currentNum = (((QPushButton*)sender())->objectName()).toInt();
-    this->sch->setCurrentWeekNumber(currentNum);   // назначаем выбранную неделю
-    emit replaceWhithData(WEEK_SCHEDULE, this->sch);
-}
-
-
-SelectWeekFragment::SelectWeekFragment() {
-}
-
-void SelectWeekFragment::bindData(BaseModel* model) {
-    this->sch = dynamic_cast<ScheduleModel*>(model);
-
+void ExamScheduleFragment::bindData(BaseModel* model) {
     // Прокручивающийся контейнер
     QVBoxLayout *scrollContainerLayout = new QVBoxLayout;
-    scrollContainerLayout->setContentsMargins(25, 25, 25, 35);
+    scrollContainerLayout->setContentsMargins(25, 25, 25, 25);
 
     QHBoxLayout *ContainerHLayout = new QHBoxLayout; // выравнивание по горизонтали
 
     // Работаем с тулбаром
-    ToolbarWidget *toolbar = new ToolbarWidget("Выбор недели", true);
+    ToolbarWidget *toolbar = new ToolbarWidget("Расписание экзаменов", true);
     toolbar->setFixedHeight(71);
     toolbar->setFixedWidth(952);
     // При нажатии на стрелочку переходим к предыдущему экрану
-    connect(toolbar, &ToolbarWidget::onBackPressed, this, &SelectWeekFragment::onBackPressed);  // слот-сигнал
+    connect(toolbar, &ToolbarWidget::onBackPressed, this, &ExamScheduleFragment::onBackPressed);  // слот-сигнал
     ContainerHLayout->addWidget(toolbar);
 
     scrollContainerLayout->addLayout(ContainerHLayout);
@@ -73,21 +65,24 @@ void SelectWeekFragment::bindData(BaseModel* model) {
 
     this->setLayout(scrollContainerLayout);  // назначение главного лейута
 
-    QGridLayout *gridLayout = new QGridLayout;  // сетка
-
-    // работаем с отдельными неделями
-    int countWeeks = this->sch->getWeeks().size();
-    for (int i=0; i<countWeeks; i++) {
-        if (i+1 == this->sch->getCurrentWeekNumber()) {
-            blockWeek = new NumWeekWidget(QString::number(i+1), true);
-        } else {
-            blockWeek = new NumWeekWidget(QString::number(i+1), false);
+    ScheduleModel *sch = dynamic_cast<ScheduleModel*>(model);
+    QGridLayout *gridLayout = new QGridLayout;
+    // работаем с днями
+    QList <QString> dates;
+    for (int i=0; i<sch->getWeeks().size(); i++) {
+        for (int j=0; j<(sch->getWeeks()[i]).getDays().size(); j++) {
+            for (int k=0; k<sch->getWeeks()[i].getDays()[j].getSubjects().size(); k++) {
+                if (dates.indexOf(sch->getWeeks()[i].getDays()[j].getDate()) == -1 && sch->getWeeks()[i].getDays()[j].getSubjects()[k].getType() == "Экзамен") {
+                    DayScheduleWidget *day = new DayScheduleWidget(sch->getWeeks()[i].getDays()[j]);
+                    day->setFixedWidth(296);
+                    day->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+                    gridLayout->addWidget(day, dates.size()/3, dates.size()%3, 1, 1, Qt::AlignTop);
+                    dates.append(sch->getWeeks()[i].getDays()[j].getDate());
+                };
+            };
         };
-        blockWeek->setObjectName(QString::number(i+1));
-        connect(blockWeek, &NumWeekWidget::clicked, this, &SelectWeekFragment::onWeekPressed);  // слот-сигнал
-        gridLayout->addWidget(blockWeek,i/4,i%4,1,1);
     };
-    gridLayout->setHorizontalSpacing(23);   // расстояние между столбцами
-    gridLayout->setVerticalSpacing(23);   // расстояние между строками
+    gridLayout->setHorizontalSpacing(32);   // расстояние между столбцами
+    gridLayout->setVerticalSpacing(32);   // расстояние между строками
     mainVLayout->addLayout(gridLayout);
-};
+}

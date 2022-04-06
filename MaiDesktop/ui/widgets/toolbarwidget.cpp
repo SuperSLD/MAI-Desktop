@@ -14,6 +14,7 @@ ToolbarWidget::ToolbarWidget(QString title, bool showBack, QString icon) {
     QHBoxLayout *titleContainer = new QHBoxLayout;
     SwgButton *backButton = new SwgButton(":/resc/resc/arrow_back.svg", QSize(24,24));
     QLabel *titleLabel = new QLabel(title);
+    titleLabel->setFont(QFont("Roboto", 24, QFont::Bold));
     titleLabel->setStyleSheet(TITLE_LABLE);
     connect(backButton, &SwgButton::clicked, this, &ToolbarWidget::onBackPressed);
     if (showBack) {
@@ -27,7 +28,7 @@ ToolbarWidget::ToolbarWidget(QString title, bool showBack, QString icon) {
         // кнопка справа тулбара
         QFrame *buttonContainer = new QFrame;
         QVBoxLayout *buttonLayout = new QVBoxLayout;
-        SwgButton *buttonIcon = new SwgButton(":/resc/resc/"+icon+".svg", QSize(32,32));
+        SwgButton *buttonIcon = new SwgButton(":/resc/resc/"+icon+".svg", QSize(38,38));
 
         buttonContainer->setLayout(buttonLayout);
         buttonContainer->setObjectName("sort_item");

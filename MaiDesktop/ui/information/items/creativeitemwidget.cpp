@@ -14,14 +14,15 @@ CreativeItemWidget::CreativeItemWidget(CreativeModel model) {
     QLabel *titleLabel = new QLabel(model.getName());
     titleLabel->setStyleSheet(
         "color:" + COLOR_PRIMARY + ";"
-        "font-size:18px;"
     );
+    titleLabel->setFont(QFont("Roboto", 18, QFont::Normal));
     QHBoxLayout *contactContainer = new QHBoxLayout;
     QLabel *nameLabel = new QLabel(model.getContactName());
     nameLabel->setStyleSheet(
         "color:" + COLOR_TEXT_PRIMARY + ";"
         "font-size:14px;"
     );
+    nameLabel->setFont(QFont("Roboto", 14, QFont::Normal));
     QLabel *phoneLable = new QLabel(model.getContact());
     phoneLable->setStyleSheet(
         "color:" + COLOR_TEXT_SECONDARY + ";"
@@ -35,11 +36,13 @@ CreativeItemWidget::CreativeItemWidget(CreativeModel model) {
         "color:" + COLOR_TEXT_SECONDARY+ ";"
         "font-size:14px;"
     );
+    descriptionTitleLabel->setFont(QFont("Roboto", 14, QFont::Normal));
     QLabel *descriptionLable = new QLabel("\n" + model.getDescription() + "\n");
     descriptionLable->setStyleSheet(
         "color:" + COLOR_TEXT_PRIMARY + ";"
         "font-size:14px;"
     );
+    descriptionLable->setFont(QFont("Roboto", 14, QFont::Normal));
     descriptionLable->setWordWrap(true);
     descriptionLable->setMaximumWidth(900);
     mainLayout->addWidget(titleLabel);

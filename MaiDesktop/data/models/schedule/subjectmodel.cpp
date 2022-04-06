@@ -6,10 +6,9 @@ SubjectModel::SubjectModel(QJsonValue val) {
     QJsonObject obj = val.toObject();
     this->id = obj["id"].toString();
     this->number = obj["number"].toString();
-    this->name = obj["number"].toString();
+    this->name = obj["name"].toString();
     this->room = RoomModel(obj["room"]);
     this->lector = LectorModel(obj["lector"]);
-    this->name = obj["number"].toString();
     this->timeStart = obj["timeStart"].toString();
     this->timeEnd = obj["timeEnd"].toString();
     this->type = obj["type"].toString();

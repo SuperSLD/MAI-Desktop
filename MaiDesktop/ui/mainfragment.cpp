@@ -9,15 +9,26 @@
 #include <stylecontainer.h>
 
 using namespace styles;
-
+#include <implfragmentfactory.h>
+using namespace screens;
 
 MainFragment::MainFragment() {
+
+    // подключение репозитория
+    netRep = new AppNetRepository();
+    connect(netRep, &AppNetRepository::listenSchedule, this, &MainFragment::listenSchedule);
+
     // главный контейнер
+    QHBoxLayout *mainLayout = new QHBoxLayout;
+    this->setLayout(mainLayout);
+
+    QFrame *mainMenuFarame = new QFrame;
     QHBoxLayout *mainHLayout = new QHBoxLayout;
     QVBoxLayout *mainVLayout = new QVBoxLayout;
     mainVLayout->setAlignment(Qt::AlignCenter);
     mainHLayout->addLayout(mainVLayout);
     mainHLayout->setAlignment(Qt::AlignHCenter);
+    mainMenuFarame->setLayout(mainHLayout);
 
     QGridLayout *gridLayout = new QGridLayout;
     QFrame *informationCardFrame = new QFrame;
@@ -36,8 +47,8 @@ MainFragment::MainFragment() {
     QLabel *titleLabel = new QLabel("М1О-309С-19");
     titleLabel->setStyleSheet(
         "color:" + COLOR_TEXT_PRIMARY + ";"
-        "font-size:36px;"
     );
+    titleLabel->setFont(QFont("Roboto", 36, QFont::Normal));
     secondaryLayout->addWidget(titleLabel);
     SwgButton *backButton = new SwgButton(":/resc/resc/Vector.svg", QSize(20,18));
     secondaryLayout->addWidget(backButton);
@@ -47,20 +58,21 @@ MainFragment::MainFragment() {
         "color:" + COLOR_TEXT_PRIMARY + ";"
         "font-size:14px;"
     );
+    titleInstituteLabel->setFont(QFont("Roboto", 14, QFont::Normal));
     headerLayout->addWidget(titleInstituteLabel);
-
     QLabel *titleTypeLabel = new QLabel("Бакалавриат или специалитет");
     titleTypeLabel->setStyleSheet(
         "color:" + COLOR_TEXT_PRIMARY + ";"
         "font-size:14px;"
     );
+    titleTypeLabel->setFont(QFont("Roboto", 14, QFont::Normal));
     headerLayout->addWidget(titleTypeLabel);
-
     QLabel *titleCourseLabel = new QLabel("Курс");
     titleCourseLabel->setStyleSheet(
         "color:" + COLOR_TEXT_PRIMARY + ";"
         "font-size:14px;"
     );
+    titleCourseLabel->setFont(QFont("Roboto", 14, QFont::Normal));
     headerLayout->addWidget(titleCourseLabel);
     headerLayout->setContentsMargins(24,24,24,24);
 
@@ -69,16 +81,21 @@ MainFragment::MainFragment() {
         "color:" + COLOR_TEXT_PRIMARY + ";"
         "font-size:14px;"
     );
+    titleChosenGroup->setFont(QFont("Roboto", 14, QFont::Normal));
     headerLayout->addWidget(titleChosenGroup);
     titleChosenGroup->setAlignment(Qt::AlignRight);
     headerLayout->setContentsMargins(24,24,24,24);
 
 
 
-    MainMenuButtonWidget *b1 = new MainMenuButtonWidget("today_calendar", "Расписание занятий", "Найдено 35 учебных недель");
-    MainMenuButtonWidget *b2 = new MainMenuButtonWidget("whatshot", "Расписание экзаменов", "Найдено 3 экзамена");
-    MainMenuButtonWidget *b3 = new MainMenuButtonWidget("watch_later", "Помощь с планированием", "Поиск удобного времени");
-    MainMenuButtonWidget *b4 = new MainMenuButtonWidget("info", "Информация", "Информация о кампусе");
+    b1 = new MainMenuButtonWidget("today_calendar", "Расписание занятий", "x", SCHEDULE);
+    connect(b1, &MainMenuButtonWidget::codeClicked, this, &MainFragment::onMenuButtonClick);
+    b2 = new MainMenuButtonWidget("whatshot", "Расписание экзаменов", "x", EXAMS);
+    connect(b2, &MainMenuButtonWidget::codeClicked, this, &MainFragment::onMenuButtonClick);
+    MainMenuButtonWidget *b3 = new MainMenuButtonWidget("watch_later", "Помощь с планированием", "Поиск удобного времени", PLANING);
+    connect(b3, &MainMenuButtonWidget::codeClicked, this, &MainFragment::onMenuButtonClick);
+    MainMenuButtonWidget *b4 = new MainMenuButtonWidget("info", "Информация", "Информация о кампусе", INFORmAtION);
+    connect(b4, &MainMenuButtonWidget::codeClicked, this, &MainFragment::onMenuButtonClick);
 
     gridLayout->addWidget(informationCardFrame, 0, 0, 1, 2);
     gridLayout->addWidget(b1, 1, 0, 1, 1);
@@ -88,10 +105,42 @@ MainFragment::MainFragment() {
 
     gridLayout->setHorizontalSpacing(23); // расстояние между столбцами
     gridLayout->setVerticalSpacing(23); // расстояние между строками
-
     mainVLayout->addLayout(gridLayout);
-    this->setLayout(mainHLayout);
+
+    // контейнер загрузки
+    loadingContainer = new LoadingContainerWidget(mainMenuFarame);
+    loadingContainer->setMaximumWidth(952);
+    loadingContainer->startLoading("Загружаем расписание...");
+    mainLayout->addWidget(loadingContainer);
+    netRep->getSchedule("d1497292f31d8755ce4530f7022b519c");
 }
 MainFragment::~MainFragment() {
+    delete netRep;
+    delete loadingContainer;
+}
 
+void MainFragment::listenSchedule(DataWrapper<ScheduleModel> wrapper) {
+    if (wrapper.isSuccess()) {
+        loadingContainer->stopLoading();
+        this->schedule = wrapper.getData();
+        b1->setSubtitle("Найдено " + QString::number(schedule.getWeeks().size()) + " учебных недель");
+        b2->setSubtitle("Найдено " + QString::number(schedule.examsCount()) + " экзаменов");
+    } else {
+        loadingContainer->error(wrapper.getMessage());
+    }
+}
+
+void MainFragment::onMenuButtonClick(int code) {
+    qDebug() << "InformationFragment: click button-" << code << Qt::endl;
+    if (code == SCHEDULE) {
+        ScheduleModel *sch = &schedule;
+        emit navigateWhithData(WEEK_SCHEDULE, sch);
+    } else if (code == EXAMS) {
+        ScheduleModel *sch = &schedule;
+        emit navigateWhithData(EXAM_SCHEDULE, sch);
+    } else if (code == PLANING) {
+        emit navigateTo(OPTIMAL_GROUPS_TAG);
+    } else if (code == INFORmAtION) {
+        emit navigateTo(INFORMATION_TAG);
+    }
 }

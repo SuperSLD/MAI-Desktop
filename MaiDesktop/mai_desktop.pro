@@ -19,6 +19,7 @@ SOURCES += \
     common/router.cpp \
     data/apiservice.cpp \
     data/appnetrepository.cpp \
+    data/appsettingsrepository.cpp \
     data/models/canteens/canteenmodel.cpp \
     data/models/canteens/canteenslist.cpp \
     data/models/creative/creativelist.cpp \
@@ -55,6 +56,11 @@ SOURCES += \
     ui/information/items/libraryitemwidget.cpp \
     ui/information/items/menubuttonwidget.cpp \
     ui/information/items/menuheaderwidget.cpp \
+    ui/items/groupcounteritemwidget.cpp \
+    ui/items/groupitemwidget.cpp \
+    ui/optimal/optimalgroupsfragment.cpp \
+    ui/schedule/examschedulefragment.cpp \
+    ui/schedule/items/dayschedulewidget.cpp \
     ui/information/items/sportitemwidget.cpp \
     ui/information/items/studorgitemwidget.cpp \
     ui/information/libraryfragment.cpp \
@@ -64,6 +70,7 @@ SOURCES += \
     ui/information/studorgfragment.cpp \
     ui/schedule/items/numweekwidget.cpp \
     ui/schedule/selectweekfragment.cpp \
+    ui/schedule/weekschedulefragment.cpp \
     ui/searchgroupfragment.cpp \
     ui/splashfragment.cpp \
     ui/widgets/cardwidget.cpp \
@@ -84,6 +91,7 @@ HEADERS += \
     common/router.h \
     data/apiservice.h \
     data/appnetrepository.h \
+    data/appsettingsrepository.h \
     data/models/canteens/canteenmodel.h \
     data/models/canteens/canteenslist.h \
     data/models/creative/creativelist.h \
@@ -119,6 +127,11 @@ HEADERS += \
     ui/information/items/libraryitemwidget.h \
     ui/information/items/menubuttonwidget.h \
     ui/information/items/menuheaderwidget.h \
+    ui/items/groupcounteritemwidget.h \
+    ui/items/groupitemwidget.h \
+    ui/optimal/optimalgroupsfragment.h \
+    ui/schedule/examschedulefragment.h \
+    ui/schedule/items/dayschedulewidget.h \
     ui/information/items/sportitemwidget.h \
     ui/information/items/studorgitemwidget.h \
     ui/information/libraryfragment.h \
@@ -128,6 +141,7 @@ HEADERS += \
     ui/information/studorgfragment.h \
     ui/schedule/items/numweekwidget.h \
     ui/schedule/selectweekfragment.h \
+    ui/schedule/weekschedulefragment.h \
     ui/searchgroupfragment.h \
     ui/splashfragment.h \
     ui/widgets/cardwidget.h \

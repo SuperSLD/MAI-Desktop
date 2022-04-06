@@ -13,11 +13,38 @@ GroupModel::GroupModel(QJsonValue val) {
     this->level = obj["level"].toString();
 }
 
+GroupModel::GroupModel(
+        QString id,
+        QString name,
+        QString fac,
+        QString level,
+        int course,
+        int count
+) {
+    this->id = id;
+    this->course = course;
+    this->fac = fac;
+    this->name = name;
+    this->level = level;
+    this->count = count;
+}
+
 QString GroupModel::getId() { return id; }
 QString GroupModel::getName() { return name; }
 QString GroupModel::getFaculty() { return fac; }
 QString GroupModel::getLevel() { return level; }
 int GroupModel::getCourse() { return course; }
+
+GroupModel GroupModel::clone() {
+    return GroupModel(
+                this->id,
+                this->name,
+                this->fac,
+                this->level,
+                this->course,
+                this->count
+    );
+}
 
 QJsonObject GroupModel::toParams() {
     QJsonObject param;

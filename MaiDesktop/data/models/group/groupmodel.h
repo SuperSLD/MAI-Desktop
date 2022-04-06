@@ -19,6 +19,14 @@ public:
     int count = 0;
 
     GroupModel(QJsonValue obj);
+    GroupModel(
+            QString id,
+            QString name,
+            QString fac,
+            QString level,
+            int course,
+            int count = 0
+    );
 
     QString getId();
     QString getName();
@@ -26,6 +34,7 @@ public:
     QString getLevel();
     int getCourse();
 
+    GroupModel clone();
     QJsonObject toParams();
 };
 
