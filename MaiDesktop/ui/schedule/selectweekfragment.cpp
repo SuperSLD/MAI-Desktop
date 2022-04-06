@@ -1,6 +1,7 @@
 #include "selectweekfragment.h"
 
 #include <QDebug>
+#include <QFrame>
 #include <QGridLayout>
 #include <QScrollArea>
 #include <QScrollBar>
@@ -9,12 +10,29 @@
 #include <stylecontainer.h>
 
 #include <ui/widgets/toolbarwidget.h>
-#include <ui/schedule/items/numweekwidget.h>
 
 using namespace screens;
 using namespace styles;
 
+
+void SelectWeekFragment::onBackPressed() {
+    emit back();
+}
+
+
+void SelectWeekFragment::onWeekPressed() {
+    int currentNum = (((QPushButton*)sender())->objectName()).toInt();
+    this->sch->setCurrentWeekNumber(currentNum);   // назначаем выбранную неделю
+    emit replaceWhithData(WEEK_SCHEDULE, this->sch);
+}
+
+
 SelectWeekFragment::SelectWeekFragment() {
+}
+
+void SelectWeekFragment::bindData(BaseModel* model) {
+    this->sch = dynamic_cast<ScheduleModel*>(model);
+
     // Прокручивающийся контейнер
     QVBoxLayout *scrollContainerLayout = new QVBoxLayout;
     scrollContainerLayout->setContentsMargins(25, 25, 25, 35);
@@ -58,16 +76,18 @@ SelectWeekFragment::SelectWeekFragment() {
     QGridLayout *gridLayout = new QGridLayout;  // сетка
 
     // работаем с отдельными неделями
-    int countWeeks = 20;   // предполагаемое кол-во недель
+    int countWeeks = this->sch->getWeeks().size();
     for (int i=0; i<countWeeks; i++) {
-        NumWeekWidget *blockWeek = new NumWeekWidget(QString::number(i+1));
+        if (i+1 == this->sch->getCurrentWeekNumber()) {
+            blockWeek = new NumWeekWidget(QString::number(i+1), true);
+        } else {
+            blockWeek = new NumWeekWidget(QString::number(i+1), false);
+        };
+        blockWeek->setObjectName(QString::number(i+1));
+        connect(blockWeek, &NumWeekWidget::clicked, this, &SelectWeekFragment::onWeekPressed);  // слот-сигнал
         gridLayout->addWidget(blockWeek,i/4,i%4,1,1);
     };
     gridLayout->setHorizontalSpacing(23);   // расстояние между столбцами
     gridLayout->setVerticalSpacing(23);   // расстояние между строками
     mainVLayout->addLayout(gridLayout);
-}
-
-void SelectWeekFragment::onBackPressed() {
-    emit back();
-}
+};
