@@ -30,7 +30,7 @@ namespace screens {
 
     // оптимальное время
     static const QString OPTIMAL_GROUPS_TAG = "optimal_groups";
-
+    static const QString OPTIMAL_INFO_TAG = "optimal_info";
 };
 
 class ImplFragmentFactory: public BaseFragmentFactory {

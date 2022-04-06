@@ -1,7 +1,7 @@
 #include "numweekwidget.h"
 
 #include <QHBoxLayout>
-#include <qlabel.h>
+#include <QLabel>
 
 #include <stylecontainer.h>
 using namespace styles;
@@ -19,13 +19,14 @@ NumWeekWidget::NumWeekWidget (QString numWeek, bool current) {
     QLabel *mainLabel = new QLabel(numWeek);
     mainLabel->setStyleSheet(
         "color:" + COLOR_TEXT_PRIMARY + ";"
-        "font-size: 48px;"
     );
     mainLabel->setAlignment(Qt::AlignHCenter);
+    mainLabel->setFont(QFont("Roboto", 48, QFont::Bold));
     mainVLayout->addWidget(mainLabel);
 
     QLabel *weekLabel = new QLabel("Неделя №"+ numWeek);
     weekLabel->setAlignment(Qt::AlignHCenter);
+    weekLabel->setFont(QFont("Roboto", 18));
     mainVLayout->addWidget(weekLabel);
 
     this->setFixedHeight(164);
@@ -39,7 +40,6 @@ NumWeekWidget::NumWeekWidget (QString numWeek, bool current) {
         );
         weekLabel->setStyleSheet(
             "color:white;"
-            "font-size:18px;"
         );
     } else {
         this->setStyleSheet(
@@ -49,7 +49,6 @@ NumWeekWidget::NumWeekWidget (QString numWeek, bool current) {
         );
         weekLabel->setStyleSheet(
             "color:" + COLOR_TEXT_SECONDARY + ";"
-            "font-size:18px;"
         );
     };
 }
