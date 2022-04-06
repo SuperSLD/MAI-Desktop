@@ -43,6 +43,7 @@ MainFragment::MainFragment() {
     informationCardFrame->setLayout(headerLayout);
     QHBoxLayout *secondaryLayout = new QHBoxLayout;
     headerLayout->addLayout(secondaryLayout);
+
     QLabel *titleLabel = new QLabel("М1О-309С-19");
     titleLabel->setStyleSheet(
         "color:" + COLOR_TEXT_PRIMARY + ";"
