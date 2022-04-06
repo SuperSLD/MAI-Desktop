@@ -56,6 +56,8 @@ SOURCES += \
     ui/information/items/libraryitemwidget.cpp \
     ui/information/items/menubuttonwidget.cpp \
     ui/information/items/menuheaderwidget.cpp \
+    ui/items/groupcounteritemwidget.cpp \
+    ui/items/groupitemwidget.cpp \
     ui/optimal/optimalgroupsfragment.cpp \
     ui/schedule/examschedulefragment.cpp \
     ui/schedule/items/dayschedulewidget.cpp \
@@ -125,6 +127,8 @@ HEADERS += \
     ui/information/items/libraryitemwidget.h \
     ui/information/items/menubuttonwidget.h \
     ui/information/items/menuheaderwidget.h \
+    ui/items/groupcounteritemwidget.h \
+    ui/items/groupitemwidget.h \
     ui/optimal/optimalgroupsfragment.h \
     ui/schedule/examschedulefragment.h \
     ui/schedule/items/dayschedulewidget.h \

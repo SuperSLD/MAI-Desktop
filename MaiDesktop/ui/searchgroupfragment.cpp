@@ -65,5 +65,4 @@ void SearchGroupFragment::listenGroups(DataWrapper<GroupList> wrapper) {
         qDebug() << "SearchGroupFragment:" << group.getName() <<Qt::endl;
         group.count = 3;
     }
-    netRepository->getOptimalTime(wrapper.getData(), 80);
 }
