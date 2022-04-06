@@ -7,7 +7,7 @@
 
 
 namespace screens {
-    static const QString SERVER_URL = "https://jutter.online/mai_v2";
+    static const QString SERVER_URL = "http://jutter.online/mai_v2";
     //static const QString SERVER_URL = "http://localhost:8080";
 
     //старт и поиск группы
