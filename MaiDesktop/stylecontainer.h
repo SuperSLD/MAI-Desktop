@@ -159,6 +159,14 @@ namespace styles{
             "   padding: 8px;"
             "   border-radius:8px;"
             "}";
+
+    static const QString EDIT_TEXT =
+            "border: 1px solid "+COLOR_BORDER+";"
+            "color: "+COLOR_TEXT_PRIMARY+";"
+            "background-color:"+COLOR_BACKGROUND+";"
+            "font-size:16px;"
+            "border-radius: 0px;"
+            "padding:8px;";
 };
 
 class StyleContainer

@@ -75,7 +75,7 @@ public:
      *
      * @param list
      */
-    void getOptimalTime(GroupList list, int percernt);
+    void getOptimalTime(GroupList list);
 
     /**
      * @brief getCanteens

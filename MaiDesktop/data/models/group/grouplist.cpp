@@ -11,7 +11,7 @@ GroupList::GroupList(QJsonValue val) {
     }
 }
 
-QJsonObject GroupList::toParams(int percent) {
+QJsonObject GroupList::toParams() {
     QJsonObject param;
     param.insert("sem", 2);
     param.insert("minPercent", percent);
