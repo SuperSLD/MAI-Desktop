@@ -14,6 +14,7 @@
 #include <ui/information/libraryfragment.h>
 #include <ui/information/sportfragment.h>
 #include <ui/information/studorgfragment.h>
+#include <ui/optimal/optimalgroupsfragment.h>
 
 using namespace screens;
 
@@ -46,6 +47,8 @@ BaseFragment* ImplFragmentFactory::create(QString tag) {
         return new StudOrgFragment;
     } else if (tag == CREATIVE_TAG) {
         return new CreativeFragment;
+    } else if (tag == OPTIMAL_GROUPS_TAG) {
+        return new OptimalGroupsFragment;
     } else {
         return nullptr;
     }

@@ -13,6 +13,7 @@ namespace screens {
     //старт и поиск группы
     static const QString SPLASH_TAG = "splash";
     static const QString SEARCH_GROUP = "search_group";
+    static const QString MAIN_TAG = "main_tag";
 
     //информация
     static const QString INFORMATION_TAG = "information";
@@ -26,7 +27,10 @@ namespace screens {
     static const QString WEEK_SCHEDULE = "week_schedule";
     static const QString SELECT_WEEK = "select_week";
     static const QString EXAM_SCHEDULE = "exam_schedule";
-    static const QString MAIN_TAG = "main_tag";
+
+    // оптимальное время
+    static const QString OPTIMAL_GROUPS_TAG = "optimal_groups";
+
 };
 
 class ImplFragmentFactory: public BaseFragmentFactory {
