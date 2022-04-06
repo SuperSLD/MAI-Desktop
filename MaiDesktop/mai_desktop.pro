@@ -59,6 +59,8 @@ SOURCES += \
     ui/optimal/items/columnwidget.cpp \
     ui/optimal/items/dayinfowidget.cpp \
     ui/optimal/items/infoblockwidget.cpp \
+    ui/items/groupcounteritemwidget.cpp \
+    ui/items/groupitemwidget.cpp \
     ui/optimal/optimalgroupsfragment.cpp \
     ui/optimal/optimalinfofragment.cpp \
     ui/schedule/examschedulefragment.cpp \
@@ -132,6 +134,8 @@ HEADERS += \
     ui/optimal/items/columnwidget.h \
     ui/optimal/items/dayinfowidget.h \
     ui/optimal/items/infoblockwidget.h \
+    ui/items/groupcounteritemwidget.h \
+    ui/items/groupitemwidget.h \
     ui/optimal/optimalgroupsfragment.h \
     ui/optimal/optimalinfofragment.h \
     ui/schedule/examschedulefragment.h \

@@ -15,6 +15,7 @@ namespace screens {
     static const QString SEARCH_GROUP = "search_group";
     static const QString MAIN_TAG = "main_tag";
 
+
     //информация
     static const QString INFORMATION_TAG = "information";
     static const QString CANTEENS_TAG = "canteens";

@@ -24,7 +24,8 @@ public:
             QString name,
             QString fac,
             QString level,
-            int course
+            int course,
+            int count = 0
     );
 
     QString getId();
@@ -33,6 +34,7 @@ public:
     QString getLevel();
     int getCourse();
 
+    GroupModel clone();
     QJsonObject toParams();
 };
 

@@ -14,6 +14,8 @@
 #include <ui/widgets/codeview/codestyles/cppcodestyle.h>
 #include <ui/widgets/codeview/codestyles/jsoncodestyle.h>
 #include <data/models/group/groupmodel.h>
+#include <ui/widgets/cardwidget.h>
+#include <ui/widgets/swgbutton.h>
 
 
 using namespace screens;
@@ -31,23 +33,27 @@ SearchGroupFragment::SearchGroupFragment() {
     mainHLayout->addLayout(mainVLayout);
     mainHLayout->setAlignment(Qt::AlignHCenter);
 
-    // отображение исходного кода
-    mainVLayout->addWidget(new CodeViewWidget(
-        "/**\n"
-        "  * Метод поиска группы по части\n"
-        "  * ее названия.\n"
-        "  *\n"
-        "  * @param groupName часть названия\n"
-        "  */\n"
-        "void AppNetRepository::searchGroups(QString groupName) {\n"
-        "   service->get( \"api/groups/search/\" + groupName,\n"
-        "       [](QJsonObject o, AppNetRepository *r) {\n"
-        "           r->listenGroups(DataWrapper<GroupList>(o));\n"
-        "       }\n"
-        "   );\n"
-        "}",
-        new CppCodeStyle()
-    ));
+    QFrame *informationCardFrame = new CardWidget;
+    informationCardFrame->setMinimumHeight(20);
+    informationCardFrame->setMinimumWidth(640);
+
+    QFrame *groupCardFrame = new CardWidget;
+    informationCardFrame->setMinimumHeight(20);
+    informationCardFrame->setMinimumWidth(340);
+
+
+    informationCardFrame->setObjectName("section");
+    QVBoxLayout *headerLayout = new QVBoxLayout;
+    informationCardFrame->setLayout(headerLayout);
+    QHBoxLayout *secondaryLayout = new QHBoxLayout;
+    headerLayout->addLayout(secondaryLayout);
+
+
+
+
+    mainVLayout->addWidget(informationCardFrame);
+
+
 
     this->setLayout(mainHLayout);
     this->setObjectName("fragment");
@@ -65,5 +71,4 @@ void SearchGroupFragment::listenGroups(DataWrapper<GroupList> wrapper) {
         qDebug() << "SearchGroupFragment:" << group.getName() <<Qt::endl;
         group.count = 3;
     }
-    netRepository->getOptimalTime(wrapper.getData(), 80);
 }
