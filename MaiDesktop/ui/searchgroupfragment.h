@@ -3,22 +3,32 @@
 
 #include <common/base/basefragment.h>
 
+#include <ui/widgets/loadingcontainerwidget.h>
+
 #include <data/appnetrepository.h>
+
+#include <qlineedit.h>
 
 
 
 class SearchGroupFragment: public BaseFragment {
-    Q_OBJECT
 
 private:
-    AppNetRepository *netRepository;
-    QVBoxLayout *mainVLayout;
+    LoadingContainerWidget *loadingContainer;
+    QVBoxLayout* groupsFoundLayout;
+    QLineEdit *groupNameEdit;
+
+    AppNetRepository *netRep;
+
+    void updateLists();
 public:
     SearchGroupFragment();
     ~SearchGroupFragment();
-public slots:
-    void listenGroups(DataWrapper<GroupList> wrapper);
 
+private slots:
+    void onSearch();
+    void onSelectGroup(GroupModel group);
+    void listenGroups(DataWrapper<GroupList> wrapper);
 };
 
 #endif // SEARCHGROUPFRAGMENT_H
