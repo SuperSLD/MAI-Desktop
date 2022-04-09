@@ -30,6 +30,7 @@ public:
 
 private slots:
     void onMenuButtonClick(int code);
+    void onExit();
     void listenSchedule(DataWrapper<ScheduleModel> wrapper);
 };
 
