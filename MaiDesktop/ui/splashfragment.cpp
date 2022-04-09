@@ -34,5 +34,7 @@ SplashFragment::~SplashFragment() {
 
 void SplashFragment::openStartScreen() {
     qDebug() << "SplashFragment: open main menu";
-    emit navigateTo(SEARCH_GROUP);
+    //emit newRootScreen(SEARCH_GROUP);
+    emit navigateTo(MAIN_TAG);
+    //emit navigateTo(SEARCH_GROUP);
 }

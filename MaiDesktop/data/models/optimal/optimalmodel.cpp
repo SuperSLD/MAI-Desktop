@@ -6,7 +6,7 @@ OptimalModel::OptimalModel(QJsonValue val) {
     QJsonObject obj = val.toObject();
     QJsonArray items = obj["weekDataList"].toArray();
     foreach(QJsonValue item, items) {
-        weekDataList.append(OptimalDayModel(item));
+        this->weekDataList.append(OptimalDayModel(item));
     }
 
     this->minPercent = obj["minPercent"].toInt();

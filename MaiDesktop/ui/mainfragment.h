@@ -3,7 +3,6 @@
 
 #include <common/base/basefragment.h>
 
-#include <common/base/basefragment.h>
 #include <ui/widgets/loadingcontainerwidget.h>
 #include <data/appnetrepository.h>
 #include <ui/items/mainmenubuttonwidget.h>

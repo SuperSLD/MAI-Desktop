@@ -8,7 +8,7 @@ OptimalTimeModel::OptimalTimeModel(QJsonValue val) {
     this->time = obj["time"].toString();
     this->intTime = obj["intTime"].toInt();
     this->count = obj["count"].toInt();
-    this->percent = obj["per"].toDouble();
+    this->percent = obj["percent"].toDouble();
 }
 
 QString OptimalTimeModel::getTime() {return time;}
