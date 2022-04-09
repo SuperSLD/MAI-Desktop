@@ -12,7 +12,7 @@
 
 
 class SearchGroupFragment: public BaseFragment {
-
+    Q_OBJECT
 private:
     LoadingContainerWidget *loadingContainer;
     QVBoxLayout* groupsFoundLayout;

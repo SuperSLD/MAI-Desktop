@@ -34,6 +34,8 @@ using namespace styles;
 
 #include <ui/items/groupcounteritemwidget.h>
 #include <ui/items/groupitemwidget.h>
+
+#include <data/appsettingsrepository.h>
 using namespace screens;
 
 SearchGroupFragment::SearchGroupFragment() {
@@ -125,12 +127,10 @@ void SearchGroupFragment::listenGroups(DataWrapper<GroupList> wrapper) {
         loadingContainer->stopLoading();
         if (wrapper.getData().list.size() > 0) {
             foreach (GroupModel model , wrapper.getData().list) {
-
-                    GroupItemWidget *modelWidget = new GroupItemWidget(model);
-                    groupsFoundLayout->addWidget(modelWidget);
-                    groupsFoundLayout->setSpacing(12);
-                    connect(modelWidget, &GroupItemWidget::groupClicked, this, &SearchGroupFragment::onSelectGroup);
-
+                GroupItemWidget *modelWidget = new GroupItemWidget(model);
+                groupsFoundLayout->addWidget(modelWidget);
+                groupsFoundLayout->setSpacing(12);
+                connect(modelWidget, &GroupItemWidget::groupClicked, this, &SearchGroupFragment::onSelectGroup);
             }
         } else {
             loadingContainer->error("Ничего не найдено");
@@ -141,5 +141,7 @@ void SearchGroupFragment::listenGroups(DataWrapper<GroupList> wrapper) {
 }
 
 void SearchGroupFragment::onSelectGroup(GroupModel group) {
-
+    AppSettingsRepository settingsRep = AppSettingsRepository();
+    settingsRep.saveGroup(group);
+    emit replace(MAIN_TAG);
 }
