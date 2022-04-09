@@ -1,5 +1,6 @@
 #include "numweekwidget.h"
 
+#include <QGraphicsDropShadowEffect>
 #include <QHBoxLayout>
 #include <QLabel>
 
@@ -51,4 +52,12 @@ NumWeekWidget::NumWeekWidget (QString numWeek, bool current) {
             "color:" + COLOR_TEXT_SECONDARY + ";"
         );
     };
+
+    // Добавление тени
+    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
+    effect->setXOffset(4);
+    effect->setYOffset(4);
+    effect->setBlurRadius(20);
+    effect->setColor(QColor(0, 0, 0, 60));
+    this->setGraphicsEffect(effect);
 }

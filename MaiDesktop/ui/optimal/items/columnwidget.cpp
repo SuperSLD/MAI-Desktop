@@ -18,12 +18,12 @@ ColumnWidget::ColumnWidget(float percent) {
 
     // Основное расположение элементов в окне
     QVBoxLayout *mainVLayout = new QVBoxLayout;
-    mainVLayout->setMargin(7);
+    mainVLayout->setMargin(0);
     mainVLayout->setAlignment(Qt::AlignBottom);    // направление выравнивания (наверх)
     this->setLayout(mainVLayout);   // назначение главного лейута
 
     QFrame *percentFrame = new QFrame;
-    percentFrame->setFixedWidth(133);
+    percentFrame->setFixedWidth(147);
     percentFrame->setFixedHeight(static_cast<int>(202*(percent/100)));
     percentFrame->setStyleSheet(
         "background-color:" + COLOR_PRIMARY + ";"

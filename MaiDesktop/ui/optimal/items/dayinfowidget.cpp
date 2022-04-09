@@ -18,7 +18,7 @@ DayInfoWidget::DayInfoWidget(OptimalDayModel *dayInfo) {
     mainVLayout->setAlignment(Qt::AlignTop);    // направление выравнивания (наверх)
     mainHLayout->setAlignment(Qt::AlignLeft); // направление выравнивания (к центру)
     mainVLayout->setSpacing(0);
-    mainVLayout->setMargin(15);
+    mainVLayout->setMargin(10);
     mainHLayout->addLayout(mainVLayout);
 
     this->setLayout(mainHLayout);  // назначение главного лейута
@@ -28,13 +28,35 @@ DayInfoWidget::DayInfoWidget(OptimalDayModel *dayInfo) {
     QHBoxLayout *dayNameHLayout = new QHBoxLayout;
     dayNameHLayout->setAlignment(Qt::AlignLeft);
     dayNameHLayout->setContentsMargins(0, 0, 0, 0);
-    dayNameHLayout->setSpacing(10);
+    dayNameHLayout->setSpacing(5);
     dayNameLabel->setStyleSheet(
         "color: white;"
     );
     dayNameLabel->setAlignment(Qt::AlignBottom);
     dayNameHLayout->addWidget(dayNameLabel);
     mainVLayout->addLayout(dayNameHLayout);
+
+    if (dayInfo->getTimeData().size() == 0) {
+        QLabel *breakLine = new QLabel();
+        QHBoxLayout *breakLineHLayout = new QHBoxLayout;
+        breakLineHLayout->setContentsMargins(0, 12, 0, 12);
+        breakLine->setFixedHeight(1);
+        breakLine->setStyleSheet(
+            "background-color:" + COLOR_BORDER + ";"
+        );
+        breakLine->setAlignment(Qt::AlignHCenter);
+        breakLineHLayout->addWidget(breakLine);
+        mainVLayout->addLayout(breakLineHLayout);
+
+        QLabel *freeLabel = new QLabel("Тут пусто,  все могут приехать");
+        freeLabel->setFixedWidth(400);
+        freeLabel->setFont(QFont("Roboto", 18));
+        freeLabel->setStyleSheet(
+            "color:" + COLOR_TEXT_SECONDARY + ";"
+        );
+        freeLabel->setAlignment(Qt::AlignLeft);
+        mainVLayout->addWidget(freeLabel);
+    };
 
     for (int i=0; i<dayInfo->getTimeData().size(); i++) {
         QLabel *breakLine = new QLabel();
@@ -68,7 +90,7 @@ DayInfoWidget::DayInfoWidget(OptimalDayModel *dayInfo) {
         );
         //dpLabel->setAlignment(Qt::AlignLeft);
         dayPercentHLayout->addWidget(dpLabel);
-        QLabel *dayPercentLabel = new QLabel(QString::number(dayInfo->getTimeData()[i].getPercent()));
+        QLabel *dayPercentLabel = new QLabel(QString::number(static_cast<int>(dayInfo->getTimeData()[i].getPercent()))+"%");
         dayPercentLabel->setFont(QFont("Roboto", 18));
         dayPercentLabel->setStyleSheet(
             "color:" + COLOR_PRIMARY + ";"
@@ -95,10 +117,6 @@ DayInfoWidget::DayInfoWidget(OptimalDayModel *dayInfo) {
         dayCountPeopleHLayout->addWidget(dayCountPeopleLabel);
         gridLayout->addLayout(dayCountPeopleHLayout, 0, 3, 1, 2);
 
-
-        if (dayInfo->getTimeData().size() == 0) {
-            qDebug() << "dayInfo->getTimeData().size() == 0";
-        };
         mainVLayout->addLayout(gridLayout);
     };
 }

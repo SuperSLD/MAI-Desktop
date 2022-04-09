@@ -31,8 +31,23 @@ OptimalInfoFragment::OptimalInfoFragment() {
 void OptimalInfoFragment::listenOptimalTime(DataWrapper<OptimalModel> wrapper) {
     if (wrapper.isSuccess()) {
         loadingContainer->stopLoading();
-
         optimalTime = wrapper.getData();
+
+        // Находим кол-во "Удачных дней"
+        int countLuckyDays = 0;
+        int countTimeCheck = 0;
+        qDebug() << optimalTime.getWeekDataList().size();
+        for (int i=0; i<6; i++) {
+            countTimeCheck = 0;
+            for (int j=0; j<optimalTime.getWeekDataList()[i].getTimeData().size(); j++) {
+                if (optimalTime.getWeekDataList()[i].getTimeData()[j].getIntTime() < 1020) {
+                    countTimeCheck++;
+                };
+            };
+            if (countTimeCheck == optimalTime.getWeekDataList()[i].getTimeData().size()) {
+                countLuckyDays++;
+            }
+        };
 
         QGridLayout *gridLayout = new QGridLayout;
         InfoBlockWidget *block1 = new InfoBlockWidget(QString::number(optimalTime.getMinPercent()) + "%", "Посещаемость", "#8773FF");
@@ -41,7 +56,7 @@ void OptimalInfoFragment::listenOptimalTime(DataWrapper<OptimalModel> wrapper) {
         gridLayout->addWidget(block2, 0, 1, 1, 1, Qt::AlignTop);
         InfoBlockWidget *block3 = new InfoBlockWidget(QString::number(optimalTime.getTotal()), "Человек", "white");
         gridLayout->addWidget(block3, 0, 2, 1, 1, Qt::AlignTop);
-        InfoBlockWidget *block4 = new InfoBlockWidget(QString::number(optimalTime.getTotal()), "Удачные дни", COLOR_PRIMARY);
+        InfoBlockWidget *block4 = new InfoBlockWidget(QString::number(countLuckyDays), "Удачные дни", COLOR_PRIMARY);
         gridLayout->addWidget(block4, 0, 3, 1, 1, Qt::AlignTop);
         gridLayout->setHorizontalSpacing(23);   // расстояние между столбцами
         mainVLayout->addLayout(gridLayout);
@@ -91,24 +106,6 @@ void OptimalInfoFragment::listenOptimalTime(DataWrapper<OptimalModel> wrapper) {
             DayInfoWidget *dayInfo = new DayInfoWidget(&optimalTime.getWeekDataList()[i]);
             mainVLayout->addWidget(dayInfo);
         };
-
-
-    //    // работаем с днями
-    //    QList <QString> dates;
-    //    for (int i=0; i<sch->getWeeks().size(); i++) {
-    //        for (int j=0; j<(sch->getWeeks()[i]).getDays().size(); j++) {
-    //            for (int k=0; k<sch->getWeeks()[i].getDays()[j].getSubjects().size(); k++) {
-    //                if (dates.indexOf(sch->getWeeks()[i].getDays()[j].getDate()) == -1 && sch->getWeeks()[i].getDays()[j].getSubjects()[k].getType() == "Экзамен") {
-    //                    DayScheduleWidget *day = new DayScheduleWidget(sch->getWeeks()[i].getDays()[j]);
-    //                    day->setFixedWidth(296);
-    //                    day->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
-    //                    gridLayout->addWidget(day, dates.size()/3, dates.size()%3, 1, 1, Qt::AlignTop);
-    //                    dates.append(sch->getWeeks()[i].getDays()[j].getDate());
-    //                };
-    //            };
-    //        };
-    //    };
-
 
     } else {
         loadingContainer->error(wrapper.getMessage());

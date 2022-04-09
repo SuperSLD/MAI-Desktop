@@ -67,7 +67,7 @@ void SelectWeekFragment::bindData(BaseModel* model) {
     QVBoxLayout *mainVLayout = new QVBoxLayout;
     QHBoxLayout *mainHLayout = new QHBoxLayout;
     mainVLayout->setAlignment(Qt::AlignTop);    // направление выравнивания (наверх)
-    mainHLayout->setAlignment(Qt::AlignHCenter); // направление выравнивания (к центру)
+    mainHLayout->setAlignment(Qt::AlignCenter); // направление выравнивания (к центру)
     mainHLayout->addLayout(mainVLayout);
     scrolConttent->setLayout(mainHLayout);
 
@@ -87,7 +87,7 @@ void SelectWeekFragment::bindData(BaseModel* model) {
         connect(blockWeek, &NumWeekWidget::clicked, this, &SelectWeekFragment::onWeekPressed);  // слот-сигнал
         gridLayout->addWidget(blockWeek,i/4,i%4,1,1);
     };
-    gridLayout->setHorizontalSpacing(23);   // расстояние между столбцами
-    gridLayout->setVerticalSpacing(23);   // расстояние между строками
+    gridLayout->setHorizontalSpacing(20);   // расстояние между столбцами
+    gridLayout->setVerticalSpacing(20);   // расстояние между строками
     mainVLayout->addLayout(gridLayout);
 };

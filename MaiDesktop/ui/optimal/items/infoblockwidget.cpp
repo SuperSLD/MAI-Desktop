@@ -34,10 +34,4 @@ InfoBlockWidget::InfoBlockWidget(QString bigName, QString littleName, QString na
 
     this->setFixedHeight(164);
     this->setFixedWidth(221);
-
-    this->setStyleSheet(
-        "background-color:#343434;"
-        "border:none;"
-        "padding:0px;"
-    );
 }
