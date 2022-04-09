@@ -25,7 +25,6 @@ ColumnWidget::ColumnWidget(float percent) {
     QFrame *percentFrame = new QFrame;
     percentFrame->setFixedWidth(133);
     percentFrame->setFixedHeight(static_cast<int>(202*(percent/100)));
-    qDebug() << static_cast<int>(202*(percent/100));
     percentFrame->setStyleSheet(
         "background-color:" + COLOR_PRIMARY + ";"
     );

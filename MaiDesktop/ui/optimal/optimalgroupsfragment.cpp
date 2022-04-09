@@ -235,5 +235,5 @@ void OptimalGroupsFragment::updateLists() {
 void OptimalGroupsFragment::onSearchResult() {
     groupList->percent = percentEdit->text().toInt();
     qDebug() << groupList->toParams();
-    //emit navigateWhithData("tag", groupList);
+    emit navigateWhithData(OPTIMAL_INFO_TAG, groupList);
 }

@@ -9,14 +9,14 @@ namespace styles{
     static const QString COLOR_WINDOW_BACKGROUND = "#292929";
     static const QString COLOR_BACKGROUND = "#343434";
     static const QString COLOR_TEXT_PRIMARY = "#FFFFFF";
-    static const QString COLOR_TEXT_SECONDARY= "#646464";
+    static const QString COLOR_TEXT_SECONDARY = "#646464";
     static const QString COLOR_PRIMARY = "#0596FF";
-    static const QString COLOR_SECONDARY= "#8773FF";
+    static const QString COLOR_SECONDARY = "#8773FF";
     static const QString COLOR_BORDER = "#434343";
     static const QString COLOR_BUTTON_HOVER = "#BBDEFF";
     static const QString COLOR_BUTTON_PRESSED = "#2988E0";
-    static const QString COLOR_SECONDARY_HOVER= "#FF9F81";
-    static const QString COLOR_SECONDARY_PRESSED= "#AE4524";
+    static const QString COLOR_SECONDARY_HOVER = "#FF9F81";
+    static const QString COLOR_SECONDARY_PRESSED = "#AE4524";
 
     static const QColor QT_COLOR_PRIMARY = QColor(5, 150, 255);
 

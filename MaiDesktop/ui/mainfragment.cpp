@@ -139,8 +139,8 @@ void MainFragment::onMenuButtonClick(int code) {
         ScheduleModel *sch = &schedule;
         emit navigateWhithData(EXAM_SCHEDULE, sch);
     } else if (code == PLANING) {
-        //emit navigateTo(OPTIMAL_GROUPS_TAG);
-        emit navigateTo(OPTIMAL_INFO_TAG);
+        emit navigateTo(OPTIMAL_GROUPS_TAG);
+        //emit navigateTo(OPTIMAL_INFO_TAG);
     } else if (code == INFORmAtION) {
         emit navigateTo(INFORMATION_TAG);
     }

@@ -4,11 +4,12 @@
 #include <QString>
 
 #include <ui/widgets/cardwidget.h>
+#include <data/models/optimal/optimaldaymodel.h>
 
 class DayInfoWidget : public CardWidget {
     Q_OBJECT
 public:
-    DayInfoWidget(QString dayName, QList<QString> dayTimes, QList<QString> dayPercent, QList<QString> dayCountPeople);
+    DayInfoWidget(OptimalDayModel *dayInfo);
 };
 
 #endif // DAYINFOWIDGET_H

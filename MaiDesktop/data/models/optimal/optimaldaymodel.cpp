@@ -9,7 +9,7 @@ OptimalDayModel::OptimalDayModel(QJsonValue val) {
 
     QJsonArray items = obj["timeData"].toArray();
     foreach(QJsonValue item, items) {
-        timeData.append(OptimalTimeModel(item));
+        this->timeData.append(OptimalTimeModel(item));
     }
 }
 
