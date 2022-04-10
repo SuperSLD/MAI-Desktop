@@ -7,6 +7,8 @@
 
 #include <implfragmentfactory.h>
 #include <stylecontainer.h>
+
+#include <data/appsettingsrepository.h>
 using namespace screens;
 using namespace styles;
 
@@ -33,8 +35,12 @@ SplashFragment::~SplashFragment() {
 }
 
 void SplashFragment::openStartScreen() {
-    qDebug() << "SplashFragment: open main menu";
-    //emit newRootScreen(SEARCH_GROUP);
-    emit navigateTo(MAIN_TAG);
-    //emit navigateTo(SEARCH_GROUP);
+    AppSettingsRepository settingsRep = AppSettingsRepository();
+    if (settingsRep.containsGroup()) {
+        qDebug() << "SplashFragment: open main menu";
+        emit navigateTo(MAIN_TAG);
+    } else {
+        qDebug() << "SplashFragment: open search group";
+        emit navigateTo(SEARCH_GROUP);
+    }
 }

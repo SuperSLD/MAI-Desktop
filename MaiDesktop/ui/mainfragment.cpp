@@ -10,6 +10,8 @@
 
 using namespace styles;
 #include <implfragmentfactory.h>
+
+#include <data/appsettingsrepository.h>
 using namespace screens;
 
 MainFragment::MainFragment() {
@@ -17,6 +19,9 @@ MainFragment::MainFragment() {
     // подключение репозитория
     netRep = new AppNetRepository();
     connect(netRep, &AppNetRepository::listenSchedule, this, &MainFragment::listenSchedule);
+
+    AppSettingsRepository settingsRep = AppSettingsRepository();
+    GroupModel group = settingsRep.getGroup();
 
     // главный контейнер
     QHBoxLayout *mainLayout = new QHBoxLayout;
@@ -44,30 +49,31 @@ MainFragment::MainFragment() {
     QHBoxLayout *secondaryLayout = new QHBoxLayout;
     headerLayout->addLayout(secondaryLayout);
 
-    QLabel *titleLabel = new QLabel("М1О-309С-19");
+    QLabel *titleLabel = new QLabel(group.getName());
     titleLabel->setStyleSheet(
         "color:" + COLOR_TEXT_PRIMARY + ";"
     );
     titleLabel->setFont(QFont("Roboto", 36, QFont::Normal));
     secondaryLayout->addWidget(titleLabel);
     SwgButton *backButton = new SwgButton(":/resc/resc/Vector.svg", QSize(20,18));
+    connect(backButton, &SwgButton::clicked, this, &MainFragment::onExit);
     secondaryLayout->addWidget(backButton);
 
-    QLabel *titleInstituteLabel = new QLabel("Институт");
+    QLabel *titleInstituteLabel = new QLabel(group.getFaculty());
     titleInstituteLabel->setStyleSheet(
         "color:" + COLOR_TEXT_PRIMARY + ";"
         "font-size:14px;"
     );
     titleInstituteLabel->setFont(QFont("Roboto", 14, QFont::Normal));
     headerLayout->addWidget(titleInstituteLabel);
-    QLabel *titleTypeLabel = new QLabel("Бакалавриат или специалитет");
+    QLabel *titleTypeLabel = new QLabel(group.getLevel());
     titleTypeLabel->setStyleSheet(
         "color:" + COLOR_TEXT_PRIMARY + ";"
         "font-size:14px;"
     );
     titleTypeLabel->setFont(QFont("Roboto", 14, QFont::Normal));
     headerLayout->addWidget(titleTypeLabel);
-    QLabel *titleCourseLabel = new QLabel("Курс");
+    QLabel *titleCourseLabel = new QLabel("Курс " + QString::number(group.getCourse()));
     titleCourseLabel->setStyleSheet(
         "color:" + COLOR_TEXT_PRIMARY + ";"
         "font-size:14px;"
@@ -112,7 +118,7 @@ MainFragment::MainFragment() {
     loadingContainer->setMaximumWidth(952);
     loadingContainer->startLoading("Загружаем расписание...");
     mainLayout->addWidget(loadingContainer);
-    netRep->getSchedule("d1497292f31d8755ce4530f7022b519c");
+    netRep->getSchedule(group.getId());
 }
 MainFragment::~MainFragment() {
     delete netRep;
@@ -143,4 +149,10 @@ void MainFragment::onMenuButtonClick(int code) {
     } else if (code == INFORmAtION) {
         emit navigateTo(INFORMATION_TAG);
     }
+}
+
+void MainFragment::onExit() {
+    AppSettingsRepository settingsRep = AppSettingsRepository();
+    settingsRep.deleteGroup();
+    emit replace(SEARCH_GROUP);
 }
