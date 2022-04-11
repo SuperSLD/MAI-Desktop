@@ -19,6 +19,14 @@ void ScheduleModel::setCurrentWeekNumber(int isCurrentWeekNumber) {
     this->currentWeekNumber = isCurrentWeekNumber;
 }
 int ScheduleModel::examsCount() {
-    // потом дописать
-    return 5;
+    int count = 0;
+    foreach(WeekModel week, weeks) {
+        foreach(DayModel day, week.getDays()) {
+            if (!day.getSubjects().isEmpty())
+                if (!day.getSubjects().isEmpty())
+                    if (day.getSubjects().first().getType() == "Экзамен")
+                        count++;
+        }
+    }
+    return count;
 }

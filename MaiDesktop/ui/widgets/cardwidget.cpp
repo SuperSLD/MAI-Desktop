@@ -10,11 +10,11 @@ CardWidget::CardWidget(QWidget *parent) : QFrame(parent) {
         "padding:0px;"
     );
 
-    // Добавление тени
-    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
-    effect->setXOffset(4);
-    effect->setYOffset(4);
-    effect->setBlurRadius(20);
-    effect->setColor(QColor(0, 0, 0, 60));
-    this->setGraphicsEffect(effect);
+    // Добавление тени (лагает как киберпанк)
+//    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
+//    effect->setXOffset(4);
+//    effect->setYOffset(4);
+//    effect->setBlurRadius(20);
+//    effect->setColor(QColor(0, 0, 0, 60));
+//    this->setGraphicsEffect(effect);
 }
